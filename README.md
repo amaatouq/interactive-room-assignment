@@ -48,11 +48,13 @@ following these instructions (assuming you have
 [Meteor installed](https://www.meteor.com/install)):
 
 1. [Download](https://github.com/amaatouq/interactive-room-assignment/archive/master.zip)
-   the repository (and unzip). Alternativly,from terminal just run: `git clone
-   https://github.com/amaatouq/influence-in-small-group-discussions.git`
+   the repository (and unzip). Alternatively,from terminal just run:
+   
+    ```git clone https://github.com/amaatouq/influence-in-small-group-discussions.git```
+
 2. Go into the folder with
 
-`cd influence-in-small-group-discussions`
+    ```cd influence-in-small-group-discussions```
 
 3. Install the required dependencies `meteor npm install`
 
