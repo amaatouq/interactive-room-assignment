@@ -9,8 +9,9 @@ export default class Task extends React.Component {
 
     return (
       <div className="task">
-        <TaskStimulus round={round} stage={stage} player={player} />
-        <TaskResponse round={round} stage={stage} player={player} game={game} />
+        {round.task}
+        {/*<TaskStimulus round={round} stage={stage} player={player} />*/}
+        {/*<TaskResponse round={round} stage={stage} player={player} game={game} />*/}
       </div>
     );
   }

@@ -12,13 +12,13 @@ export const conditions = {
     description: "Specifies how many seconds for each decision stage",
     type: SimpleSchema.Integer,
     min: 5,
-    max: 300
+    max: 10000
   },
   nRounds: {
     description:
       "The number of rounds in the game (can't be more than the number of tasks)",
     type: SimpleSchema.Integer,
-    min: 1,
+    min: 0,
     max: taskData.length
   },
   basePay: {

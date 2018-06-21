@@ -2,8 +2,6 @@ import React from "react";
 
 import Centered from "../../../core/ui/components/Centered.jsx";
 
-import ExampleBoard from "./ExampleBoard";
-
 export default class InstructionStepThree extends React.Component {
   render() {
     const { hasPrev, hasNext, onNext, onPrev, treatment } = this.props;
