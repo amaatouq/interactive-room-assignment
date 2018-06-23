@@ -8,8 +8,14 @@ export const onRoundStart = (game, round, players) => {
   console.log("Round ", round.index + 1, "game", game._id, " started");
   //initiate the score for this round (because everyone will have the same score, we can save it at the round object
   round.set("score", 0);
-  round.set("chat", [{}]);
-  round.set("log", [{}]);
+  round.set("chat", []);
+  round.set("log", []);
+
+  const task = round.get("task");
+  round.set("deck", task.students);
+  task.rooms.forEach(room => {
+    round.set(`room-${room}`, []);
+  });
 };
 
 export const onStageStart = (game, round, stage, players) => {};
