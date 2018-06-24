@@ -9,12 +9,17 @@ export const onRoundStart = (game, round, players) => {
   //initiate the score for this round (because everyone will have the same score, we can save it at the round object
   round.set("score", 0);
   round.set("chat", []);
-  round.set("log", []);
+  round.set("log", [
+    {
+      verb: "roundStarted",
+      at: new Date()
+    }
+  ]);
 
   const task = round.get("task");
-  round.set("deck", task.students);
-  task.rooms.forEach(room => {
-    round.set(`room-${room}`, []);
+  task.students.forEach(student => {
+    round.set(`student-${student}-room`, "deck");
+    round.set(`student-${student}-dragger`, null);
   });
 };
 
