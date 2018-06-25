@@ -11,27 +11,27 @@ export default class Task extends React.Component {
     return (
       <div className="task">
         <div className="left">
-          {/* <div className="payoff">
-            <h5>Payoff</h5>
-            <table className="pt-table pt-interactive">
-              <thead>
-                <tr>
-                  <th>Rooms</th>
-                  {task.rooms.map(room => <th key={room}>{room}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {task.students.map(student => (
-                  <tr key={student}>
-                    <th>Student {student}</th>
-                    {task.rooms.map(room => (
-                      <td key={room}>{task.payoff[student][room]}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div> */}
+          {/*<div className="payoff">*/}
+            {/*<h5>Payoff</h5>*/}
+            {/*<table className="pt-table pt-interactive">*/}
+              {/*<thead>*/}
+                {/*<tr>*/}
+                  {/*<th>Rooms</th>*/}
+                  {/*{task.rooms.map(room => <th key={room}>{room}</th>)}*/}
+                {/*</tr>*/}
+              {/*</thead>*/}
+              {/*<tbody>*/}
+                {/*{task.students.map(student => (*/}
+                  {/*<tr key={student}>*/}
+                    {/*<th>Student {student}</th>*/}
+                    {/*{task.rooms.map(room => (*/}
+                      {/*<td key={room}>{task.payoff[student][room]}</td>*/}
+                    {/*))}*/}
+                  {/*</tr>*/}
+                {/*))}*/}
+              {/*</tbody>*/}
+            {/*</table>*/}
+          {/*</div>*/}
 
           <div className="constraints">
             <h5>Constraints</h5>

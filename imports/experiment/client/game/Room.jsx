@@ -36,7 +36,8 @@ export default class Room extends React.Component {
       verb: "movedStudent",
       subjectId: player._id,
       object: student,
-      target: room
+      target: room,
+      at: new Date()
     });
   };
 

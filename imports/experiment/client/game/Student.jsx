@@ -10,6 +10,12 @@ export default class Student extends React.Component {
       return;
     }
     round.set(`student-${student}-dragger`, player._id);
+    round.append("log", {
+      verb: "draggingStudent",
+      subjectId: player._id,
+      object: student,
+      at: new Date(),
+    });
     e.dataTransfer.setData("text/plain", student);
   };
 
@@ -20,19 +26,21 @@ export default class Student extends React.Component {
   };
 
   render() {
-    const { student, round, game } = this.props;
+    const { student, round, game, player } = this.props;
+    this.isDragabble=true; // usually everyone can drag, except if it is colored (i.e., being dragged by someone else)
     const dragger = round.get(`student-${student}-dragger`);
     const style = {};
     if (dragger) {
-      const player = game.players.find(p => p._id === dragger);
-      if (player) {
-        style.fill = player.get("nameColor");
+      const playerDragging = game.players.find(p => p._id === dragger);
+      if (playerDragging) {
+        style.fill = playerDragging.get("nameColor");
+        this.isDragabble = playerDragging===player._id; //only one can drag at a time
       }
     }
 
     return (
       <div
-        draggable
+        draggable={this.isDragabble}
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
         className="student"

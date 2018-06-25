@@ -24,7 +24,7 @@ export default class SocialInteractions extends React.Component {
 
   renderPlayer(player, self = false) {
     return (
-      <div className="player">
+      <div className="player" key={player._id}>
         <span className="image">
           <img src={player.get("avatar")} />
         </span>
@@ -55,8 +55,8 @@ export default class SocialInteractions extends React.Component {
       <div className="social-interactions">
         <div className="players">
           {this.renderPlayer(player, true)}
-          {this.renderPlayer(player)}
-          {this.renderPlayer(player)}
+          {/*{this.renderPlayer(player)}*/}
+          {/*{this.renderPlayer(player)}*/}
           {otherPlayers.map(p => this.renderPlayer(p))}
         </div>
 
@@ -74,7 +74,7 @@ export default class SocialInteractions extends React.Component {
                 placeholder="Enter chat message"
                 value={comment}
                 onChange={this.handleChange}
-                autoComplete={false}
+                autoComplete="off"
               />
               <button type="submit" className="pt-button pt-intent-primary">
                 Send
@@ -151,11 +151,20 @@ class Event extends React.Component {
           </div>
         );
         break;
+      case "draggingStudent":
+        content = (
+          <div className="content">
+            <Author player={subject} /> started moving{" "}
+            <div className="object">{object}</div>
+          </div>
+        );
+        break;
       default:
         console.error(`Unknown Event: ${verb}`);
 
         return null;
     }
+    console.log("at", moment(at).format("hh:mm:ss a"));
 
     return (
       <div className="event">
