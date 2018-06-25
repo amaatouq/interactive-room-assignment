@@ -164,7 +164,7 @@ class Event extends React.Component {
 
         return null;
     }
-    console.log("at", moment(at).format("hh:mm:ss a"));
+    console.log("at", at);
 
     return (
       <div className="event">
