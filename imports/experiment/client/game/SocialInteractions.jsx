@@ -109,6 +109,7 @@ class Message extends React.Component {
   }
 }
 
+const chatSound = new Audio("experiment/unsure.mp3");
 class Messages extends React.Component {
   componentDidMount() {
     this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
@@ -117,6 +118,7 @@ class Messages extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length < this.props.messages.length) {
       this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
+      chatSound.play();
     }
   }
 
@@ -155,7 +157,7 @@ class Event extends React.Component {
         content = (
           <div className="content">
             <Author player={subject} /> started moving{" "}
-            <div className="object">{object}</div>
+            <div className="object">{object}</div>.
           </div>
         );
         break;
@@ -164,7 +166,6 @@ class Event extends React.Component {
 
         return null;
     }
-    console.log("at", at);
 
     return (
       <div className="event">

@@ -3,9 +3,10 @@ import React from "react";
 export default class Student extends React.Component {
   handleDragStart = e => {
     const { student, round, player } = this.props;
-    const dragger = round.set(`student-${student}-dragger`);
+    const dragger = round.get(`student-${student}-dragger`); //check if there is already a dragger
     if (dragger) {
       // Can't drag
+      console.log("dragger");
       e.preventDefault();
       return;
     }

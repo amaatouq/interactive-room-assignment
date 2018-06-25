@@ -2,6 +2,7 @@ export const onGameStart = (game, players) => {
   console.log("game ", game._id, " started");
   //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
   game.set("cumulativeScore", 0);
+  game.set("justStarted",true) // I use this to play the sound on the UI when the game starts
 };
 
 export const onRoundStart = (game, round, players) => {
