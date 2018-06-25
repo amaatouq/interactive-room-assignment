@@ -26,8 +26,19 @@ export default class Room extends React.Component {
     // onto these drop zones (e.g. files from their desktop) so we check this
     // is an existing student first.
     const currentRoom = round.get(`student-${student}-room`);
-    if (!currentRoom || currentRoom === room) {
+    if (!currentRoom) {
       return;
+    }
+    
+    //if they kept the student where it is, log that they stayed in the same place
+    if (currentRoom === room) {
+      round.append("log", {
+        verb: "keptStudent",
+        subjectId: player._id,
+        object: student,
+        target: room,
+        at: new Date()
+      });
     }
 
     round.set(`student-${student}-room`, room);

@@ -161,6 +161,15 @@ class Event extends React.Component {
           </div>
         );
         break;
+      case "keptStudent":
+        content = (
+          <div className="content">
+            <Author player={subject} /> kept{" "}
+            <div className="object">{object}</div> in{" "}
+            <div className="target">Room {target}</div>.
+          </div>
+        );
+        break;
       default:
         console.error(`Unknown Event: ${verb}`);
 

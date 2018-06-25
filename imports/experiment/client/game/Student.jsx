@@ -4,6 +4,7 @@ export default class Student extends React.Component {
   handleDragStart = e => {
     const { student, round, player } = this.props;
     const dragger = round.get(`student-${student}-dragger`); //check if there is already a dragger
+    //if so, you can't move it, already someone is moving it!
     if (dragger) {
       // Can't drag
       console.log("dragger");
@@ -31,12 +32,15 @@ export default class Student extends React.Component {
     this.isDragabble=true; // usually everyone can drag, except if it is colored (i.e., being dragged by someone else)
     const dragger = round.get(`student-${student}-dragger`);
     const style = {};
+    const cursorStyle= {cursor:null};
     if (dragger) {
       const playerDragging = game.players.find(p => p._id === dragger);
       if (playerDragging) {
         style.fill = playerDragging.get("nameColor");
         this.isDragabble = playerDragging===player._id; //only one can drag at a time
       }
+    } else { //if the student is NOT being dragged by anyone, then the cursor will be changed
+      cursorStyle.cursor="move";
     }
 
     return (
@@ -45,6 +49,7 @@ export default class Student extends React.Component {
         onDragStart={this.handleDragStart}
         onDragEnd={this.handleDragEnd}
         className="student"
+        style={cursorStyle}
       >
         {/* <span className="icon pt-icon-standard pt-icon-person" /> */}
         <span className="icon">
