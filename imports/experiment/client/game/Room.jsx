@@ -21,7 +21,7 @@ export default class Room extends React.Component {
 
     this.setState({ hovered: false });
 
-    // Avoid any unwanted drops! And don't change if same room.
+    // Avoid any unwanted drops!
     // We're using the native DnD system, which mean people can drag anything
     // onto these drop zones (e.g. files from their desktop) so we check this
     // is an existing student first.
@@ -30,7 +30,8 @@ export default class Room extends React.Component {
       return;
     }
     
-    //if they kept the student where it is, log that they stayed in the same place
+    
+    //if they kept the student where it is, log that they stayed in the same place And don't change the answer
     if (currentRoom === room) {
       round.append("log", {
         verb: "keptStudent",
@@ -39,6 +40,7 @@ export default class Room extends React.Component {
         target: room,
         at: new Date()
       });
+      return
     }
 
     round.set(`student-${student}-room`, room);
