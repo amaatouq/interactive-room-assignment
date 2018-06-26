@@ -48,8 +48,8 @@ export const onStageEnd = (game, round, stage, players) => {
 
   //get score if there are no violations, otherwise, the score is 0
   const currentScore =
-    violationIds.length === 0 && assignments["deck"].length === 0
-      ? getScore(task, assignments)
+    assignments["deck"].length === 0
+      ? getScore(task, assignments, violationIds.length)
       : 0;
   console.log("currentScore", currentScore);
   round.set("score", currentScore || 0);
@@ -67,7 +67,7 @@ export const onGameEnd = (game, players) => {
   console.log("The game", game._id, "has ended");
 
   //computing the bonus for everyone (in this game, everyone will get the same value)
-  const conversionRate = 1 / 10; //TODO: we need to discuss this
+  const conversionRate = 1 / 500; //TODO: we need to discuss this
   const bonus =
     game.get("cumulativeScore") > 0
       ? Math.round(game.get("cumulativeScore") * conversionRate)
@@ -81,41 +81,41 @@ export const onGameEnd = (game, players) => {
 
 export const onSet = (game, round, stage, players) => {
   const task = round.get("task");
-  
+
   let assignments = { deck: [] };
   task.rooms.forEach(room => {
     assignments[room] = [];
   });
-  
+
   //find the rooms for each player
   task.students.forEach(student => {
     console.log("student", student);
     assignments[round.get(`student-${student}-room`)].push(student);
   });
-  
+
   //check for constraint violations
   const violationIds = getViolations(task, assignments);
   round.set("violatedConstraints", violationIds);
   console.log("violations", violationIds);
-  
+
   //get score if there are no violations, otherwise, the score is 0
   const currentScore =
-    violationIds.length === 0 && assignments["deck"].length === 0
-      ? getScore(task, assignments)
+    assignments["deck"].length === 0
+      ? getScore(task, assignments, violationIds.length)
       : 0;
   console.log("currentScore", currentScore);
   round.set("score", currentScore || 0);
 };
 
 //helpers
-function getScore(task, assignments) {
+function getScore(task, assignments, nViolations) {
   let score = 0;
   Object.keys(assignments).forEach(room => {
     assignments[room].forEach(student => {
       score += task.payoff[student][room];
     });
   });
-  return score;
+  return score - nViolations * 100;
 }
 
 function find_room(assignments, student) {

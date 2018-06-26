@@ -8,12 +8,21 @@ export default class InstructionStepTwo extends React.Component {
     return (
       <Centered>
         <div className="instructions">
-          <h1> Instructions 2 </h1>
+          <h1> Task: Room Assignment </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio,
-            animi? Quae autem asperiores officiis voluptatum fuga recusandae
-            minima! Animi pariatur ex sapiente laborum. Ipsa quo quia ab,
-            veritatis et labore.
+            In each task of this HIT, you will be asked to assign students to
+            dorm rooms. Students express their degree of satisfaction for living
+            in a room as a number between 0 and 100 (the higher the rating, the
+            more satisfied the student is). The table below shows an example of
+            a task with 4 students need to be assigned to 3 rooms:
+          </p>
+
+          <p>[TODO: We will show the table and example of board here]</p>
+
+          <p>
+            You are provided with a handy <strong>drag and drop</strong> tool to
+            solve the problem. To assign a student into a room, simply drag the
+            icon of that student and drop it into the corresponding room.
           </p>
           <button
             type="button"

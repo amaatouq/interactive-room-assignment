@@ -8,15 +8,24 @@ export default class InstructionStepThree extends React.Component {
     return (
       <Centered>
         <div className="instructions">
-          <h1>You will be part of a team</h1>
+          <h1>Task: Constraints</h1>
           <p>
-            In this experiment, you will{" "}
-            <strong>
-              play together with {treatment.playerCount - 1} other participants
-            </strong>. They are other MTurk workers who are undertaking the same
-            experiment simultaneously. In total, you will{" "}
-            <strong>play {treatment.nRounds} rounds with them.</strong>
+            You also need to consider a few constraints when assigning students
+            to rooms, such as some students can't live together in the same room
+            or some students must be neighbors. These constraints vary from task
+            to task, and there are no additional constraints you need to respect
+            other than the ones stated in the task (e.g., feel free to leave one
+            room empty if no constraint requires you to assign at least one
+            student in each room).
           </p>
+
+          <p>
+            Your job in each task is to find the room assignment plan that
+            maximizes overall satisfaction for the group of students, while
+            respecting all constraints in that task.
+          </p>
+          
+          <p>[TODO: show example of constraints]</p>
 
           <button
             type="button"

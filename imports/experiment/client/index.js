@@ -5,6 +5,10 @@ import ExitSurvey from "./outro/ExitSurvey.jsx";
 import InstructionStepOne from "./intro/InstructionStepOne.jsx";
 import InstructionStepTwo from "./intro/InstructionStepTwo.jsx";
 import InstructionStepThree from "./intro/InstructionStepThree.jsx";
+import InstructionStepFour from "./intro/InstructionStepFour.jsx";
+import InstructionStepFive from "./intro/InstructionStepFive.jsx";
+import InstructionStepSix from "./intro/InstructionStepSix.jsx";
+
 import Quiz from "./intro/Quiz.jsx";
 import Round from "./game/Round.jsx";
 import Thanks from "./outro/Thanks.jsx";
@@ -13,19 +17,26 @@ import Sorry from "./outro/Sorry";
 export const config = {
   RoundComponent: Round,
   ConsentComponent: Consent,
-  
+
   // Introduction pages to show before they play the game.
   // At this point they have been assigned a treatment. You can return
   // different instruction steps depending on the assigned treatment.
   InstructionSteps(treatment) {
-    const steps = [InstructionStepOne, InstructionStepTwo];
-    if (treatment.playerCount > 1) {
-      steps.push(InstructionStepThree);
-    }
+    const steps = [
+      InstructionStepOne,
+      InstructionStepTwo,
+      InstructionStepThree,
+      InstructionStepFour,
+      InstructionStepFive,
+      InstructionStepSix
+    ];
+    // if (treatment.playerCount > 1) {
+    //   steps.push(InstructionStepThree);
+    // }
     steps.push(Quiz);
     return steps;
   },
-  
+
   // End of Game pages. These may vary depending on player or game information.
   // For example we can show the score of the user, or we can show them a
   // different message if they actually could not participate the game (timed
