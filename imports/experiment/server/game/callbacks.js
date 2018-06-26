@@ -37,7 +37,6 @@ export const onStageEnd = (game, round, stage, players) => {
 
   //find the rooms for each player
   task.students.forEach(student => {
-    console.log("student", student);
     assignments[round.get(`student-${student}-room`)].push(student);
   });
 
@@ -57,10 +56,9 @@ export const onStageEnd = (game, round, stage, players) => {
 
 export const onRoundEnd = (game, round, players) => {
   //add the round score to the game total cumulative score
-  game.set(
-    "cumulativeScore",
-    Math.round(round.get("score") + game.get("cumulativeScore"))
-  );
+  const scoreIncrement =
+    round.get("score") > 0 ? Math.round(round.get("score")) : 0;
+  game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
 };
 
 export const onGameEnd = (game, players) => {
@@ -89,7 +87,6 @@ export const onSet = (game, round, stage, players) => {
 
   //find the rooms for each player
   task.students.forEach(student => {
-    console.log("student", student);
     assignments[round.get(`student-${student}-room`)].push(student);
   });
 

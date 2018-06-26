@@ -1,5 +1,5 @@
 import SimpleSchema from "simpl-schema";
-import { taskData } from "./constants";
+import { easyTaskData, hardTaskData } from "./constants";
 
 export const conditions = {
   playerCount: {
@@ -19,7 +19,7 @@ export const conditions = {
       "The number of rounds in the game (can't be more than the number of tasks)",
     type: SimpleSchema.Integer,
     min: 1,
-    max: taskData.length
+    max: easyTaskData.length + hardTaskData.length
   },
   basePay: {
     description:

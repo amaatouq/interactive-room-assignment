@@ -1,4 +1,4 @@
-import { taskData } from "./constants";
+import { easyTaskData, hardTaskData } from "./constants";
 
 // //// Avatar stuff //////
 // const names = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split(""); //for the players names (we will call them A, B, C etc)
@@ -10,7 +10,7 @@ export const init = (treatment, players) => {
   console.log("Game with a treatment: ", treatment, " will start");
 
   // shuffle the stimuli
-  const taskSequence = _.shuffle(taskData);
+  const taskSequence = _.shuffle(easyTaskData.concat(hardTaskData));
 
   players.forEach((player, i) => {
     player.set("name", names[i]);
