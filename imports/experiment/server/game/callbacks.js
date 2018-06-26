@@ -48,9 +48,11 @@ export const onStageEnd = (game, round, stage, players) => {
 
   //get score if there are no violations, otherwise, the score is 0
   const currentScore =
-    violationIds.length === 0 ? getScore(task, assignments) : 0;
-  round.set("score", currentScore);
+    violationIds.length === 0 && assignments["deck"].length === 0
+      ? getScore(task, assignments)
+      : 0;
   console.log("currentScore", currentScore);
+  round.set("score", currentScore || 0);
 };
 
 export const onRoundEnd = (game, round, players) => {
@@ -78,24 +80,31 @@ export const onGameEnd = (game, players) => {
 //TODO: things that are missing (NOT TESTED)
 
 export const onSet = (game, round, stage, players) => {
-  let assignments = {};
-  assignments["deck"] = [];
   const task = round.get("task");
-
+  
+  let assignments = { deck: [] };
+  task.rooms.forEach(room => {
+    assignments[room] = [];
+  });
+  
   //find the rooms for each player
   task.students.forEach(student => {
     console.log("student", student);
     assignments[round.get(`student-${student}-room`)].push(student);
   });
-
+  
   //check for constraint violations
   const violationIds = getViolations(task, assignments);
   round.set("violatedConstraints", violationIds);
-
+  console.log("violations", violationIds);
+  
   //get score if there are no violations, otherwise, the score is 0
   const currentScore =
-    violationIds.length === 0 ? getScore(task, assignments) : 0;
-  round.set("score", currentScore);
+    violationIds.length === 0 && assignments["deck"].length === 0
+      ? getScore(task, assignments)
+      : 0;
+  console.log("currentScore", currentScore);
+  round.set("score", currentScore || 0);
 };
 
 //helpers
