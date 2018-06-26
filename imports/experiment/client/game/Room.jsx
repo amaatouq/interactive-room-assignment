@@ -18,17 +18,29 @@ export default class Room extends React.Component {
   handleDrop = e => {
     const { round, player, room } = this.props;
     const student = e.dataTransfer.getData("text/plain");
-
+    round.set(`student-${student}-dragger`, null); //maybe this fixes the problem of stucked colors
+    const currentRoom = round.get(`student-${student}-room`);
+  
     this.setState({ hovered: false });
 
     // Avoid any unwanted drops!
     // We're using the native DnD system, which mean people can drag anything
     // onto these drop zones (e.g. files from their desktop) so we check this
     // is an existing student first.
-    const currentRoom = round.get(`student-${student}-room`);
-    if (!currentRoom) {
-      return;
-    }
+
+    //TODO: is this really needed?
+    // if (!currentRoom) {
+    //   round.append("log", {
+    //     verb: "keptStudent",
+    //     subjectId: player._id,
+    //     object: student,
+    //     target: currentRoom,
+    //     at: new Date()
+    //   });
+    //   return;
+    // }
+    //
+    //
     
     
     //if they kept the student where it is, log that they stayed in the same place And don't change the answer
@@ -52,6 +64,7 @@ export default class Room extends React.Component {
       target: room,
       at: new Date()
     });
+  
   };
 
   render() {
