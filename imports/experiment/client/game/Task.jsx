@@ -5,9 +5,15 @@ import Timer from "./Timer.jsx";
 
 export default class Task extends React.Component {
   handleSatisfaction = (satisfied, event) => {
-    const { player } = this.props;
+    const { player, round } = this.props;
     event.preventDefault();
     player.set("satisfied", satisfied);
+    round.append("log", {
+      verb: "playerSatisfaction",
+      subjectId: player._id,
+      state: satisfied? "satisfied":"unsatisfied",
+      at: new Date()
+    });
   };
 
   render() {

@@ -31,33 +31,7 @@ export default {
 
   onStageStart(game, round, stage, players) {},
 
-  onStageEnd(game, round, stage, players) {
-    // //TODO: this is for testing only, this should be only in `onSet`
-    const task = round.get("task");
-
-    let assignments = { deck: [] };
-    task.rooms.forEach(room => {
-      assignments[room] = [];
-    });
-
-    //find the rooms for each player
-    task.students.forEach(student => {
-      assignments[round.get(`student-${student}-room`)].push(student);
-    });
-
-    //check for constraint violations
-    const violationIds = getViolations(task, assignments);
-    round.set("violatedConstraints", violationIds);
-    console.debug("violations", violationIds);
-
-    //get score if there are no violations, otherwise, the score is 0
-    const currentScore =
-      assignments["deck"].length === 0
-        ? getScore(task, assignments, violationIds.length)
-        : 0;
-    console.debug("currentScore", currentScore);
-    round.set("score", currentScore || 0);
-  },
+  onStageEnd(game, round, stage, players) {},
 
   onRoundEnd(game, round, players) {
     //add the round score to the game total cumulative score
@@ -95,7 +69,6 @@ export default {
     prevValue // Previous value
   ) {
     const task = round.get("task");
-
     let assignments = { deck: [] };
     task.rooms.forEach(room => {
       assignments[room] = [];
@@ -103,7 +76,8 @@ export default {
 
     //find the rooms for each player
     task.students.forEach(student => {
-      assignments[round.get(`student-${student}-room`)].push(student);
+      const room = round.get(`student-${student}-room`);
+      assignments[room].push(student);
     });
 
     //check for constraint violations
@@ -118,6 +92,17 @@ export default {
         : 0;
     console.debug("currentScore", currentScore);
     round.set("score", currentScore || 0);
+
+    //check if everyone is satisfied and if so, submit their answer
+    let allSatisfied = true;
+    players.forEach(player => {
+      allSatisfied = player.get("satisfied") && allSatisfied;
+    });
+    if (allSatisfied) {
+      players.forEach(player => {
+        player.stage.submit();
+      });
+    }
 
     console.debug("===============================");
   }
@@ -182,65 +167,55 @@ function find_room(assignments, student) {
 function getViolations(task, assignments) {
   console.debug("assignments ", assignments);
   const violatedConstraintsIds = [];
+
   task.constraints.forEach(constraint => {
-    switch (constraint.type) {
-      case 0:
-        //they are not in the same room, when they should've
-        if (
-          find_room(assignments, constraint.pair[0]) !==
-          find_room(assignments, constraint.pair[1])
-        ) {
-          console.debug(
-            constraint.pair.join(" and "),
-            "they are not in the same room, when they should've"
-          );
-          violatedConstraintsIds.push(constraint._id);
-        }
-        break;
-      case 1:
-        //they are in the same room, when they shouldn't
-        if (
-          find_room(assignments, constraint.pair[0]) ===
-          find_room(assignments, constraint.pair[1])
-        ) {
-          console.debug(
-            constraint.pair.join(" and "),
-            "they are in the same room, when they shouldn't"
-          );
-          violatedConstraintsIds.push(constraint._id);
-        }
+    const firstStudentRoom = find_room(assignments, constraint.pair[0]);
+    const secondStudentRoom = find_room(assignments, constraint.pair[1]);
 
-        break;
-      case 2:
-        //if they are not neighbors, when they should've been
-        if (
-          Math.abs(
-            find_room(assignments, constraint.pair[0]) -
-              find_room(assignments, constraint.pair[1])
-          ) !== 1
-        ) {
-          console.debug(
-            constraint.pair.join(" and "),
-            "they are not neighbors, when they should've been"
-          );
-          violatedConstraintsIds.push(constraint._id);
-        }
+    if (firstStudentRoom !== "deck" && secondStudentRoom !== "deck") {
+      switch (constraint.type) {
+        case 0:
+          //they are not in the same room, when they should've
+          if (firstStudentRoom !== secondStudentRoom) {
+            console.debug(
+              constraint.pair.join(" and "),
+              "they are not in the same room, when they should've"
+            );
+            violatedConstraintsIds.push(constraint._id);
+          }
+          break;
+        case 1:
+          //they are in the same room, when they shouldn't
+          if (firstStudentRoom === secondStudentRoom) {
+            console.debug(
+              constraint.pair.join(" and "),
+              "they are in the same room, when they shouldn't"
+            );
+            violatedConstraintsIds.push(constraint._id);
+          }
 
-        break;
-      case 3:
-        if (
-          Math.abs(
-            find_room(assignments, constraint.pair[0]) -
-              find_room(assignments, constraint.pair[1])
-          ) < 2
-        ) {
-          console.debug(
-            constraint.pair.join(" and "),
-            "can't live in the same room or be neighbors, so why are they?"
-          );
-          violatedConstraintsIds.push(constraint._id);
-        }
-        break;
+          break;
+        case 2:
+          //if they are not neighbors, when they should've been
+          if (Math.abs(firstStudentRoom - secondStudentRoom) !== 1) {
+            console.debug(
+              constraint.pair.join(" and "),
+              "they are not neighbors, when they should've been"
+            );
+            violatedConstraintsIds.push(constraint._id);
+          }
+
+          break;
+        case 3:
+          if (Math.abs(firstStudentRoom - secondStudentRoom) < 2) {
+            console.debug(
+              constraint.pair.join(" and "),
+              "can't live in the same room or be neighbors, so why are they?"
+            );
+            violatedConstraintsIds.push(constraint._id);
+          }
+          break;
+      }
     }
   });
   return violatedConstraintsIds;

@@ -144,7 +144,7 @@ class Messages extends React.Component {
 
 class Event extends React.Component {
   render() {
-    const { subject, verb, object, target, at } = this.props.event;
+    const { subject, verb, object, target, state, at } = this.props.event;
     let content;
     switch (verb) {
       case "roundStarted":
@@ -176,11 +176,11 @@ class Event extends React.Component {
           </div>
         );
         break;
-      case "releasedStudent":
+      case "playerSatisfaction":
         content = (
           <div className="content">
-            <Author player={subject} /> released{" "}
-            <div className="object">{object}</div>
+            <Author player={subject} /> is{" "}
+            <div className="object">{state}</div>{" "}with the answer
           </div>
         );
         break;
