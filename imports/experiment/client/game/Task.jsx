@@ -21,7 +21,7 @@ export default class Task extends React.Component {
         <div className="left">
           <div className="info">
             <Timer stage={stage} />
-            <div class="score">
+            <div className="score">
               <h5>Score</h5>
 
               <h2>{round.get("score")}</h2>
@@ -71,18 +71,26 @@ export default class Task extends React.Component {
         </div>
 
         <div className="board">
-          <Room room="deck" round={round} game={game} player={player} isDeck />
+          <div className="all-rooms">
+            <Room
+              room="deck"
+              round={round}
+              game={game}
+              player={player}
+              isDeck
+            />
 
-          <div className="rooms">
-            {task.rooms.map(room => (
-              <Room
-                key={room}
-                room={room}
-                round={round}
-                game={game}
-                player={player}
-              />
-            ))}
+            <div className="rooms">
+              {task.rooms.map(room => (
+                <Room
+                  key={room}
+                  room={room}
+                  round={round}
+                  game={game}
+                  player={player}
+                />
+              ))}
+            </div>
           </div>
 
           <div className="response">

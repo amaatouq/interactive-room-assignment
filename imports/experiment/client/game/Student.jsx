@@ -16,37 +16,43 @@ export default class Student extends React.Component {
       verb: "draggingStudent",
       subjectId: player._id,
       object: student,
-      at: new Date(),
+      at: new Date()
     });
     e.dataTransfer.setData("text/plain", student);
+  };
+
+  handleDragOver = e => {
+    e.preventDefault();
   };
 
   handleDragEnd = e => {
     const { student, round } = this.props;
     round.set(`student-${student}-dragger`, null);
-    console.log("no?", Math.random());
+    console.log("Dropped", Math.random());
   };
 
   render() {
     const { student, round, game, player } = this.props;
-    this.isDragabble=true; // usually everyone can drag, except if it is colored (i.e., being dragged by someone else)
+    this.isDragabble = true; // usually everyone can drag, except if it is colored (i.e., being dragged by someone else)
     const dragger = round.get(`student-${student}-dragger`);
     const style = {};
-    const cursorStyle= {cursor:null};
+    const cursorStyle = { cursor: null };
     if (dragger) {
       const playerDragging = game.players.find(p => p._id === dragger);
       if (playerDragging) {
         style.fill = playerDragging.get("nameColor");
-        this.isDragabble = playerDragging===player._id; //only one can drag at a time
+        this.isDragabble = playerDragging === player._id; //only one can drag at a time
       }
-    } else { //if the student is NOT being dragged by anyone, then the cursor will be changed
-      cursorStyle.cursor="move";
+    } else {
+      //if the student is NOT being dragged by anyone, then the cursor will be changed
+      cursorStyle.cursor = "move";
     }
 
     return (
       <div
         draggable={this.isDragabble}
         onDragStart={this.handleDragStart}
+        onDragOver={this.handleDragOver}
         onDragEnd={this.handleDragEnd}
         className="student"
         style={cursorStyle}
