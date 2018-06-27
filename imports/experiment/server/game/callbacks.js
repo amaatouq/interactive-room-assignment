@@ -1,13 +1,13 @@
 export default {
   onGameStart(game, players) {
-    console.log("game ", game._id, " started");
+    console.debug("game ", game._id, " started");
     //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
     game.set("cumulativeScore", 0);
     game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
   },
 
   onRoundStart(game, round, players) {
-    console.log("Round ", round.index + 1, "game", game._id, " started");
+    console.debug("Round ", round.index + 1, "game", game._id, " started");
     //initiate the score for this round (because everyone will have the same score, we can save it at the round object
     round.set("score", 0);
     round.set("chat", []);
@@ -22,6 +22,10 @@ export default {
     task.students.forEach(student => {
       round.set(`student-${student}-room`, "deck");
       round.set(`student-${student}-dragger`, null);
+    });
+
+    players.forEach(player => {
+      player.set("satisfied", false);
     });
   },
 
@@ -44,14 +48,14 @@ export default {
     //check for constraint violations
     const violationIds = getViolations(task, assignments);
     round.set("violatedConstraints", violationIds);
-    console.log("violations", violationIds);
+    console.debug("violations", violationIds);
 
     //get score if there are no violations, otherwise, the score is 0
     const currentScore =
       assignments["deck"].length === 0
         ? getScore(task, assignments, violationIds.length)
         : 0;
-    console.log("currentScore", currentScore);
+    console.debug("currentScore", currentScore);
     round.set("score", currentScore || 0);
   },
 
@@ -63,7 +67,7 @@ export default {
   },
 
   onGameEnd(game, players) {
-    console.log("The game", game._id, "has ended");
+    console.debug("The game", game._id, "has ended");
 
     //computing the bonus for everyone (in this game, everyone will get the same value)
     const conversionRate = 1 / 500; //TODO: we need to discuss this
@@ -105,15 +109,17 @@ export default {
     //check for constraint violations
     const violationIds = getViolations(task, assignments);
     round.set("violatedConstraints", violationIds);
-    console.log("violations", violationIds);
+    console.debug("violations", violationIds);
 
     //get score if there are no violations, otherwise, the score is 0
     const currentScore =
       assignments["deck"].length === 0
         ? getScore(task, assignments, violationIds.length)
         : 0;
-    console.log("currentScore", currentScore);
+    console.debug("currentScore", currentScore);
     round.set("score", currentScore || 0);
+
+    console.debug("===============================");
   }
 
   // // onSet is called when the experiment code call the `.append()` method
@@ -174,7 +180,7 @@ function find_room(assignments, student) {
 }
 
 function getViolations(task, assignments) {
-  console.log("assignments ", assignments);
+  console.debug("assignments ", assignments);
   const violatedConstraintsIds = [];
   task.constraints.forEach(constraint => {
     switch (constraint.type) {
@@ -184,7 +190,7 @@ function getViolations(task, assignments) {
           find_room(assignments, constraint.pair[0]) !==
           find_room(assignments, constraint.pair[1])
         ) {
-          console.log(
+          console.debug(
             constraint.pair.join(" and "),
             "they are not in the same room, when they should've"
           );
@@ -197,7 +203,7 @@ function getViolations(task, assignments) {
           find_room(assignments, constraint.pair[0]) ===
           find_room(assignments, constraint.pair[1])
         ) {
-          console.log(
+          console.debug(
             constraint.pair.join(" and "),
             "they are in the same room, when they shouldn't"
           );
@@ -213,7 +219,7 @@ function getViolations(task, assignments) {
               find_room(assignments, constraint.pair[1])
           ) !== 1
         ) {
-          console.log(
+          console.debug(
             constraint.pair.join(" and "),
             "they are not neighbors, when they should've been"
           );
@@ -228,8 +234,8 @@ function getViolations(task, assignments) {
               find_room(assignments, constraint.pair[1])
           ) < 2
         ) {
-          console.log(
-            constraint.pair.join("and"),
+          console.debug(
+            constraint.pair.join(" and "),
             "can't live in the same room or be neighbors, so why are they?"
           );
           violatedConstraintsIds.push(constraint._id);

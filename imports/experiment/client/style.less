@@ -33,10 +33,20 @@
 
     flex-grow: 1;
     flex-shrink: 0;
-    width: 35rem;
+    width: 38rem;
 
     & > div {
       margin: 3rem 0 0;
+    }
+
+    .info {
+      display: flex;
+
+      & > div {
+        margin-right: 3rem;
+        width: 6.5rem;
+        text-align: center;
+      }
     }
 
     .payoff {
@@ -56,6 +66,24 @@
         th,
         td {
           padding: 0.4rem 1rem;
+        }
+      }
+    }
+
+    .constraints {
+      ul {
+        padding: 0;
+        list-style: none;
+
+        li {
+          &.failed {
+            color: red;
+          }
+
+          .pt-icon-standard {
+            // display: inline-block;
+            margin-right: 0.5rem;
+          }
         }
       }
     }
@@ -130,9 +158,6 @@
 
       .room {
         height: 10rem;
-        // border: 0.1rem solid #999;
-        // background-color: #f8f8f8;
-        // border-radius: 0.3rem;
         padding: 3.5rem 1rem 1rem;
         flex-grow: 0;
         flex-shrink: 0;
@@ -149,6 +174,13 @@
         }
       }
     }
+
+    .response {
+      padding: 3rem 0;
+      .pt-button {
+        margin: 2rem;
+      }
+    }
   }
 }
 
@@ -157,43 +189,57 @@
   flex-grow: 0;
   flex-shrink: 0;
 
-  width: 35rem;
+  width: 38rem;
   max-height: 100%;
   height: 100%;
 
-  .players {
+  .status {
     display: flex;
     flex-shrink: 0;
 
-    height: 10rem;
+    padding: 0 0.5rem;
+    height: 9rem;
+    margin-bottom: 1rem;
 
-    .player {
+    .players {
+      padding: 0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
+      margin-right: 1rem;
+      width: 100%;
 
-      &:first-child {
-        .name {
-          padding-right: 2rem;
+      .player {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+
+        &:first-child {
+          .name {
+            padding-right: 2rem;
+            white-space: nowrap;
+          }
+          .image {
+            padding-right: 2rem;
+            border-right: 1px solid lightgrey;
+          }
         }
-        .image {
-          padding-right: 2rem;
-          border-right: 1px solid lightgrey;
+
+        img {
+          width: 5rem;
+          height: 5rem;
         }
       }
-
-      img {
-        width: 5rem;
-        height: 5rem;
-      }
+    }
+    .total-score {
+      padding-top: 1.5rem;
+      text-align: center;
     }
   }
 
   .eventlog {
-    height: calc(~"50% - 6rem");
-    margin: 0 0 2rem 0;
+    height: calc(~"50% - 5rem");
     padding: 0 2rem;
+    margin-bottom: 1rem;
 
     .events {
       padding: 2rem 0 0;
@@ -240,7 +286,7 @@
   }
 
   .chat {
-    height: calc(~"50% - 6rem");
+    height: calc(~"50% - 5rem");
 
     position: relative;
     padding-top: 0rem;
@@ -333,17 +379,13 @@
   }
 }
 
-//importing the Orbitron font which makes it look like a digital clock
-@import url(https://fonts.googleapis.com/css?family=Orbitron);
 .timer {
-  margin-top: 2rem;
-  text-align: center;
-
   .seconds {
-    font-size: 3rem;
-    font-family: Orbitron, sans-serif;
     color: green;
+    font-size: 2.7rem;
+    font-weight: bold;
   }
+
   &.lessThan10 {
     .seconds {
       color: orange;
