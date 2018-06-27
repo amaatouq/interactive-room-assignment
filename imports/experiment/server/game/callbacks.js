@@ -68,83 +68,49 @@ export default {
     value, // New value
     prevValue // Previous value
   ) {
-    const task = round.get("task");
-    let assignments = { deck: [] };
-    task.rooms.forEach(room => {
-      assignments[room] = [];
-    });
-
-    //find the rooms for each player
-    task.students.forEach(student => {
-      const room = round.get(`student-${student}-room`);
-      assignments[room].push(student);
-    });
-
-    //check for constraint violations
-    const violationIds = getViolations(task, assignments);
-    round.set("violatedConstraints", violationIds);
-    console.debug("violations", violationIds);
-
-    //get score if there are no violations, otherwise, the score is 0
-    const currentScore =
-      assignments["deck"].length === 0
-        ? getScore(task, assignments, violationIds.length)
-        : 0;
-    console.debug("currentScore", currentScore);
-    round.set("score", currentScore || 0);
-
-    //check if everyone is satisfied and if so, submit their answer
-    let allSatisfied = true;
-    players.forEach(player => {
-      allSatisfied = player.get("satisfied") && allSatisfied;
-    });
-    if (allSatisfied) {
+    //someone changed their satisfication status
+    if (key === "satisfied") {
+      //check if everyone is satisfied and if so, submit their answer
+      let allSatisfied = true;
       players.forEach(player => {
-        player.stage.submit();
+        allSatisfied = player.get("satisfied") && allSatisfied;
       });
+      if (allSatisfied) {
+        players.forEach(player => {
+          player.stage.submit();
+        });
+      }
+      return;
     }
 
-    console.debug("===============================");
+    //someone placed a student to a room
+    if (key.substring(0, 8) === "student-" && key.slice(-4) === "room") {
+      const task = round.get("task");
+      let assignments = { deck: [] };
+      task.rooms.forEach(room => {
+        assignments[room] = [];
+      });
+
+      //find the rooms for each player
+      task.students.forEach(student => {
+        const room = round.get(`student-${student}-room`);
+        assignments[room].push(student);
+      });
+
+      //check for constraint violations
+      const violationIds = getViolations(task, assignments);
+      round.set("violatedConstraints", violationIds);
+      console.debug("violations", violationIds);
+
+      //get score if there are no violations, otherwise, the score is 0
+      const currentScore =
+        assignments["deck"].length === 0
+          ? getScore(task, assignments, violationIds.length)
+          : 0;
+      console.debug("currentScore", currentScore);
+      round.set("score", currentScore || 0);
+    }
   }
-
-  // // onSet is called when the experiment code call the `.append()` method
-  // // on games, rounds, stages, players, playerRounds or playerStages.
-  // onAppend(
-  //   game,
-  //   round,
-  //   stage,
-  //   players,
-  //   player, // Player who made the change
-  //   target, // Object on which the change was made (eg. player.set() => player)
-  //   targetType, // Type of object on which the change was made (eg. player.set() => "player")
-  //   key, // Key of changed value (e.g. player.set("score", 1) => "score")
-  //   value, // New value
-  //   prevValue // Previous value
-  // ) {
-  //   // Note: `value` is the single last value (e.g 0.2), while `prevValue` will
-  //   //       be an array of the previsous valued (e.g. [0.3, 0.4, 0.65]).
-  // },
-
-  // onChange is called when the experiment code call the `.set()` or the
-  // `.append()` method on games, rounds, stages, players, playerRounds or
-  // playerStages.
-  // onChange(
-  //   game,
-  //   round,
-  //   stage,
-  //   players,
-  //   player, // Player who made the change
-  //   target, // Object on which the change was made (eg. player.set() => player)
-  //   targetType, // Type of object on which the change was made (eg. player.set() => "player")
-  //   key, // Key of changed value (e.g. player.set("score", 1) => "score")
-  //   value, // New value
-  //   prevValue, // Previous value
-  //   isAppend // True if the change was an append, false if it was a set
-  // ) {
-  //   // `onChange` is useful to run server-side logic for any user interaction.
-  //   // Note the extra isAppend boolean that will allow to differenciate sets and
-  //   // appends.
-  // }
 };
 
 //helpers

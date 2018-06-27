@@ -2,8 +2,8 @@
 // Empirica core to initialize and run the game.
 import Consent from "./intro/Consent.jsx";
 import ExitSurvey from "./outro/ExitSurvey.jsx";
-import InstructionStepOne from "./intro/InstructionStepOne.jsx";
-import InstructionStepTwo from "./intro/InstructionStepTwo.jsx";
+import Overview from "./intro/Overview.jsx";
+import TaskDetails from "./intro/TaskDetails.jsx";
 import InstructionStepThree from "./intro/InstructionStepThree.jsx";
 import InstructionStepFour from "./intro/InstructionStepFour.jsx";
 import InstructionStepFive from "./intro/InstructionStepFive.jsx";
@@ -23,8 +23,8 @@ export const config = {
   // different instruction steps depending on the assigned treatment.
   InstructionSteps(treatment) {
     const steps = [
-      InstructionStepOne,
-      InstructionStepTwo,
+      Overview,
+      TaskDetails,
       InstructionStepThree,
       InstructionStepFour,
       InstructionStepFive,

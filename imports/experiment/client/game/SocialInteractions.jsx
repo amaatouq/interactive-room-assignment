@@ -29,7 +29,7 @@ export default class SocialInteractions extends React.Component {
           <img src={player.get("avatar")} />
         </span>
         {/* <span className="name" style={{ color: player.get("nameColor") }}> */}
-        <span className="name">
+        <span className="name" style={{ color: player.get("nameColor") }}>
           {player.get("name")}
           {self ? " (You)" : ""}
         </span>
@@ -179,8 +179,8 @@ class Event extends React.Component {
       case "playerSatisfaction":
         content = (
           <div className="content">
-            <Author player={subject} /> is{" "}
-            <div className="object">{state}</div>{" "}with the answer
+            <Author player={subject} /> is <div className="object">{state}</div>{" "}
+            with the answer
           </div>
         );
         break;
