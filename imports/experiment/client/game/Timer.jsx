@@ -6,7 +6,10 @@ import Timer from "./Timer.jsx";
 class timer extends React.Component {
   render() {
     const { remainingSeconds } = this.props;
-
+    const minutes = Math.floor(remainingSeconds / 60);
+    const seconds = remainingSeconds - minutes * 60;
+  
+  
     const classes = ["timer"];
     if (remainingSeconds <= 5) {
       classes.push("lessThan5");
@@ -17,7 +20,7 @@ class timer extends React.Component {
     return (
       <div className={classes.join(" ")}>
         <h5>Timer</h5>
-        <span className="seconds">{remainingSeconds}</span>
+        <span className="seconds">{minutes}:{seconds}</span>
       </div>
     );
   }
