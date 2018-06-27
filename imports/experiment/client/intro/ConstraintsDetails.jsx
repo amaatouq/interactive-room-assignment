@@ -1,106 +1,51 @@
 import React from "react";
 
 import Centered from "../../../core/ui/components/Centered.jsx";
+import { exampleTaskData } from "./TaskDetails";
 
-// student names
-const studentNames = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
-// room numbers
-const roomNumbers = _.range(101, 111);
-
-// constraint types
-const constraintTypes = {
-  0: "must live in the same room",
-  1: "can't live in the same room",
-  2: "must be neighbors",
-  3: "can't live in the same room or be neighbors"
-};
-
-export const exampleTaskData = {
-  _id: 0,
-  optimal: 220,
-  difficulty: "easy",
-  students: studentNames.slice(0, 4), // how many students
-  rooms: roomNumbers.slice(0, 3), // how many rooms
-  constraints: [
-    {
-      _id: 0, // i.e., A and B can't live in the same room or be neighbors.
-      pair: ["A", "B"],
-      type: 3,
-      text: constraintTypes[3]
-    },
-    {
-      _id: 1, // i.e., B and C must live in the same room.
-      pair: ["B", "C"],
-      type: 0,
-      text: constraintTypes[0]
-    }
-  ],
-  payoff: {
-    // the payoff of placing Student i in Room j (e.g., `payoff[i][j]`)
-    A: { 101: 20, 102: 80, 103: 65 },
-    B: { 101: 67, 102: 90, 103: 76 },
-    C: { 101: 85, 102: 82, 103: 79 },
-    D: { 101: 20, 102: 75, 103: 78 }
-  }
-};
-
-export default class TaskDetails extends React.Component {
- 
+export default class ConstraintsDetails extends React.Component {
   render() {
-    const { hasPrev, hasNext, onNext, onPrev } = this.props;
+    const { hasPrev, hasNext, onNext, onPrev, treatment } = this.props;
+    this.violatedConstraints();
     this.updateScore();
     return (
       <Centered>
         <div className="instructions">
-          <h1> Task: Room Assignment </h1>
+          <h1>Task: Respect the Constraints</h1>
           <p>
-            In each task (or round), you will be asked to{" "}
-            <strong>assign students to dorm rooms</strong>. Students express
-            their degree of satisfaction for living in a room as a number
-            between 0 and 100 (the higher the rating, the more satisfied the
-            student is).{" "}
-          </p>
-
-          <p>
-            You are provided with a handy <strong>drag and drop</strong> tool to
-            solve the problem. To assign a student into a room, drag the icon of
-            that student and drop it into the room. Try this example:
+            You need to consider some constraints when assigning students to
+            rooms. Some students can't live together in the same room and some
+            students must be neighbors. These constraints vary from task to
+            task, and there are no additional constraints you need to respect
+            other than the ones stated (e.g., feel free to leave one room empty
+            if no constraint requires you to assign at least one student in each
+            room).
           </p>
 
           <div className="task">
             <div className="left">
-              <div className="payoff">
-                <h5>Payoff</h5>
-                <table className="pt-table">
-                  <thead>
-                    <tr>
-                      <th>Rooms</th>
-                      {exampleTaskData.rooms.map(room => (
-                        <th key={room}>{room}</th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {exampleTaskData.students.map(student => (
-                      <tr key={student}>
-                        <th>Student {student}</th>
-                        {exampleTaskData.rooms.map(room => (
-                          <td
-                            key={room}
-                            className={
-                              this.state[`student${student}Room`] === room
-                                ? "active"
-                                : null
-                            }
-                          >
-                            {exampleTaskData.payoff[student][room]}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="constraints">
+                <h5>Constraints</h5>
+                <ul>
+                  {exampleTaskData.constraints.map(constraint => {
+                    const failed = this.state.violatedConstraintsIds.includes(
+                      constraint._id
+                    );
+                    return (
+                      <li
+                        key={constraint._id}
+                        className={failed ? "failed" : ""}
+                      >
+                        {failed ? (
+                          <span className="pt-icon-standard pt-icon-cross" />
+                        ) : (
+                          <span className="pt-icon-standard pt-icon-dot" />
+                        )}
+                        {constraint.pair.join(" and ")} {constraint.text}.
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
 
               <div className="info">
@@ -126,8 +71,8 @@ export default class TaskDetails extends React.Component {
           <div style={{ textAlign: "center" }}>
             <p>
               <strong>
-                NOTE: ALL the students HAVE to be assigned to a room in order
-                for your score to count.
+                NOTE: Every violated constraint will result in deducting 100
+                points from your score.
               </strong>
             </p>
           </div>
@@ -153,7 +98,7 @@ export default class TaskDetails extends React.Component {
       </Centered>
     );
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -162,7 +107,8 @@ export default class TaskDetails extends React.Component {
       studentBRoom: "deck",
       studentCRoom: "deck",
       studentDRoom: "deck",
-      score: 0
+      score:0,
+      violatedConstraintsIds: []
     };
   }
   
@@ -175,6 +121,7 @@ export default class TaskDetails extends React.Component {
         }
       });
     });
+    this.state.score -= 100* this.state.violatedConstraintsIds.length;
     //if anyone in the deck, then score is 0
     exampleTaskData.students.forEach(student => {
       if (this.state[`student${student}Room`] === "deck") {
@@ -183,17 +130,71 @@ export default class TaskDetails extends React.Component {
       }
     });
   }
-  
+
+  violatedConstraints() {
+    this.state.violatedConstraintsIds = [];
+    exampleTaskData.constraints.forEach(constraint => {
+      const firstStudentRoom = this.state[`student${constraint.pair[0]}Room`];
+      const secondStudentRoom = this.state[`student${constraint.pair[1]}Room`];
+
+      if (firstStudentRoom !== "deck" && secondStudentRoom !== "deck") {
+        switch (constraint.type) {
+          case 0:
+            //they are not in the same room, when they should've
+            if (firstStudentRoom !== secondStudentRoom) {
+              console.debug(
+                constraint.pair.join(" and "),
+                "they are not in the same room, when they should've"
+              );
+              this.state.violatedConstraintsIds.push(constraint._id);
+            }
+            break;
+          case 1:
+            //they are in the same room, when they shouldn't
+            if (firstStudentRoom === secondStudentRoom) {
+              console.debug(
+                constraint.pair.join(" and "),
+                "they are in the same room, when they shouldn't"
+              );
+              this.state.violatedConstraintsIds.push(constraint._id);
+            }
+
+            break;
+          case 2:
+            //if they are not neighbors, when they should've been
+            if (Math.abs(firstStudentRoom - secondStudentRoom) !== 1) {
+              console.debug(
+                constraint.pair.join(" and "),
+                "they are not neighbors, when they should've been"
+              );
+              this.state.violatedConstraintsIds.push(constraint._id);
+            }
+
+            break;
+          case 3:
+            if (Math.abs(firstStudentRoom - secondStudentRoom) < 2) {
+              console.debug(
+                constraint.pair.join(" and "),
+                "can't live in the same room or be neighbors, so why are they?"
+              );
+              this.state.violatedConstraintsIds.push(constraint._id);
+            }
+            break;
+        }
+      }
+    });
+  }
+
   handleDragOver = e => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
     this.setState({ hovered: true });
   };
-  
+
   handleDragLeave = e => {
     this.setState({ hovered: false });
   };
-  
+
   handleDrop = (room, e) => {
     const student = e.dataTransfer.getData("text/plain");
     this.setState({ hovered: false });
@@ -201,7 +202,7 @@ export default class TaskDetails extends React.Component {
     obj[`student${student}Room`] = room;
     this.setState(obj);
   };
-  
+
   renderRoom(room, isDeck) {
     const { hovered } = this.state;
     const students = [];
@@ -211,7 +212,7 @@ export default class TaskDetails extends React.Component {
       }
     });
     console.log("students in room ", room, " are ", students);
-    
+
     const classNameRoom = isDeck ? "deck pt-elevation-1" : "room";
     const classNameHovered = hovered ? "pt-elevation-3" : "";
     return (
@@ -227,23 +228,23 @@ export default class TaskDetails extends React.Component {
       </div>
     );
   }
-  
+
   studentHandleDragStart = (student, e) => {
     e.dataTransfer.setData("text/plain", student);
   };
-  
+
   studentHandleDragOver = e => {
     e.preventDefault();
   };
-  
+
   studentHandleDragEnd = e => {
     console.log("Dropped", Math.random());
   };
-  
+
   renderStudent(student) {
     const style = {};
     const cursorStyle = { cursor: "move" };
-    
+
     return (
       <div
         key={student}
@@ -267,6 +268,4 @@ export default class TaskDetails extends React.Component {
       </div>
     );
   }
-  
 }
-

@@ -9,6 +9,14 @@ export default class InstructionStepFive extends React.Component {
       <Centered>
         <div className="instructions">
           <h1> More about Performance and Bonuses</h1>
+  
+          <p>
+            Your job in each task is to find the room assignment plan that
+            maximizes overall satisfaction for the group of students, while
+            respecting all constraints in that task.
+          </p>
+          
+          
           <p>
             If your submitted answer in a task is a{" "}
             <strong>

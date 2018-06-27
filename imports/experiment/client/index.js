@@ -4,7 +4,7 @@ import Consent from "./intro/Consent.jsx";
 import ExitSurvey from "./outro/ExitSurvey.jsx";
 import Overview from "./intro/Overview.jsx";
 import TaskDetails from "./intro/TaskDetails.jsx";
-import InstructionStepThree from "./intro/InstructionStepThree.jsx";
+import ConstraintsDetails from "./intro/ConstraintsDetails.jsx";
 import InstructionStepFour from "./intro/InstructionStepFour.jsx";
 import InstructionStepFive from "./intro/InstructionStepFive.jsx";
 import InstructionStepSix from "./intro/InstructionStepSix.jsx";
@@ -25,7 +25,7 @@ export const config = {
     const steps = [
       Overview,
       TaskDetails,
-      InstructionStepThree,
+      ConstraintsDetails,
       InstructionStepFour,
       InstructionStepFive,
       InstructionStepSix
