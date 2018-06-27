@@ -6,8 +6,8 @@ import Timer from "./Timer.jsx";
 class timer extends React.Component {
   render() {
     const { remainingSeconds } = this.props;
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds - minutes * 60;
+    const minutes = ("0" + Math.floor(remainingSeconds / 60)).slice(-2);
+    const seconds = ("0" + (remainingSeconds - minutes * 60)).slice(-2);
   
   
     const classes = ["timer"];

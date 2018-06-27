@@ -11,7 +11,7 @@ export default class Task extends React.Component {
     round.append("log", {
       verb: "playerSatisfaction",
       subjectId: player._id,
-      state: satisfied? "satisfied":"unsatisfied",
+      state: satisfied ? "satisfied" : "unsatisfied",
       at: new Date()
     });
   };
@@ -55,7 +55,7 @@ export default class Task extends React.Component {
 
           <div className="payoff">
             <h5>Payoff</h5>
-            <table className="pt-table pt-interactive">
+            <table className="pt-table">
               <thead>
                 <tr>
                   <th>Rooms</th>
@@ -67,7 +67,16 @@ export default class Task extends React.Component {
                   <tr key={student}>
                     <th>Student {student}</th>
                     {task.rooms.map(room => (
-                      <td key={room}>{task.payoff[student][room]}</td>
+                      <td
+                        className={
+                          round.get(`student-${student}-room`) === room
+                            ? "active"
+                            : null
+                        }
+                        key={room}
+                      >
+                        {task.payoff[student][room]}
+                      </td>
                     ))}
                   </tr>
                 ))}
