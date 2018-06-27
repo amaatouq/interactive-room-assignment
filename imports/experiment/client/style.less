@@ -46,6 +46,12 @@
         margin-right: 3rem;
         width: 6.5rem;
         text-align: center;
+
+        h2 {
+          padding: 0;
+          margin: 0;
+          line-height: 3.5rem;
+        }
       }
     }
 
@@ -94,9 +100,55 @@
     flex-shrink: 1;
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    .all-rooms {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .deck,
+      .room {
+        position: relative;
+        // margin: -0.1rem -0.1rem 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .deck {
+        flex-shrink: 0;
+        height: 7rem;
+        min-width: 40rem;
+        // border: 0.15rem dashed #eee;
+        // border-radius: 10px;
+        background-color: #eee;
+        margin: 1rem;
+      }
+
+      .rooms {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        // max-width: 75rem;
+
+        .room {
+          height: 10rem;
+          padding: 3.5rem 1rem 1rem;
+          flex-grow: 0;
+          flex-shrink: 0;
+          width: 25rem;
+          margin: 1rem;
+
+          h6 {
+            position: absolute;
+            text-align: center;
+            width: 100%;
+            top: 0;
+            padding: 1rem 0;
+            color: #666;
+          }
+        }
+      }
+    }
 
     .student {
       position: relative;
@@ -131,52 +183,9 @@
       }
     }
 
-    .deck,
-    .room {
-      position: relative;
-      // margin: -0.1rem -0.1rem 0 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .deck {
-      flex-shrink: 0;
-      height: 7rem;
-      min-width: 40rem;
-      // border: 0.15rem dashed #eee;
-      // border-radius: 10px;
-      background-color: #eee;
-      margin: 1rem;
-    }
-
-    .rooms {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      // max-width: 75rem;
-
-      .room {
-        height: 10rem;
-        padding: 3.5rem 1rem 1rem;
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 25rem;
-        margin: 1rem;
-
-        h6 {
-          position: absolute;
-          text-align: center;
-          width: 100%;
-          top: 0;
-          padding: 1rem 0;
-          color: #666;
-        }
-      }
-    }
-
     .response {
       padding: 3rem 0;
+      text-align: center;
       .pt-button {
         margin: 2rem;
       }
