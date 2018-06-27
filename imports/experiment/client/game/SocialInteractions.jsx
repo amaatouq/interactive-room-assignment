@@ -186,7 +186,15 @@ class Event extends React.Component {
 
     return (
       <div className="event">
-        <div className="timestamp">{moment(at).format("hh:mm:ss a")}</div>
+        {/*
+          Not sure we even need to show am/pm. I think we need seconds since the
+          interactions are quick but to save space we can probably skip am/pm
+          for the sake of space. We could maybe also just but the seconds since
+          start of round or remaining second before end of round, might be more
+          relevant. Might or might not be clear.
+        */}
+        {/* <div className="timestamp">{moment(at).format("hh:mm:ss a")}</div> */}
+        <div className="timestamp">{moment(at).format("hh:mm:ss")}</div>
         {content}
       </div>
     );
