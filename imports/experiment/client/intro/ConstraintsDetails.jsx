@@ -213,7 +213,6 @@ export default class ConstraintsDetails extends React.Component {
         students.push(student);
       }
     });
-    console.log("students in room ", room, " are ", students);
 
     const classNameRoom = isDeck ? "deck pt-elevation-1" : "room";
     const classNameHovered = hovered ? "pt-elevation-3" : "";
@@ -240,7 +239,7 @@ export default class ConstraintsDetails extends React.Component {
   };
 
   studentHandleDragEnd = e => {
-    console.log("Dropped", Math.random());
+    //console.log("Dropped", Math.random());
   };
 
   renderStudent(student) {
