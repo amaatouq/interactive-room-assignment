@@ -46,7 +46,6 @@ export const exampleTaskData = {
 };
 
 export default class TaskDetails extends React.Component {
- 
   render() {
     const { hasPrev, hasNext, onNext, onPrev } = this.props;
     this.updateScore();
@@ -153,7 +152,7 @@ export default class TaskDetails extends React.Component {
       </Centered>
     );
   }
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -165,7 +164,7 @@ export default class TaskDetails extends React.Component {
       score: 0
     };
   }
-  
+
   updateScore() {
     this.state.score = 0;
     exampleTaskData.students.forEach(student => {
@@ -183,17 +182,17 @@ export default class TaskDetails extends React.Component {
       }
     });
   }
-  
+
   handleDragOver = e => {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
     this.setState({ hovered: true });
   };
-  
+
   handleDragLeave = e => {
     this.setState({ hovered: false });
   };
-  
+
   handleDrop = (room, e) => {
     const student = e.dataTransfer.getData("text/plain");
     this.setState({ hovered: false });
@@ -201,7 +200,7 @@ export default class TaskDetails extends React.Component {
     obj[`student${student}Room`] = room;
     this.setState(obj);
   };
-  
+
   renderRoom(room, isDeck) {
     const { hovered } = this.state;
     const students = [];
@@ -210,7 +209,7 @@ export default class TaskDetails extends React.Component {
         students.push(student);
       }
     });
-    
+
     const classNameRoom = isDeck ? "deck pt-elevation-1" : "room";
     const classNameHovered = hovered ? "pt-elevation-3" : "";
     return (
@@ -226,23 +225,21 @@ export default class TaskDetails extends React.Component {
       </div>
     );
   }
-  
+
   studentHandleDragStart = (student, e) => {
     e.dataTransfer.setData("text/plain", student);
   };
-  
+
   studentHandleDragOver = e => {
     e.preventDefault();
   };
-  
-  studentHandleDragEnd = e => {
 
-  };
-  
+  studentHandleDragEnd = e => {};
+
   renderStudent(student) {
     const style = {};
     const cursorStyle = { cursor: "move" };
-    
+
     return (
       <div
         key={student}
@@ -266,6 +263,4 @@ export default class TaskDetails extends React.Component {
       </div>
     );
   }
-  
 }
-

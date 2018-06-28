@@ -73,7 +73,7 @@ export default class SocialInteractionDetails extends React.Component {
   
           <p>
             <strong>
-              If all team members are satisfied before the timer this up, the
+              If all team members are satisfied before the timer is up, the
               answer will be submitted and you will move to the next task
             </strong>.
           </p>

@@ -144,11 +144,19 @@ class Messages extends React.Component {
 
 class Event extends React.Component {
   render() {
-    const { subject, verb, object, target, state, at } = this.props.event;
+    const {
+      subject,
+      roundId,
+      verb,
+      object,
+      target,
+      state,
+      at
+    } = this.props.event;
     let content;
     switch (verb) {
       case "roundStarted":
-        content = <div className="content">Round started</div>;
+        content = <div className="content">Round {roundId} started</div>;
         break;
       case "movedStudent":
         content = (

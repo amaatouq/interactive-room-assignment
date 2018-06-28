@@ -14,6 +14,7 @@ export default {
     round.set("log", [
       {
         verb: "roundStarted",
+        roundId: round.index + 1,
         at: new Date()
       }
     ]);
@@ -41,7 +42,7 @@ export default {
   },
 
   onGameEnd(game, players) {
-    console.debug("The game", game._id, "has ended");
+    //console.debug("The game", game._id, "has ended");
 
     //computing the bonus for everyone (in this game, everyone will get the same value)
     const conversionRate = 1 / 500; //TODO: we need to discuss this
@@ -100,14 +101,14 @@ export default {
       //check for constraint violations
       const violationIds = getViolations(task, assignments);
       round.set("violatedConstraints", violationIds);
-      console.debug("violations", violationIds);
+      //console.debug("violations", violationIds);
 
       //get score if there are no violations, otherwise, the score is 0
       const currentScore =
         assignments["deck"].length === 0
           ? getScore(task, assignments, violationIds.length)
           : 0;
-      console.debug("currentScore", currentScore);
+      //console.debug("currentScore", currentScore);
       round.set("score", currentScore || 0);
     }
   }
@@ -131,7 +132,7 @@ function find_room(assignments, student) {
 }
 
 function getViolations(task, assignments) {
-  console.debug("assignments ", assignments);
+  // console.debug("assignments ", assignments);
   const violatedConstraintsIds = [];
 
   task.constraints.forEach(constraint => {
@@ -143,20 +144,20 @@ function getViolations(task, assignments) {
         case 0:
           //they are not in the same room, when they should've
           if (firstStudentRoom !== secondStudentRoom) {
-            console.debug(
-              constraint.pair.join(" and "),
-              "they are not in the same room, when they should've"
-            );
+            // console.debug(
+            //   constraint.pair.join(" and "),
+            //   "they are not in the same room, when they should've"
+            // );
             violatedConstraintsIds.push(constraint._id);
           }
           break;
         case 1:
           //they are in the same room, when they shouldn't
           if (firstStudentRoom === secondStudentRoom) {
-            console.debug(
-              constraint.pair.join(" and "),
-              "they are in the same room, when they shouldn't"
-            );
+            // console.debug(
+            //   constraint.pair.join(" and "),
+            //   "they are in the same room, when they shouldn't"
+            // );
             violatedConstraintsIds.push(constraint._id);
           }
 
@@ -164,20 +165,20 @@ function getViolations(task, assignments) {
         case 2:
           //if they are not neighbors, when they should've been
           if (Math.abs(firstStudentRoom - secondStudentRoom) !== 1) {
-            console.debug(
-              constraint.pair.join(" and "),
-              "they are not neighbors, when they should've been"
-            );
+            // console.debug(
+            //   constraint.pair.join(" and "),
+            //   "they are not neighbors, when they should've been"
+            // );
             violatedConstraintsIds.push(constraint._id);
           }
 
           break;
         case 3:
           if (Math.abs(firstStudentRoom - secondStudentRoom) < 2) {
-            console.debug(
-              constraint.pair.join(" and "),
-              "can't live in the same room or be neighbors, so why are they?"
-            );
+            // console.debug(
+            //   constraint.pair.join(" and "),
+            //   "can't live in the same room or be neighbors, so why are they?"
+            // );
             violatedConstraintsIds.push(constraint._id);
           }
           break;

@@ -13,9 +13,11 @@ export default class ConstraintsDetails extends React.Component {
         <div className="instructions">
           <h1>Task: Respect the Constraints</h1>
           <p>
-            You need to <strong>consider some constraints when assigning students to
-            rooms</strong>. Some students can't live together in the same room and some
-            students must be neighbors.
+            You need to{" "}
+            <strong>
+              consider some constraints when assigning students to rooms
+            </strong>. Some students can't live together in the same room and
+            some students must be neighbors.
           </p>
           <p>
             These constraints vary from task to task, and there are no
