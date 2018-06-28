@@ -46,11 +46,9 @@ export default class Room extends React.Component {
     //if they kept the student where it is, log that they stayed in the same place And don't change the answer
     if (currentRoom === room) {
       round.append("log", {
-        verb: "keptStudent",
+        verb: "releasedStudent",
         subjectId: player._id,
-        object: student,
-        target: room,
-        at: new Date()
+        object: student
       });
       return
     }

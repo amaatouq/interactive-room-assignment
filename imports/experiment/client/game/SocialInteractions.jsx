@@ -136,7 +136,6 @@ class Messages extends React.Component {
 
   render() {
     const { messages, player } = this.props;
-    console.log("messages",messages);
 
     return (
       <div className="messages" ref={el => (this.messagesEl = el)}>
@@ -183,15 +182,15 @@ class Event extends React.Component {
           </div>
         );
         break;
-      case "keptStudent":
-        content = (
-          <div className="content">
-            <Author player={subject} self={self} /> kept{" "}
-            <div className="object">{object}</div> in{" "}
-            <div className="target">Room {target}</div>.
-          </div>
-        );
-        break;
+      // case "keptStudent":
+      //   content = (
+      //     <div className="content">
+      //       <Author player={subject} self={self} /> kept{" "}
+      //       <div className="object">{object}</div> in{" "}
+      //       <div className="target">Room {target}</div>.
+      //     </div>
+      //   );
+      //   break;
       case "releasedStudent":
         content = (
           <div className="content">
