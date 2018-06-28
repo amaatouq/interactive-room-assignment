@@ -20,7 +20,7 @@ export default class Room extends React.Component {
     const student = e.dataTransfer.getData("text/plain");
     round.set(`student-${student}-dragger`, null); //maybe this fixes the problem of stucked colors
     const currentRoom = round.get(`student-${student}-room`);
-  
+
     this.setState({ hovered: false });
 
     // Avoid any unwanted drops!
@@ -41,8 +41,7 @@ export default class Room extends React.Component {
     // }
     //
     //
-    
-    
+
     //if they kept the student where it is, log that they stayed in the same place And don't change the answer
     if (currentRoom === room) {
       round.append("log", {
@@ -50,7 +49,7 @@ export default class Room extends React.Component {
         subjectId: player._id,
         object: student
       });
-      return
+      return;
     }
 
     round.set(`student-${student}-room`, room);
@@ -62,7 +61,6 @@ export default class Room extends React.Component {
       target: room,
       at: new Date()
     });
-  
   };
 
   render() {
