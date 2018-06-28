@@ -44,7 +44,7 @@ export default class SocialInteractions extends React.Component {
     const otherPlayers = _.reject(game.players, p => p._id === player._id);
     const messages = round.get("chat").map(({ text, playerId }) => ({
       text,
-      player: game.players.find(p => p._id === playerId)
+      subject: game.players.find(p => p._id === playerId)
     }));
     const events = round.get("log").map(({ subjectId, ...rest }) => ({
       subject: subjectId && game.players.find(p => p._id === subjectId),
@@ -67,10 +67,10 @@ export default class SocialInteractions extends React.Component {
         </div>
 
         <div className="eventlog pt-card">
-          <EventLog events={events} />
+          <EventLog events={events} player={player} />
         </div>
         <div className="chat pt-card">
-          <Messages messages={messages} />
+          <Messages messages={messages} player={player} />
           <form onSubmit={this.handleSubmit}>
             <div className="pt-control-group">
               <input
@@ -93,22 +93,28 @@ export default class SocialInteractions extends React.Component {
   }
 }
 
-const Author = ({ player }) => (
-  <div className="author">
-    <img src={player.get("avatar")} />
-    <span className="name" style={{ color: player.get("nameColor") }}>
-      {player.get("name")}
-    </span>
-  </div>
-);
+class Author extends React.Component {
+  render() {
+    const { player, self } = this.props;
+
+    return (
+      <div className="author">
+        <img src={player.get("avatar")} />
+        <span className="name" style={{ color: player.get("nameColor") }}>
+          {self ? "You" : player.get("name")}
+        </span>
+      </div>
+    );
+  }
+}
 
 class Message extends React.Component {
   render() {
-    const { player, text } = this.props.message;
-
+    const { text,subject } = this.props.message;
+    const {self } = this.props;
     return (
       <div className="message">
-        <Author player={player} />
+        <Author player={subject} self={self} />
         {text}
       </div>
     );
@@ -129,14 +135,15 @@ class Messages extends React.Component {
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, player } = this.props;
+    console.log("messages",messages);
 
     return (
       <div className="messages" ref={el => (this.messagesEl = el)}>
         {messages.length === 0 ? (
           <div className="empty">No messages yet...</div>
         ) : null}
-        {messages.map((message, i) => <Message key={i} message={message} />)}
+        {messages.map((message, i) => <Message key={i} message={message} self={message.subject ? player._id === message.subject._id : null}  />)}
       </div>
     );
   }
@@ -153,6 +160,7 @@ class Event extends React.Component {
       state,
       at
     } = this.props.event;
+    const { self } = this.props;
     let content;
     switch (verb) {
       case "roundStarted":
@@ -161,7 +169,7 @@ class Event extends React.Component {
       case "movedStudent":
         content = (
           <div className="content">
-            <Author player={subject} /> moved{" "}
+            <Author player={subject} self={self} /> moved{" "}
             <div className="object">{object}</div> to{" "}
             <div className="target">Room {target}</div>.
           </div>
@@ -170,7 +178,7 @@ class Event extends React.Component {
       case "draggingStudent":
         content = (
           <div className="content">
-            <Author player={subject} /> started moving{" "}
+            <Author player={subject} self={self} /> started moving{" "}
             <div className="object">{object}</div>.
           </div>
         );
@@ -178,17 +186,25 @@ class Event extends React.Component {
       case "keptStudent":
         content = (
           <div className="content">
-            <Author player={subject} /> kept{" "}
+            <Author player={subject} self={self} /> kept{" "}
             <div className="object">{object}</div> in{" "}
             <div className="target">Room {target}</div>.
+          </div>
+        );
+        break;
+      case "releasedStudent":
+        content = (
+          <div className="content">
+            <Author player={subject} self={self} /> released{" "}
+            <div className="object">{object}</div> without moving it.
           </div>
         );
         break;
       case "playerSatisfaction":
         content = (
           <div className="content">
-            <Author player={subject} /> is <div className="object">{state}</div>{" "}
-            with the answer
+            <Author player={subject} self={self} /> is{" "}
+            <div className="object">{state}</div> with the answer
           </div>
         );
         break;
@@ -227,11 +243,13 @@ class EventLog extends React.Component {
   }
 
   render() {
-    const { events } = this.props;
-
+    const { events, player } = this.props;
+    
+  
+    //if the one who made the event is the player himself then self will be true
     return (
       <div className="events" ref={el => (this.eventsEl = el)}>
-        {events.map((event, i) => <Event key={i} event={event} />)}
+        {events.map((event, i) => <Event key={i} event={event} self={event.subject ? player._id === event.subject._id : null} />)}
       </div>
     );
   }

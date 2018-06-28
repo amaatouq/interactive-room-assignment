@@ -25,10 +25,26 @@ export default class Student extends React.Component {
     e.preventDefault();
   };
 
-  handleDragEnd = e => {
+  handleDragLeave = e => {
+    e.preventDefault();
+    console.log("released!");
     const { student, round } = this.props;
     round.set(`student-${student}-dragger`, null);
-    console.log("Dropped", Math.random());
+  };
+
+  handleDragEnd = e => {
+    e.preventDefault();
+    const { student, round, player} = this.props;
+    round.set(`student-${student}-dragger`, null);
+
+    //if dropped into non-allowed area
+    if (e.dataTransfer.dropEffect === "none") {
+      round.append("log", {
+        verb: "releasedStudent",
+        subjectId: player._id,
+        object: student
+      });
+    }
   };
 
   render() {
@@ -54,6 +70,7 @@ export default class Student extends React.Component {
         onDragStart={this.handleDragStart}
         onDragOver={this.handleDragOver}
         onDragEnd={this.handleDragEnd}
+        onDragExit={this.handleDragLeave}
         className="student"
         style={cursorStyle}
       >
