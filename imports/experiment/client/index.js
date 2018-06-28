@@ -5,9 +5,9 @@ import ExitSurvey from "./outro/ExitSurvey.jsx";
 import Overview from "./intro/Overview.jsx";
 import TaskDetails from "./intro/TaskDetails.jsx";
 import ConstraintsDetails from "./intro/ConstraintsDetails.jsx";
-import InstructionStepFour from "./intro/InstructionStepFour.jsx";
-import InstructionStepFive from "./intro/InstructionStepFive.jsx";
-import InstructionStepSix from "./intro/InstructionStepSix.jsx";
+import TeamDetails from "./intro/TeamDetails.jsx";
+import SocialInteractionDetails from "./intro/SocialInteractionDetails.jsx";
+import MoreAboutBonus from "./intro/MoreAboutBonus.jsx";
 
 import Quiz from "./intro/Quiz.jsx";
 import Round from "./game/Round.jsx";
@@ -26,9 +26,9 @@ export const config = {
       Overview,
       TaskDetails,
       ConstraintsDetails,
-      InstructionStepFour,
-      InstructionStepFive,
-      InstructionStepSix
+      TeamDetails,
+      SocialInteractionDetails,
+      MoreAboutBonus
     ];
     // if (treatment.playerCount > 1) {
     //   steps.push(InstructionStepThree);

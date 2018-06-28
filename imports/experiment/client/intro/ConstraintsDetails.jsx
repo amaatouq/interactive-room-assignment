@@ -13,13 +13,15 @@ export default class ConstraintsDetails extends React.Component {
         <div className="instructions">
           <h1>Task: Respect the Constraints</h1>
           <p>
-            You need to consider some constraints when assigning students to
-            rooms. Some students can't live together in the same room and some
-            students must be neighbors. These constraints vary from task to
-            task, and there are no additional constraints you need to respect
-            other than the ones stated (e.g., feel free to leave one room empty
-            if no constraint requires you to assign at least one student in each
-            room).
+            You need to <strong>consider some constraints when assigning students to
+            rooms</strong>. Some students can't live together in the same room and some
+            students must be neighbors.
+          </p>
+          <p>
+            These constraints vary from task to task, and there are no
+            additional constraints you need to respect other than the ones
+            stated (e.g., feel free to leave one room empty if no constraint
+            requires you to assign at least one student in each room).
           </p>
 
           <div className="task">
@@ -107,11 +109,11 @@ export default class ConstraintsDetails extends React.Component {
       studentBRoom: "deck",
       studentCRoom: "deck",
       studentDRoom: "deck",
-      score:0,
+      score: 0,
       violatedConstraintsIds: []
     };
   }
-  
+
   updateScore() {
     this.state.score = 0;
     exampleTaskData.students.forEach(student => {
@@ -121,7 +123,7 @@ export default class ConstraintsDetails extends React.Component {
         }
       });
     });
-    this.state.score -= 100* this.state.violatedConstraintsIds.length;
+    this.state.score -= 100 * this.state.violatedConstraintsIds.length;
     //if anyone in the deck, then score is 0
     exampleTaskData.students.forEach(student => {
       if (this.state[`student${student}Room`] === "deck") {
