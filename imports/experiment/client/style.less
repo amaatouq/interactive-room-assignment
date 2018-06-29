@@ -225,6 +225,19 @@
         align-items: center;
         padding: 1rem;
 
+        .image {
+          position: relative;
+          .satisfied {
+            // font-size: 0.1rem;
+            position: absolute;
+            top: -0.6rem;
+            right: -0.8rem;
+            .pt-icon-standard {
+              font-size: 1.2rem;
+            }
+          }
+        }
+
         &:first-child {
           .name {
             padding-right: 2rem;
@@ -233,6 +246,10 @@
           .image {
             padding-right: 2rem;
             border-right: 1px solid lightgrey;
+
+            .satisfied {
+              right: 1.2rem;
+            }
           }
         }
 

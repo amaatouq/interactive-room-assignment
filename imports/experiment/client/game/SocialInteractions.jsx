@@ -7,6 +7,18 @@ export default class SocialInteractions extends React.Component {
     return (
       <div className="player" key={player._id}>
         <span className="image">
+          <span
+            class={`satisfied pt-tag pt-round ${
+              player.get("satisfied") ? "pt-intent-success" : "pt-intent-danger"
+            }`}
+          >
+            <span
+              className={`pt-icon-standard ${
+                player.get("satisfied") ? "pt-icon-tick" : "pt-icon-cross"
+              }`}
+            />
+          </span>
+
           <img src={player.get("avatar")} />
         </span>
         {/* <span className="name" style={{ color: player.get("nameColor") }}> */}
