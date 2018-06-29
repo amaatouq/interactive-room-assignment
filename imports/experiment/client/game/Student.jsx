@@ -70,7 +70,7 @@ export default class Student extends React.Component {
         onDragStart={this.handleDragStart}
         onDragOver={this.handleDragOver}
         onDragEnd={this.handleDragEnd}
-        onDragExit={this.handleDragLeave}
+        //onDragExit={this.handleDragLeave}
         className="student"
         style={cursorStyle}
       >

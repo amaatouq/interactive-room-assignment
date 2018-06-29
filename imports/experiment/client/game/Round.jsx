@@ -23,13 +23,10 @@ export default class Round extends React.Component {
 
     return (
       <div className="round">
-        {/* <PlayerProfile player={player} stage={stage} game={game} /> */}
         <Task round={round} stage={stage} player={player} game={game} />
         {game.treatment.playerCount > 1 ? (
           <SocialInteractions game={game} round={round} player={player} />
         ) : null}
-
-        {/* <SocialExposure stage={stage} player={player} game={game} /> */}
       </div>
     );
   }
