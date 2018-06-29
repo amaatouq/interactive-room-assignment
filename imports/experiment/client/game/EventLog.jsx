@@ -18,14 +18,16 @@ export default class EventLog extends React.Component {
 
     //if the one who made the event is the player himself then self will be true
     return (
-      <div className="events" ref={el => (this.eventsEl = el)}>
-        {events.map((event, i) => (
-          <Event
-            key={i}
-            event={event}
-            self={event.subject ? player._id === event.subject._id : null}
-          />
-        ))}
+      <div className="eventlog pt-card">
+        <div className="events" ref={el => (this.eventsEl = el)}>
+          {events.map((event, i) => (
+            <Event
+              key={i}
+              event={event}
+              self={event.subject ? player._id === event.subject._id : null}
+            />
+          ))}
+        </div>
       </div>
     );
   }

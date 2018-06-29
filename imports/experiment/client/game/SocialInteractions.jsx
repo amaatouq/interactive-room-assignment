@@ -46,12 +46,8 @@ export default class SocialInteractions extends React.Component {
           </div>
         </div>
 
-        <div className="eventlog pt-card">
-          <EventLog events={events} round={round} player={player} />
-        </div>
-        <div className="chat pt-card">
-          <ChatLog messages={messages} round={round} player={player} />
-        </div>
+        <EventLog events={events} round={round} player={player} />
+        <ChatLog messages={messages} round={round} player={player} />
       </div>
     );
   }

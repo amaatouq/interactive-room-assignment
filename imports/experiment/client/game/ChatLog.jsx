@@ -4,6 +4,7 @@ import Author from "./Author";
 export default class ChatLog extends React.Component {
   state = { comment: "" };
 
+  
   handleChange = e => {
     const el = e.currentTarget;
     this.setState({ [el.name]: el.value });
@@ -27,7 +28,7 @@ export default class ChatLog extends React.Component {
     const { messages, player } = this.props;
 
     return (
-      <div>
+      <div className="chat pt-card">
         <Messages messages={messages} player={player} />
         <form onSubmit={this.handleSubmit}>
           <div className="pt-control-group">
@@ -50,20 +51,18 @@ export default class ChatLog extends React.Component {
   }
 }
 
-
 const chatSound = new Audio("experiment/unsure.mp3");
 class Messages extends React.Component {
   componentDidMount() {
     this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
   }
-
+  
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length < this.props.messages.length) {
       this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
       chatSound.play();
     }
   }
-
   render() {
     const { messages, player } = this.props;
 
@@ -83,7 +82,6 @@ class Messages extends React.Component {
     );
   }
 }
-
 
 class Message extends React.Component {
   render() {
