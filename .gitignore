@@ -9,3 +9,5 @@ staging.json
 production.json
 settings.json
 builder
+deploy-individual.json
+deploy-group.json

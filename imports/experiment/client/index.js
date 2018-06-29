@@ -9,7 +9,7 @@ import TeamDetails from "./intro/TeamDetails.jsx";
 import SocialInteractionDetails from "./intro/SocialInteractionDetails.jsx";
 import MoreAboutBonus from "./intro/MoreAboutBonus.jsx";
 
-import Quiz from "./intro/Quiz.jsx";
+import GroupQuiz from "./intro/GroupQuiz.jsx";
 import Round from "./game/Round.jsx";
 import Thanks from "./outro/Thanks.jsx";
 import Sorry from "./outro/Sorry";
@@ -33,7 +33,7 @@ export const config = {
     // if (treatment.playerCount > 1) {
     //   steps.push(InstructionStepThree);
     // }
-    steps.push(Quiz);
+    steps.push(GroupQuiz);
     return steps;
   },
 

@@ -5,7 +5,7 @@ import Centered from "../../../core/ui/components/Centered.jsx";
 
 import { Radio, RadioGroup } from "@blueprintjs/core";
 
-export default class Quiz extends React.Component {
+export default class GroupQuiz extends React.Component {
   state = { nParticipants: "", scoreOption: "", idle: "", largeError: "" };
 
   handleChange = event => {
