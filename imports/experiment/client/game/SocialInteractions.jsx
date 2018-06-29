@@ -8,7 +8,7 @@ export default class SocialInteractions extends React.Component {
       <div className="player" key={player._id}>
         <span className="image">
           <span
-            class={`satisfied pt-tag pt-round ${
+            className={`satisfied pt-tag pt-round ${
               player.get("satisfied") ? "pt-intent-success" : "pt-intent-danger"
             }`}
           >
