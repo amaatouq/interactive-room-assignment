@@ -52,7 +52,7 @@ export default class TaskDetails extends React.Component {
     return (
       <Centered>
         <div className="instructions">
-          <h1> Task: Room Assignment </h1>
+          <h1> Room Assignment Tasks </h1>
           <p>
             In each task (or round), you will be asked to{" "}
             <strong>assign students to dorm rooms</strong>. Students express

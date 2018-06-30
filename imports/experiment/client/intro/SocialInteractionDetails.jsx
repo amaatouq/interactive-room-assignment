@@ -75,21 +75,18 @@ export default class SocialInteractionDetails extends React.Component {
     return (
       <Centered>
         <div className="instructions">
-          <h1> Communication and Event Logs</h1>
+          <h1> Event Logs and In-Game Chat</h1>
           <p>
-            We will log every action taken by you or any of your teammates. This{" "}
-            <strong>
-              log will be shown to you to keep track of the actions that took
-              place so far
-            </strong>.
+            We will log every action taken by you or any of your teammates, and
+            this log will be shown to you to help you keep track of all the
+            actions that have taken place so far.
           </p>
 
           <p>
-            Also, <strong>you may communicate with your teammates</strong>{" "}
-            through the in-game chat. This <strong>chat room is public</strong>{" "}
-            so whatever you write will appear to the other{" "}
-            {treatment.playerCount - 1} teammates. You can use this in anyway
-            you want.
+            Also, you may communicate with your teammates through the in-game
+            chat. This chat room is public so whatever you write will appear to
+            the other {treatment.playerCount} teammates. You can use this in
+            anyway you want.
           </p>
 
           <p>
@@ -100,7 +97,7 @@ export default class SocialInteractionDetails extends React.Component {
           </p>
           <p>
             However, you can always indicate whether you are satisfied with the
-            answer even when the timer is up.{" "}
+            answer before the timer is up (indicated by the check mark on the avatar).{" "}
           </p>
 
           <div className="social-interactions" style={{ margin: "auto" }}>
@@ -144,8 +141,9 @@ export default class SocialInteractionDetails extends React.Component {
 
           <p>
             <strong>
-              If all team members are satisfied before the timer is up, the
-              answer will be submitted and you will move to the next task
+              If all team members are satisfied with the answer before the timer
+              is up, the answer will be submitted and your team will proceed to
+              the next task.
             </strong>.
           </p>
 

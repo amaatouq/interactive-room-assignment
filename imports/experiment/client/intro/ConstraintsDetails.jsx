@@ -11,7 +11,7 @@ export default class ConstraintsDetails extends React.Component {
     return (
       <Centered>
         <div className="instructions">
-          <h1>Task: Respect the Constraints</h1>
+          <h1>Respecting the Constraints</h1>
           <p>
             You need to{" "}
             <strong>
@@ -73,7 +73,7 @@ export default class ConstraintsDetails extends React.Component {
           </div>
 
           <div style={{ textAlign: "center" }}>
-            <p>
+            <p style={{ color: "red" }}>
               <strong>
                 NOTE: Every violated constraint will result in deducting 100
                 points from your score.

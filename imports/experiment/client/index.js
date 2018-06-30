@@ -5,11 +5,14 @@ import ExitSurvey from "./outro/ExitSurvey.jsx";
 import Overview from "./intro/Overview.jsx";
 import TaskDetails from "./intro/TaskDetails.jsx";
 import ConstraintsDetails from "./intro/ConstraintsDetails.jsx";
+import RoomArrangements from "./intro/RoomArrangements";
 import TeamDetails from "./intro/TeamDetails.jsx";
 import SocialInteractionDetails from "./intro/SocialInteractionDetails.jsx";
 import MoreAboutBonus from "./intro/MoreAboutBonus.jsx";
-
+import UIOverview from "./intro/UIOverview.jsx";
 import GroupQuiz from "./intro/GroupQuiz.jsx";
+import IndividualQuiz from "./intro/IndividualQuiz.jsx";
+
 import Round from "./game/Round.jsx";
 import Thanks from "./outro/Thanks.jsx";
 import Sorry from "./outro/Sorry";
@@ -22,18 +25,18 @@ export const config = {
   // At this point they have been assigned a treatment. You can return
   // different instruction steps depending on the assigned treatment.
   InstructionSteps(treatment) {
-    const steps = [
-      Overview,
-      TaskDetails,
-      ConstraintsDetails,
-      TeamDetails,
-      SocialInteractionDetails,
-      MoreAboutBonus
-    ];
-    // if (treatment.playerCount > 1) {
-    //   steps.push(InstructionStepThree);
-    // }
-    steps.push(GroupQuiz);
+    const steps = [Overview, TaskDetails, ConstraintsDetails, RoomArrangements];
+    if (treatment.playerCount > 1) {
+      steps.push(TeamDetails, SocialInteractionDetails);
+    }
+    steps.push(MoreAboutBonus, UIOverview);
+
+    if (treatment.playerCount > 1) {
+      steps.push(GroupQuiz);
+    } else {
+      steps.push(IndividualQuiz);
+    }
+
     return steps;
   },
 

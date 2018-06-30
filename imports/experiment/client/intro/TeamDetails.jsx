@@ -59,8 +59,9 @@ export default class TeamDetails extends React.Component {
             </strong>. They are other MTurk workers who are undertaking the same
             experiment simultaneously. Throughout all the tasks, the team will
             submit only one answer, and therefore,{" "}
-            <strong>all members of the team will receive the same score</strong>{" "}
-            across all tasks. We will assign your color when the game starts.
+            <strong>all members of the team will receive the same score</strong>.{" "}
+            To help you identify yourself and differentiate each other in the
+            team, we will assign a color to you when the game starts.
           </p>
           <br />
           <div className="social-interactions" style={{ margin: "auto" }}>
@@ -80,10 +81,11 @@ export default class TeamDetails extends React.Component {
           <br />
           <p>
             Note that the game allows for simultaneous and real-time actions.
-            That means you will be able to drag students to assign them to rooms
-            while your teammates are doing the same. However, when you or a a
-            team member starts dragging a student, that student will be locked
-            (i.e., no one else can move it) until it is assigned to a room.{" "}
+            That means that you will be able to drag students to assign them to
+            rooms while your teammates are doing the same. However, when any
+            member in the team starts dragging a student, that student will be
+            locked (i.e., no one else can move it) until it is assigned to a
+            room.{" "}
             <strong>
               The student that is being moved will have the color of the
               participant
@@ -112,6 +114,3 @@ export default class TeamDetails extends React.Component {
     );
   }
 }
-
-
-

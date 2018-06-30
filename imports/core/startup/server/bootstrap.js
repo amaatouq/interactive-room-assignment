@@ -4,7 +4,7 @@ import { config } from "../../../experiment/server";
 const admins = [
   {
     username: "admin",
-    password: "msr2018"
+    password: "@msr2018"
   }
 ];
 
