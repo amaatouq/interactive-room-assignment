@@ -20,9 +20,11 @@ export default class RoomArrangements extends React.Component {
           </div>
 
           <p>
+            In all cases and for any arrangement that appears for you, you only
+            need to consider the numbers on those rooms when addressing
+            constraints in a task. In particular,{" "}
             <strong>
-              In all cases and for any arrangement that appears for you, the
-              constraints only consider the numbers on those rooms
+              "neighbor" is defined as rooms with consecutive numbers
             </strong>. For example, regardless of the arrangement you have on
             the screen, Room 102 is next door to both Room 101 and Room 103. On
             the other hand, Room 101 is only next door to Room 102.

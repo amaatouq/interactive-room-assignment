@@ -57,13 +57,15 @@ export default class MoreAboutBonus extends React.Component {
 
           <p>
             1. <strong>"performance-based bonus":</strong> When your score is
-            positive , no matter whether your answer is the BEST possible
-            assignment or not.
+            positive, no matter whether your answer is the BEST possible
+            assignment or not. <strong>{1./treatment.conversionRate} game points = $1
+            bonus</strong>.
           </p>
 
           <p>
             2. <strong>"optimal assignment bonus" </strong>: if your answer is
-            the BEST possible assignment.
+            the BEST possible assignment, you get <strong>an additional{" "}
+            ${treatment.optimalSolutionBonus} per optimal answer</strong>.
           </p>
 
           {social ? (
@@ -78,13 +80,13 @@ export default class MoreAboutBonus extends React.Component {
             </div>
           ) : null}
 
-            <p>
-              <strong>
-                {social ? "Remember, free riding is not permitted." : ""} If we
-                detect that you are inactive during a task, you will not receive
-                a bonus for that task.
-              </strong>
-            </p>
+          <p>
+            <strong>
+              {social ? "Remember, free riding is not permitted." : ""} If we
+              detect that you are inactive during a task, you will not receive a
+              bonus for that task.
+            </strong>
+          </p>
 
           <button
             type="button"

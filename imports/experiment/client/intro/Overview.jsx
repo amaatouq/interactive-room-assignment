@@ -44,9 +44,10 @@ export default class Overview extends React.Component {
                   {treatment.playerCount - 1} other participants in real-time
                 </strong>. As we will explain in more detail later, in each
                 task, you and your teammates will submit a single room
-                assignment plan as a team. We will evaluate the quality of your
-                plan through score and thus all team members will receive the
-                same score in each task.
+                assignment plan.
+                {/*We will evaluate the quality of your*/}
+                {/*plan through score and thus all team members will receive the*/}
+                {/*same score in each task.*/}
               </p>
               <p>
                 At the end of the game, you will have the opportunity to earn a

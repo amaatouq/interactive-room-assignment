@@ -1,4 +1,4 @@
-import { easyTaskData, hardTaskData } from "./constants";
+import { stepOneData, stepTwoData } from "./constants";
 
 // //// Avatar stuff //////
 // const names = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split(""); //for the players names (we will call them A, B, C etc)
@@ -9,8 +9,17 @@ const nameColor = ["#3D50B7", "#70A945", "#DE8AAB", "A59144"]; // similar to the
 export const init = (treatment, players) => {
   console.log("Game with a treatment: ", treatment, " will start");
 
-  // shuffle the stimuli
-  const taskSequence = _.shuffle(easyTaskData.concat(hardTaskData));
+  //we don't know the sequence yet
+  let taskSequence = treatment.taskSequence === 1 ? stepOneData : stepTwoData;
+
+  if (treatment.taskOrder === "shuffle") {
+    taskSequence = _.shuffle(taskSequence);
+  }
+  if (treatment.taskOrder === "reverse") {
+    console.log("reversing the order of the tasks");
+    //the .slice() so it does not mutate the actually array (i.e., next time it seems to effect the server code)
+    taskSequence = taskSequence.slice().reverse();
+  }
 
   players.forEach((player, i) => {
     player.set("name", names[i]);

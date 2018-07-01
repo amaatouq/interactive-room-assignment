@@ -3,19 +3,32 @@ import React from "react";
 import { AlertToaster } from "../../../core/ui/components/AlertToaster.jsx";
 import Centered from "../../../core/ui/components/Centered.jsx";
 
-import { Radio, RadioGroup } from "@blueprintjs/core";
+import { Checkbox } from "@blueprintjs/core";
 
 export default class IndividualQuiz extends React.Component {
-  state = { violatedConstraints: "", largeError: "" };
+  state = {
+    violatedConstraints: "",
+    largeError: "",
+    mc_1_101: false,
+    mc_1_102: false,
+    mc_1_103: false,
+    mc_1_104: false,
+    mc_1_105: false,
+    mc_2_101: false,
+    mc_2_102: false,
+    mc_2_103: false,
+    mc_2_104: false,
+    mc_2_105: false
+  };
 
   handleChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value.trim().toLowerCase() });
   };
 
-  handleRadioChange = event => {
+  handleEnabledChange = event => {
     const el = event.currentTarget;
-    this.setState({ scoreOption: el.value });
+    this.setState({ [el.name]: !this.state[el.name] });
   };
 
   handleSubmit = event => {
@@ -24,7 +37,17 @@ export default class IndividualQuiz extends React.Component {
     //it should be this.state.nParticipants !== "3" but we don't have "treatment" in QUIZ
     if (
       this.state.violatedConstraints !== "100" ||
-      this.state.largeError !== "0"
+      this.state.largeError !== "0" ||
+      this.state.mc_1_101 ||
+      !this.state.mc_1_102 || //only this one is correct
+      this.state.mc_1_103 ||
+      this.state.mc_1_104 ||
+      this.state.mc_1_105 ||
+      this.state.mc_2_101 ||
+      !this.state.mc_2_102 || //this one is correct
+      this.state.mc_2_103 ||
+      !this.state.mc_2_104 || //this one is correct
+      this.state.mc_2_105
     ) {
       AlertToaster.show({
         message:
@@ -85,6 +108,94 @@ export default class IndividualQuiz extends React.Component {
                   onChange={this.handleChange}
                   required
                 />
+              </div>
+            </div>
+
+            <div className="pt-form-group">
+              <label className="pt-label" htmlFor="neighbor-of-room-101">
+                Which of the following rooms is a neighbor of Room 101? Please
+                select all that apply.
+              </label>
+              <div className="pt-form-content ">
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_1_101"}
+                    label="Room 101"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_1_102"}
+                    label="Room 102"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox">
+                  <Checkbox
+                    name={"mc_1_103"}
+                    label="Room 103"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_1_104"}
+                    label="Room 104"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_1_105"}
+                    label="Room 105"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-form-group">
+              <label className="pt-label" htmlFor="neighbor-of-room-101">
+                Which of the following rooms is a neighbor of Room 103? Please
+                select all that apply.{" "}
+              </label>
+              <div className="pt-form-content ">
+                <div className="pt-control pt-checkbox">
+                  <Checkbox
+                    name={"mc_2_101"}
+                    label="Room 101"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_2_102"}
+                    label="Room 102"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox pt-inline">
+                  <Checkbox
+                    name={"mc_2_103"}
+                    label="Room 103"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox">
+                  <Checkbox
+                    name={"mc_2_104"}
+                    label="Room 104"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
+                <div className="pt-control pt-checkbox">
+                  <Checkbox
+                    name={"mc_2_105"}
+                    label="Room 105"
+                    onChange={this.handleEnabledChange}
+                  />
+                </div>
               </div>
             </div>
 

@@ -2,7 +2,8 @@ export default {
   onGameStart(game, players) {
     console.debug("game ", game._id, " started");
     //initiate the cumulative score for this game (because everyone will have the same score, we can save it at the game object
-    game.set("cumulativeScore", 0);
+    game.set("cumulativeScore", 0); // the total score at the end of the game
+    game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
     game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
   },
 
@@ -35,9 +36,16 @@ export default {
   onStageEnd(game, round, stage, players) {},
 
   onRoundEnd(game, round, players) {
+    const currentScore = round.get("score");
+    const optimalScore = round.get("task").optimal;
+
+    if (currentScore === optimalScore) {
+      game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
+      console.log("You found the optimal")
+    }
+
     //add the round score to the game total cumulative score
-    const scoreIncrement =
-      round.get("score") > 0 ? Math.round(round.get("score")) : 0;
+    const scoreIncrement = currentScore > 0 ? Math.round(currentScore) : 0;
     game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
   },
 
@@ -45,11 +53,22 @@ export default {
     //console.debug("The game", game._id, "has ended");
 
     //computing the bonus for everyone (in this game, everyone will get the same value)
-    const conversionRate = 1 / 500; //TODO: we need to discuss this
+    const conversionRate = game.treatment.conversionRate
+      ? game.treatment.conversionRate
+      : 1;
+
+    const optimalSolutionBonus = game.treatment.optimalSolutionBonus
+      ? game.treatment.optimalSolutionBonus
+      : 0;
+
     const bonus =
       game.get("cumulativeScore") > 0
-        ? Math.round(game.get("cumulativeScore") * conversionRate)
+        ? (
+            game.get("cumulativeScore") * conversionRate +
+            game.get("nOptimalSolutions") * optimalSolutionBonus
+          ).toFixed(2)
         : 0;
+
     players.forEach(player => {
       player.set("bonus", bonus);
     });

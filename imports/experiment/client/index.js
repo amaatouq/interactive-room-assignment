@@ -1,7 +1,8 @@
 // config contains the client side configuration for this game. It is used by
 // Empirica core to initialize and run the game.
 import Consent from "./intro/Consent.jsx";
-import ExitSurvey from "./outro/ExitSurvey.jsx";
+import GroupExitSurvey from "./outro/GroupExitSurvey.jsx";
+import IndividualExitSurvey from "./outro/IndividualExitSurvey.jsx";
 import Overview from "./intro/Overview.jsx";
 import TaskDetails from "./intro/TaskDetails.jsx";
 import ConstraintsDetails from "./intro/ConstraintsDetails.jsx";
@@ -52,6 +53,10 @@ export const config = {
     if (player.exitStatus !== "finished") {
       return [Sorry];
     }
-    return [ExitSurvey, Thanks];
+    if (game.treatment.playerCount > 1) {
+      return [GroupExitSurvey, Thanks];
+    } else {
+      return [IndividualExitSurvey, Thanks];
+    }
   }
 };
