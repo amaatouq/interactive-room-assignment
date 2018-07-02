@@ -76,7 +76,7 @@ export default class Overview extends React.Component {
 
           <p>
             The game <strong>must be played on a desktop or laptop</strong>.
-            There NO mobile support
+            There is NO mobile support
           </p>
 
           <p>

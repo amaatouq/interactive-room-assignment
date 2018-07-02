@@ -89,9 +89,9 @@ export default class GroupQuiz extends React.Component {
 
             <div className="pt-form-group">
               <label className="pt-label" htmlFor="number-of-participants">
-                If we end up NOT assigning all students to room (i.e., at least
-                one student remained in the deck) then the score will be
-                incremented by:
+                If your team ended up NOT assigning all students to room (i.e.,
+                at least one student remained in the deck) then your score in
+                that task will be:
               </label>
               <div className="pt-form-content">
                 <input

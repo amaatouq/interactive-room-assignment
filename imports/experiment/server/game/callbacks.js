@@ -41,7 +41,7 @@ export default {
 
     if (currentScore === optimalScore) {
       game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
-      console.log("You found the optimal")
+      console.log("You found the optimal");
     }
 
     //add the round score to the game total cumulative score

@@ -57,11 +57,12 @@ export default class TeamDetails extends React.Component {
               play together with {treatment.playerCount - 1} other participants
               (your teammates)
             </strong>. They are other MTurk workers who are undertaking the same
-            experiment simultaneously. Throughout all the tasks, the team will
-            submit only one answer, and therefore,{" "}
+            study simultaneously. Throughout all the tasks, the team will submit
+            only one answer, and therefore,{" "}
             <strong>all members of the team will receive the same score</strong>.{" "}
             To help you identify yourself and differentiate each other in the
-            team, we will assign a color to you when the game starts.
+            team, we will assign a color to you when the game starts (as shown
+            in the following example).
           </p>
           <br />
           <div className="social-interactions" style={{ margin: "auto" }}>

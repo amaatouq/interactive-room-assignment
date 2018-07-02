@@ -85,7 +85,7 @@ export default class SocialInteractionDetails extends React.Component {
           <p>
             Also, you may communicate with your teammates through the in-game
             chat. This chat room is public so whatever you write will appear to
-            the other {treatment.playerCount} teammates. You can use this in
+            the other {treatment.playerCount - 1} teammates. You can use this in
             anyway you want.
           </p>
 
@@ -97,7 +97,9 @@ export default class SocialInteractionDetails extends React.Component {
           </p>
           <p>
             However, you can always indicate whether you are satisfied with the
-            answer before the timer is up (indicated by the check mark on the avatar).{" "}
+            answer before the timer is up (indicated by the check mark on the
+            avatar). Click on the "Satisfied" button in the following example
+            and see what happens!
           </p>
 
           <div className="social-interactions" style={{ margin: "auto" }}>

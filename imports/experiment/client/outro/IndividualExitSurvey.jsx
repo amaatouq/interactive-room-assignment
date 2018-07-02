@@ -5,7 +5,7 @@ import Centered from "../../../core/ui/components/Centered.jsx";
 import { Radio, RadioGroup } from "@blueprintjs/core";
 
 export default class IndividualExitSurvey extends React.Component {
-  static stepName = "IndividualExitSurvey";
+  static stepName = "ExitSurvey";
   state = {
     timeReasonable: "",
     uiProblems: "",
@@ -41,13 +41,9 @@ export default class IndividualExitSurvey extends React.Component {
         <p>
           You final{" "}
           <strong>
-            <em>bonus is ${player.get("bonus") || 0}</em>
+            bonus for the part of Room Assignment Game{" "}
+            <em>is ${player.get("bonus") || 0}</em>
           </strong>{" "}
-          in addition of the{" "}
-          <strong>
-            <em>${game.treatment.basePay} base reward</em>
-          </strong>{" "}
-          for completing the HIT.
         </p>
       </div>
     );

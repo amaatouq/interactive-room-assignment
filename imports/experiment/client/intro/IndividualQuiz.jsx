@@ -68,7 +68,7 @@ export default class IndividualQuiz extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="pt-form-group">
               <label className="pt-label" htmlFor="number-of-participants">
-                If we end up NOT assigning all students to room (i.e., at least
+                If you end up NOT assigning all students to room (i.e., at least
                 one student remained in the deck) then the score for that task
                 will be:
               </label>

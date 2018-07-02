@@ -8,8 +8,8 @@ const {
   onRoundEnd,
   onRoundStart,
   onSet,
-  onChange,
-  onAppend,
+  // onChange,
+  // onAppend,
   onStageEnd,
   onStageStart
 } = callbacks;
@@ -22,8 +22,8 @@ export const config = {
   onRoundStart,
   onStageStart,
   onSet,
-  onAppend,
-  onChange,
+  // onAppend,
+  // onChange,
   onStageEnd,
   onRoundEnd,
   onGameEnd

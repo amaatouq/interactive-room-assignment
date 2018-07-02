@@ -5,7 +5,7 @@ import Centered from "../../../core/ui/components/Centered.jsx";
 import { Radio, RadioGroup } from "@blueprintjs/core";
 
 export default class GroupExitSurvey extends React.Component {
-  static stepName = "GroupExitSurvey";
+  static stepName = "ExitSurvey";
   state = {
     strategy: "",
     fair: "",
@@ -17,7 +17,6 @@ export default class GroupExitSurvey extends React.Component {
     chatUseful: "",
     events: ""
   };
-  
 
   handleChange = event => {
     const el = event.currentTarget;
@@ -44,11 +43,6 @@ export default class GroupExitSurvey extends React.Component {
           <strong>
             <em>bonus is ${player.get("bonus") || 0}</em>
           </strong>{" "}
-          in addition of the{" "}
-          <strong>
-            <em>${game.treatment.basePay} base reward</em>
-          </strong>{" "}
-          for completing the HIT.
         </p>
       </div>
     );
@@ -126,11 +120,7 @@ export default class GroupExitSurvey extends React.Component {
                   value="stronglyAgree"
                   className={"pt-inline"}
                 />
-                <Radio
-                  label="Agree"
-                  value="agree"
-                  className={"pt-inline"}
-                />
+                <Radio label="Agree" value="agree" className={"pt-inline"} />
                 <Radio
                   label="Neutral"
                   value="neutral"
@@ -183,7 +173,7 @@ export default class GroupExitSurvey extends React.Component {
                 <Radio
                   label="Extremely invaluable"
                   value="extremelyInvaluable"
-                  className={'pt-inline'}
+                  className={"pt-inline"}
                 />
               </RadioGroup>
             </div>

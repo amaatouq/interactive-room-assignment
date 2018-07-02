@@ -58,14 +58,18 @@ export default class MoreAboutBonus extends React.Component {
           <p>
             1. <strong>"performance-based bonus":</strong> When your score is
             positive, no matter whether your answer is the BEST possible
-            assignment or not. <strong>{1./treatment.conversionRate} game points = $1
-            bonus</strong>.
+            assignment or not. The exchange rate is{" "}
+            <strong style={{ color: "red" }}>
+              {1 / treatment.conversionRate} game points = $1 bonus
+            </strong>.
           </p>
 
           <p>
-            2. <strong>"optimal assignment bonus" </strong>: if your answer is
-            the BEST possible assignment, you get <strong>an additional{" "}
-            ${treatment.optimalSolutionBonus} per optimal answer</strong>.
+            2. <strong>"optimal assignment bonus" </strong>: When your answer is
+            the BEST possible assignment, you get{" "}
+            <strong style={{ color: "red" }}>
+              an additional bonus of ${treatment.optimalSolutionBonus} in that task
+            </strong>.
           </p>
 
           {social ? (

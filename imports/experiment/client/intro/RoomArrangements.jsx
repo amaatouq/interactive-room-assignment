@@ -12,7 +12,7 @@ export default class RoomArrangements extends React.Component {
           <p>
             Depending on the number of rooms, number of students, and your
             screen/browser size and resolution, the arrangement of the rooms
-            might "look" different in your screen.
+            might "look" different on your screen.
           </p>
 
           <div className="image">
