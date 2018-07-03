@@ -5,6 +5,7 @@ export default {
     game.set("cumulativeScore", 0); // the total score at the end of the game
     game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
     game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
+    game.set("justEnded",false) //this is a temporary fix for the problem of infinite last round
   },
 
   onRoundStart(game, round, players) {
@@ -36,6 +37,14 @@ export default {
   onStageEnd(game, round, stage, players) {},
 
   onRoundEnd(game, round, players) {
+    console.debug("Round ", round.index + 1, "game", game._id, " ended");
+  
+    //temporary fix
+    const gameEnded = game.get("justEnded");
+    if (gameEnded){
+      return;
+    }
+    
     const currentScore = round.get("score");
     const optimalScore = round.get("task").optimal;
 
@@ -50,8 +59,15 @@ export default {
   },
 
   onGameEnd(game, players) {
-    //console.debug("The game", game._id, "has ended");
-
+    console.debug("The game", game._id, "has ended");
+    
+    //temporary fix
+    const gameEnded = game.get("justEnded");
+    if (gameEnded){
+      return;
+    }
+    
+    game.set("justEnded", true);
     //computing the bonus for everyone (in this game, everyone will get the same value)
     const conversionRate = game.treatment.conversionRate
       ? game.treatment.conversionRate
@@ -70,7 +86,9 @@ export default {
         : 0;
 
     players.forEach(player => {
-      player.set("bonus", bonus);
+      if (player.get("bonus")===0){
+        player.set("bonus", bonus);
+      }
     });
   },
 

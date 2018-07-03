@@ -20,7 +20,7 @@ export default class Thanks extends React.Component {
               Submission code: {player._id}
             </h4>
             <h4 className="pt-non-ideal-state-title">
-              Bonus: ${(player.get("bonus")).toFixed(2)}
+              Bonus: ${player.get("bonus")}
             </h4>
             <hr />
             <div className="pt-non-ideal-state-description">
