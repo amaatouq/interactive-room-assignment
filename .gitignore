@@ -11,3 +11,4 @@ settings.json
 builder
 deploy-individual.json
 deploy-group.json
+deploy-test.json
