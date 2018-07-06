@@ -58,10 +58,24 @@ export default class GameLobby extends React.Component {
             </div>
             <h4 className="pt-non-ideal-state-title">Lobby</h4>
             <div className="pt-non-ideal-state-description">
-              <p>Waiting message here...</p>
-
               <p>
                 {exisiting} / {total} players ready.
+              </p>
+              <br/>
+              
+              <p>Please wait while we try to find the needed participants.</p>
+              
+              <br/>
+              <p>
+                If we can't find enough participants we will cancel the game and
+                pay you for your time.
+              </p>
+              <br/>
+              <p>
+                <strong>
+                  Please make sure your sound is on as a bell will ring to
+                  indicate the start of the game.
+                </strong>
               </p>
             </div>
           </div>

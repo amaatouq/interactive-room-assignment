@@ -5,7 +5,7 @@ export default {
     game.set("cumulativeScore", 0); // the total score at the end of the game
     game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
     game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
-    game.set("justEnded",false) //this is a temporary fix for the problem of infinite last round
+    game.set("justEnded", false); //this is a temporary fix for the problem of infinite last round
   },
 
   onRoundStart(game, round, players) {
@@ -20,6 +20,7 @@ export default {
         at: new Date()
       }
     ]);
+    round.set("intermediateSolutions", []);
 
     const task = round.get("task");
     task.students.forEach(student => {
@@ -30,6 +31,10 @@ export default {
     players.forEach(player => {
       player.set("satisfied", false);
     });
+
+    //there is a case where the optimal is found, but not submitted (i.e., they ruin things)
+    round.set("optimalFound", false); //the optimal answer wasn't found
+    round.set("optimalSubmitted", false); //the optimal answer wasn't submitted
   },
 
   onStageStart(game, round, stage, players) {},
@@ -38,18 +43,14 @@ export default {
 
   onRoundEnd(game, round, players) {
     console.debug("Round ", round.index + 1, "game", game._id, " ended");
-  
-    //temporary fix
-    const gameEnded = game.get("justEnded");
-    if (gameEnded){
-      return;
-    }
-    
+
     const currentScore = round.get("score");
     const optimalScore = round.get("task").optimal;
 
     if (currentScore === optimalScore) {
       game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
+      round.set("optimalSubmitted", true);
+
       console.log("You found the optimal");
     }
 
@@ -60,13 +61,7 @@ export default {
 
   onGameEnd(game, players) {
     console.debug("The game", game._id, "has ended");
-    
-    //temporary fix
-    const gameEnded = game.get("justEnded");
-    if (gameEnded){
-      return;
-    }
-    
+
     game.set("justEnded", true);
     //computing the bonus for everyone (in this game, everyone will get the same value)
     const conversionRate = game.treatment.conversionRate
@@ -86,7 +81,7 @@ export default {
         : 0;
 
     players.forEach(player => {
-      if (player.get("bonus")===0){
+      if (player.get("bonus") === 0) {
         player.set("bonus", bonus);
       }
     });
@@ -106,6 +101,8 @@ export default {
     value, // New value
     prevValue // Previous value
   ) {
+    
+    
     //someone changed their satisfication status
     if (key === "satisfied") {
       //check if everyone is satisfied and if so, submit their answer
@@ -136,9 +133,20 @@ export default {
       });
 
       //check for constraint violations
-      const violationIds = getViolations(task, assignments);
+      const violationIds = getViolations(round, assignments);
       round.set("violatedConstraints", violationIds);
-      //console.debug("violations", violationIds);
+      //to keep track of the number of violated constraints overtime
+      round.append("violatedConstraints", {
+        violatedConstraintsIds: violationIds,
+        nConstraintsViolated: violationIds.length,
+        at: new Date()
+      });
+
+
+      round.append("intermediateSolutions", {
+        solution: assignments,
+        at: new Date()
+      });
 
       //get score if there are no violations, otherwise, the score is 0
       const currentScore =
@@ -147,6 +155,10 @@ export default {
           : 0;
       //console.debug("currentScore", currentScore);
       round.set("score", currentScore || 0);
+
+      if (currentScore === task.optimal) {
+        round.set("optimalFound", true);
+      }
     }
   }
 };
@@ -168,8 +180,9 @@ function find_room(assignments, student) {
   );
 }
 
-function getViolations(task, assignments) {
+function getViolations(round, assignments) {
   // console.debug("assignments ", assignments);
+  const task = round.get("task");
   const violatedConstraintsIds = [];
 
   task.constraints.forEach(constraint => {
@@ -222,5 +235,6 @@ function getViolations(task, assignments) {
       }
     }
   });
+
   return violatedConstraintsIds;
 }
