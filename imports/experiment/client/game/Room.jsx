@@ -22,28 +22,13 @@ export default class Room extends React.Component {
     const currentRoom = stage.get(`student-${student}-room`);
 
     this.setState({ hovered: false });
-
+  
     // Avoid any unwanted drops!
     // We're using the native DnD system, which mean people can drag anything
     // onto these drop zones (e.g. files from their desktop) so we check this
     // is an existing student first.
-
-    //TODO: is this really needed?
-    // if (!currentRoom) {
-    //   round.append("log", {
-    //     verb: "keptStudent",
-    //     subjectId: player._id,
-    //     object: student,
-    //     target: currentRoom,
-    //     at: new Date()
-    //   });
-    //   return;
-    // }
-    //
-    //
-
-    //if they kept the student where it is, log that they stayed in the same place And don't change the answer
     if (currentRoom === room) {
+      //if they kept the student where it is, log that they stayed in the same place And don't change the answer
       stage.append("log", {
         verb: "releasedStudent",
         subjectId: player._id,

@@ -35,6 +35,11 @@ export default class Task extends React.Component {
           </div>
 
           <div className="constraints">
+            {stage.name === "practice" ? (
+              <p><strong style={{ color: "blue" }}>This is practice round and the Score will not count</strong></p>
+            ) : (
+              ""
+            )}
             <h5>Constraints</h5>
             <ul>
               {task.constraints.map(constraint => {

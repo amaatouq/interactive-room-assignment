@@ -1,5 +1,4 @@
 import SimpleSchema from "simpl-schema";
-import { easyTaskData, hardTaskData } from "./constants";
 
 export const conditions = {
   playerCount: {
@@ -14,14 +13,12 @@ export const conditions = {
     min: 5,
     max: 10000
   },
-  taskSequence: {
+  StepOne: {
     description: "SequenceOne of 5 tasks or SequenceTwo of 6 tasks",
-    type: SimpleSchema.Integer,
-    min: 1,
-    max: 2
+    type: Boolean,
   },
   taskOrder: {
-      description: "How to do the sequence to be ordered (easy-hard; hard-easy only with sequence 2)",
+      description: "How to do the sequence to be ordered",
       type: String,
       regEx: /[a-zA-Z]+/,
       allowedValues: ["order","shuffle", "reverse"],

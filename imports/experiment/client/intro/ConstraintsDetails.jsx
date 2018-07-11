@@ -25,8 +25,11 @@ export default class ConstraintsDetails extends React.Component {
             stated (e.g., feel free to leave one room empty if no constraint
             requires you to assign at least one student in each room).
           </p>
-          
-          <p>Try this example again and see what will happen if a constraint is violated:</p>
+
+          <p>
+            Try this example again and see what will happen if a constraint is
+            violated:
+          </p>
 
           <div className="task">
             <div className="left">
@@ -60,7 +63,6 @@ export default class ConstraintsDetails extends React.Component {
                   {/*<h2>{this.state.score}</h2>*/}
                 </div>
               </div>
-            
             </div>
 
             <div className="board">
@@ -80,6 +82,12 @@ export default class ConstraintsDetails extends React.Component {
               <strong>
                 NOTE: Every violated constraint will result in deducting 100
                 points from your score.
+              </strong>
+            </p>
+            <p style={{ color: "green" }}>
+              <strong>
+                NOTE: It is OK to leave some rooms empty, but you have to assign
+                all the students.
               </strong>
             </p>
           </div>

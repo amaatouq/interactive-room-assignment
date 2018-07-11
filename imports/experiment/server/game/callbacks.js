@@ -18,22 +18,25 @@ export default {
     stage.set("log", [
       {
         verb: "roundStarted",
-        roundId: stage.name,
+        roundId:
+          stage.name === "practice"
+            ? stage.name + "(will not count towards your score)"
+            : stage.name,
         at: new Date()
       }
     ]);
     stage.set("intermediateSolutions", []);
-  
+
     const task = stage.get("task");
     task.students.forEach(student => {
       stage.set(`student-${student}-room`, "deck");
       stage.set(`student-${student}-dragger`, null);
     });
-  
+
     players.forEach(player => {
       player.set("satisfied", false);
     });
-  
+
     //there is a case where the optimal is found, but not submitted (i.e., they ruin things)
     stage.set("optimalFound", false); //the optimal answer wasn't found
     stage.set("optimalSubmitted", false); //the optimal answer wasn't submitted
@@ -41,20 +44,23 @@ export default {
 
   onStageEnd(game, round, stage, players) {
     console.debug("Round ", stage.name, "game", game._id, " ended");
-  
+
     const currentScore = stage.get("score");
     const optimalScore = stage.get("task").optimal;
-  
+
     if (currentScore === optimalScore) {
-      game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
+      if (stage.name !== "practice") {
+        game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
+      }
       stage.set("optimalSubmitted", true);
-    
       console.log("You found the optimal");
     }
-  
-    //add the round score to the game total cumulative score
-    const scoreIncrement = currentScore > 0 ? Math.round(currentScore) : 0;
-    game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
+
+    //add the round score to the game total cumulative score (only if it is not practice)
+    if (stage.name !== "practice") {
+      const scoreIncrement = currentScore > 0 ? Math.round(currentScore) : 0;
+      game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
+    }
   },
 
   onRoundEnd(game, round, players) {},
@@ -101,8 +107,6 @@ export default {
     value, // New value
     prevValue // Previous value
   ) {
-    
-    
     //someone changed their satisfication status
     if (key === "satisfied") {
       //check if everyone is satisfied and if so, submit their answer
@@ -141,7 +145,6 @@ export default {
         nConstraintsViolated: violationIds.length,
         at: new Date()
       });
-
 
       stage.append("intermediateSolutions", {
         solution: assignments,
