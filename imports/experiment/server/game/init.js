@@ -30,20 +30,20 @@ export const init = (treatment, players) => {
   });
 
   const rounds = [];
-  _.times(treatment.nRounds, i => {
-    const stages = [];
+  const stages = [];
 
-    // in this game we have only one stage per round
+  // in this game we have stages per round
+  _.times(taskSequence.length, i => {
     stages.push({
-      name: "response",
-      displayName: "Response",
-      durationInSeconds: treatment.stageDuration
-    });
-
-    rounds.push({
-      stages,
+      name: i + 1,
+      displayName: "Round " + (i + 1) + "(" + taskSequence[i].difficulty + ")", //name of stage is: Round 1 (hard)
+      durationInSeconds: treatment.stageDuration,
       task: taskSequence[i]
     });
+  });
+
+  rounds.push({
+    stages
   });
 
   return {

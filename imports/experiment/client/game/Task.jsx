@@ -5,10 +5,10 @@ import Timer from "./Timer.jsx";
 
 export default class Task extends React.Component {
   handleSatisfaction = (satisfied, event) => {
-    const { player, round } = this.props;
+    const { player, stage } = this.props;
     event.preventDefault();
     player.set("satisfied", satisfied);
-    round.append("log", {
+    stage.append("log", {
       verb: "playerSatisfaction",
       subjectId: player._id,
       state: satisfied ? "satisfied" : "unsatisfied",
@@ -17,10 +17,10 @@ export default class Task extends React.Component {
   };
 
   render() {
-    const { game, round, stage, player } = this.props;
+    const { game, stage, player } = this.props;
 
-    const task = round.get("task");
-    const violatedConstraints = round.get("violatedConstraints") || [];
+    const task = stage.get("task");
+    const violatedConstraints = stage.get("violatedConstraints") || [];
 
     return (
       <div className="task">
@@ -30,7 +30,7 @@ export default class Task extends React.Component {
             <div className="score">
               <h5>Score</h5>
 
-              <h2>{round.get("score")}</h2>
+              <h2>{stage.get("score")}</h2>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ export default class Task extends React.Component {
                     {task.rooms.map(room => (
                       <td
                         className={
-                          round.get(`student-${student}-room`) === room
+                          stage.get(`student-${student}-room`) === room
                             ? "active"
                             : null
                         }
@@ -89,7 +89,7 @@ export default class Task extends React.Component {
           <div className="all-rooms">
             <Room
               room="deck"
-              round={round}
+              stage={stage}
               game={game}
               player={player}
               isDeck
@@ -100,7 +100,7 @@ export default class Task extends React.Component {
                 <Room
                   key={room}
                   room={room}
-                  round={round}
+                  stage={stage}
                   game={game}
                   player={player}
                 />

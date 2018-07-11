@@ -16,10 +16,10 @@ export default class Room extends React.Component {
   };
 
   handleDrop = e => {
-    const { round, player, room } = this.props;
+    const { stage, player, room } = this.props;
     const student = e.dataTransfer.getData("text/plain");
-    round.set(`student-${student}-dragger`, null); //maybe this fixes the problem of stucked colors
-    const currentRoom = round.get(`student-${student}-room`);
+    stage.set(`student-${student}-dragger`, null); //maybe this fixes the problem of stucked colors
+    const currentRoom = stage.get(`student-${student}-room`);
 
     this.setState({ hovered: false });
 
@@ -44,7 +44,7 @@ export default class Room extends React.Component {
 
     //if they kept the student where it is, log that they stayed in the same place And don't change the answer
     if (currentRoom === room) {
-      round.append("log", {
+      stage.append("log", {
         verb: "releasedStudent",
         subjectId: player._id,
         object: student
@@ -52,9 +52,9 @@ export default class Room extends React.Component {
       return;
     }
 
-    round.set(`student-${student}-room`, room);
+    stage.set(`student-${student}-room`, room);
 
-    round.append("log", {
+    stage.append("log", {
       verb: "movedStudent",
       subjectId: player._id,
       object: student,
@@ -64,12 +64,12 @@ export default class Room extends React.Component {
   };
 
   render() {
-    const { room, isDeck, round, ...rest } = this.props;
+    const { room, isDeck, stage, ...rest } = this.props;
     const { hovered } = this.state;
     const students = [];
-    const task = round.get("task");
+    const task = stage.get("task");
     task.students.forEach(student => {
-      if (round.get(`student-${student}-room`) === room) {
+      if (stage.get(`student-${student}-room`) === room) {
         students.push(student);
       }
     });
@@ -90,7 +90,7 @@ export default class Room extends React.Component {
             key={student}
             student={student}
             room={room}
-            round={round}
+            stage={stage}
             {...rest}
           />
         ))}

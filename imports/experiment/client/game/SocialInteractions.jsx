@@ -31,14 +31,14 @@ export default class SocialInteractions extends React.Component {
   }
 
   render() {
-    const { game, round, player } = this.props;
+    const { game, stage, player } = this.props;
 
     const otherPlayers = _.reject(game.players, p => p._id === player._id);
-    const messages = round.get("chat").map(({ text, playerId }) => ({
+    const messages = stage.get("chat").map(({ text, playerId }) => ({
       text,
       subject: game.players.find(p => p._id === playerId)
     }));
-    const events = round.get("log").map(({ subjectId, ...rest }) => ({
+    const events = stage.get("log").map(({ subjectId, ...rest }) => ({
       subject: subjectId && game.players.find(p => p._id === subjectId),
       ...rest
     }));
@@ -58,8 +58,8 @@ export default class SocialInteractions extends React.Component {
           </div>
         </div>
 
-        <EventLog events={events} round={round} player={player} />
-        <ChatLog messages={messages} round={round} player={player} />
+        <EventLog events={events} stage={stage} player={player} />
+        <ChatLog messages={messages} stage={stage} player={player} />
       </div>
     );
   }

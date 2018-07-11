@@ -2,8 +2,8 @@ import React from "react";
 
 export default class Student extends React.Component {
   handleDragStart = e => {
-    const { student, round, player } = this.props;
-    const dragger = round.get(`student-${student}-dragger`); //check if there is already a dragger
+    const { student, stage, player } = this.props;
+    const dragger = stage.get(`student-${student}-dragger`); //check if there is already a dragger
     //if so, you can't move it, already someone is moving it!
     if (dragger) {
       // Can't drag
@@ -11,8 +11,8 @@ export default class Student extends React.Component {
       e.preventDefault();
       return;
     }
-    round.set(`student-${student}-dragger`, player._id);
-    round.append("log", {
+    stage.set(`student-${student}-dragger`, player._id);
+    stage.append("log", {
       verb: "draggingStudent",
       subjectId: player._id,
       object: student,
@@ -28,18 +28,18 @@ export default class Student extends React.Component {
   handleDragLeave = e => {
     e.preventDefault();
     console.log("released!");
-    const { student, round } = this.props;
-    round.set(`student-${student}-dragger`, null);
+    const { student, stage } = this.props;
+    stage.set(`student-${student}-dragger`, null);
   };
 
   handleDragEnd = e => {
     e.preventDefault();
-    const { student, round, player} = this.props;
-    round.set(`student-${student}-dragger`, null);
+    const { student, stage, player} = this.props;
+    stage.set(`student-${student}-dragger`, null);
 
     //if dropped into non-allowed area
     if (e.dataTransfer.dropEffect === "none") {
-      round.append("log", {
+      stage.append("log", {
         verb: "releasedStudent",
         subjectId: player._id,
         object: student
@@ -48,9 +48,9 @@ export default class Student extends React.Component {
   };
 
   render() {
-    const { student, round, game, player } = this.props;
+    const { student, stage, game, player } = this.props;
     this.isDragabble = true; // usually everyone can drag, except if it is colored (i.e., being dragged by someone else)
-    const dragger = round.get(`student-${student}-dragger`);
+    const dragger = stage.get(`student-${student}-dragger`);
     const style = {};
     const cursorStyle = { cursor: null };
     if (dragger) {

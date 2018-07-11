@@ -8,56 +8,56 @@ export default {
     game.set("justEnded", false); //this is a temporary fix for the problem of infinite last round
   },
 
-  onRoundStart(game, round, players) {
-    console.debug("Round ", round.index + 1, "game", game._id, " started");
+  onRoundStart(game, round, players) {},
+
+  onStageStart(game, round, stage, players) {
+    console.debug("Round ", stage.name, "game", game._id, " started");
     //initiate the score for this round (because everyone will have the same score, we can save it at the round object
-    round.set("score", 0);
-    round.set("chat", []);
-    round.set("log", [
+    stage.set("score", 0);
+    stage.set("chat", []);
+    stage.set("log", [
       {
         verb: "roundStarted",
-        roundId: round.index + 1,
+        roundId: stage.name,
         at: new Date()
       }
     ]);
-    round.set("intermediateSolutions", []);
-
-    const task = round.get("task");
+    stage.set("intermediateSolutions", []);
+  
+    const task = stage.get("task");
     task.students.forEach(student => {
-      round.set(`student-${student}-room`, "deck");
-      round.set(`student-${student}-dragger`, null);
+      stage.set(`student-${student}-room`, "deck");
+      stage.set(`student-${student}-dragger`, null);
     });
-
+  
     players.forEach(player => {
       player.set("satisfied", false);
     });
-
+  
     //there is a case where the optimal is found, but not submitted (i.e., they ruin things)
-    round.set("optimalFound", false); //the optimal answer wasn't found
-    round.set("optimalSubmitted", false); //the optimal answer wasn't submitted
+    stage.set("optimalFound", false); //the optimal answer wasn't found
+    stage.set("optimalSubmitted", false); //the optimal answer wasn't submitted
   },
 
-  onStageStart(game, round, stage, players) {},
-
-  onStageEnd(game, round, stage, players) {},
-
-  onRoundEnd(game, round, players) {
-    console.debug("Round ", round.index + 1, "game", game._id, " ended");
-
-    const currentScore = round.get("score");
-    const optimalScore = round.get("task").optimal;
-
+  onStageEnd(game, round, stage, players) {
+    console.debug("Round ", stage.name, "game", game._id, " ended");
+  
+    const currentScore = stage.get("score");
+    const optimalScore = stage.get("task").optimal;
+  
     if (currentScore === optimalScore) {
       game.set("nOptimalSolutions", game.get("nOptimalSolutions") + 1);
-      round.set("optimalSubmitted", true);
-
+      stage.set("optimalSubmitted", true);
+    
       console.log("You found the optimal");
     }
-
+  
     //add the round score to the game total cumulative score
     const scoreIncrement = currentScore > 0 ? Math.round(currentScore) : 0;
     game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
   },
+
+  onRoundEnd(game, round, players) {},
 
   onGameEnd(game, players) {
     console.debug("The game", game._id, "has ended");
@@ -120,7 +120,7 @@ export default {
 
     //someone placed a student to a room
     if (key.substring(0, 8) === "student-" && key.slice(-4) === "room") {
-      const task = round.get("task");
+      const task = stage.get("task");
       let assignments = { deck: [] };
       task.rooms.forEach(room => {
         assignments[room] = [];
@@ -128,22 +128,22 @@ export default {
 
       //find the rooms for each player
       task.students.forEach(student => {
-        const room = round.get(`student-${student}-room`);
+        const room = stage.get(`student-${student}-room`);
         assignments[room].push(student);
       });
 
       //check for constraint violations
-      const violationIds = getViolations(round, assignments);
-      round.set("violatedConstraints", violationIds);
+      const violationIds = getViolations(stage, assignments);
+      stage.set("violatedConstraints", violationIds);
       //to keep track of the number of violated constraints overtime
-      round.append("violatedConstraints", {
+      stage.append("violatedConstraints", {
         violatedConstraintsIds: violationIds,
         nConstraintsViolated: violationIds.length,
         at: new Date()
       });
 
 
-      round.append("intermediateSolutions", {
+      stage.append("intermediateSolutions", {
         solution: assignments,
         at: new Date()
       });
@@ -154,10 +154,10 @@ export default {
           ? getScore(task, assignments, violationIds.length)
           : 0;
       //console.debug("currentScore", currentScore);
-      round.set("score", currentScore || 0);
+      stage.set("score", currentScore || 0);
 
       if (currentScore === task.optimal) {
-        round.set("optimalFound", true);
+        stage.set("optimalFound", true);
       }
     }
   }
@@ -180,9 +180,9 @@ function find_room(assignments, student) {
   );
 }
 
-function getViolations(round, assignments) {
+function getViolations(stage, assignments) {
   // console.debug("assignments ", assignments);
-  const task = round.get("task");
+  const task = stage.get("task");
   const violatedConstraintsIds = [];
 
   task.constraints.forEach(constraint => {
