@@ -36,7 +36,7 @@ export const init = (treatment, players) => {
   _.times(taskSequence.length, i => {
     stages.push({
       name: i + 1,
-      displayName: "Round " + (i + 1) + "(" + taskSequence[i].difficulty + ")", //name of stage is: Round 1 (hard)
+      displayName: taskSequence[i].difficulty, //name of stage is: Round 1 (hard)
       durationInSeconds: treatment.stageDuration,
       task: taskSequence[i]
     });

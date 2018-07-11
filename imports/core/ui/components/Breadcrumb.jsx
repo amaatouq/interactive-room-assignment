@@ -8,7 +8,8 @@ export default class Breadcrumb extends React.Component {
       <nav className="round-nav">
         <ul className="pt-breadcrumbs">
           <li>
-            <span className="pt-breadcrumb">Round {round.index + 1}</span>
+            <span className="pt-breadcrumb">Round {stage.name}</span>
+            {/*<span className="pt-breadcrumb">Round {round.index + 1}</span>*/}
           </li>
           {round.stages.map(s => {
             const current =
