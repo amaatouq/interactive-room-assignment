@@ -175,7 +175,7 @@ export const stepOneData = [
     constraints: [
       {
         _id: 0,
-        pair: ["A", "B"],
+        pair: ["A", "F"],
         type: 1,
         text: "can't live in the same room"
       },
