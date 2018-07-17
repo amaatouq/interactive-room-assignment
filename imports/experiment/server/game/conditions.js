@@ -24,13 +24,6 @@ export const conditions = {
       allowedValues: ["order","shuffle", "reverse"],
       optional: true
   },
-  nRounds: {
-    description:
-      "The number of rounds in the game (can't be more than the number of tasks)",
-    type: SimpleSchema.Integer,
-    min: 1,
-    max: 6
-  },
   basePay: {
     description:
       "The amount for base pay (i.e., showing up and completing the experiment)",

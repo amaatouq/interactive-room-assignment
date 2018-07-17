@@ -5,16 +5,17 @@ export default {
     game.set("cumulativeScore", 0); // the total score at the end of the game
     game.set("nOptimalSolutions", 0); // will count how many times they've got the optimal answer
     game.set("justStarted", true); // I use this to play the sound on the UI when the game starts
-    game.set("justEnded", false); //this is a temporary fix for the problem of infinite last round
+    game.set("team", players.length > 1);
   },
 
   onRoundStart(game, round, players) {},
 
   onStageStart(game, round, stage, players) {
     console.debug("Round ", stage.name, "game", game._id, " started");
+    const team = game.get("team");
+
     //initiate the score for this round (because everyone will have the same score, we can save it at the round object
     stage.set("score", 0);
-    stage.set("chat", []);
     stage.set("log", [
       {
         verb: "roundStarted",
@@ -67,8 +68,6 @@ export default {
 
   onGameEnd(game, players) {
     console.debug("The game", game._id, "has ended");
-
-    game.set("justEnded", true);
     //computing the bonus for everyone (in this game, everyone will get the same value)
     const conversionRate = game.treatment.conversionRate
       ? game.treatment.conversionRate
@@ -107,7 +106,7 @@ export default {
     value, // New value
     prevValue // Previous value
   ) {
-    //someone changed their satisfication status
+    //someone changed their satisfaction status
     if (key === "satisfied") {
       //check if everyone is satisfied and if so, submit their answer
       let allSatisfied = true;
@@ -139,17 +138,6 @@ export default {
       //check for constraint violations
       const violationIds = getViolations(stage, assignments);
       stage.set("violatedConstraints", violationIds);
-      //to keep track of the number of violated constraints overtime
-      stage.append("violatedConstraints", {
-        violatedConstraintsIds: violationIds,
-        nConstraintsViolated: violationIds.length,
-        at: new Date()
-      });
-
-      stage.append("intermediateSolutions", {
-        solution: assignments,
-        at: new Date()
-      });
 
       //get score if there are no violations, otherwise, the score is 0
       const currentScore =
@@ -162,6 +150,20 @@ export default {
       if (currentScore === task.optimal) {
         stage.set("optimalFound", true);
       }
+
+      //keep track of solution, scores, and violated constraints
+      //TODO: eventually this should have the 'log' parameter so it is not sent to the UI
+      //TODO: how about I store everything here, and that's it! less data
+      stage.append("intermediateSolutions", {
+        solution: assignments,
+        at: new Date(),
+        violatedConstraintsIds: violationIds,
+        nConstraintsViolated: violationIds.length,
+        score: getScore(task, assignments, violationIds.length),
+        optimalFound: currentScore === task.optimal,
+        completeSolution: assignments["deck"].length === 0,
+        completeSolutionScore: currentScore
+      });
     }
   }
 };

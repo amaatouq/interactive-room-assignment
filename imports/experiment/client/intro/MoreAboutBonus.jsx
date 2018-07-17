@@ -68,8 +68,17 @@ export default class MoreAboutBonus extends React.Component {
             2. <strong>"optimal assignment bonus" </strong>: When your answer is
             the BEST possible assignment, you get{" "}
             <strong style={{ color: "red" }}>
-              an additional bonus of ${treatment.optimalSolutionBonus} in that task
+              an additional bonus of ${treatment.optimalSolutionBonus} in that
+              task
             </strong>.
+          </p>
+
+          <p>
+            Therefore,{" "}
+            <strong>
+              you can earn more game points (i.e., more bonuses) from the
+              difficult tasks{" "}
+            </strong>(more students, more rooms) compared to the easier ones.
           </p>
 
           {social ? (

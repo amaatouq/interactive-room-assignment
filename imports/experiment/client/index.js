@@ -53,7 +53,7 @@ export const config = {
     if (player.exitStatus !== "finished") {
       return [Sorry];
     }
-    if (game.player.length > 1) {
+    if (game.players.length > 1) {
       return [GroupExitSurvey, Thanks];
     } else {
       return [IndividualExitSurvey, Thanks];
