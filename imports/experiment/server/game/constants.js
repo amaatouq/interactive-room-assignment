@@ -254,577 +254,576 @@ export const stepOneData = [
 
 export const stepTwoData = [
   {
-    _id: 1,
-    usedIn: "step2",
-    optimal: 517,
-    difficulty: "easy",
-    computeTime: 0.67,
-    students: ["A", "B", "C", "D", "E", "F"],
-    rooms: [101, 102, 103, 104],
-    constraints: [
-      {
-        _id: 0,
-        pair: ["A", "D"],
-        type: 1,
-        text: "can't live in the same room"
-      },
-      {
-        _id: 1,
-        pair: ["D", "F"],
-        type: 3,
-        text: "can't live in the same room or be neighbors"
-      }
-    ],
     payoff: {
-      A: {
-        "101": 36,
-        "102": 92,
-        "103": 86,
-        "104": 24
-      },
-      B: {
-        "101": 60,
-        "102": 91,
-        "103": 33,
-        "104": 65
-      },
-      C: {
-        "101": 42,
-        "102": 74,
-        "103": 50,
-        "104": 87
-      },
-      D: {
-        "101": 43,
-        "102": 74,
-        "103": 44,
-        "104": 55
-      },
-      E: {
-        "101": 60,
-        "102": 48,
-        "103": 72,
-        "104": 89
-      },
-      F: {
-        "101": 79,
-        "102": 100,
-        "103": 34,
-        "104": 90
-      }
-    }
-  },
-  {
-    _id: 2,
-    usedIn: "step2",
-    optimal: 444,
-    difficulty: "easy",
-    computeTime: 0.19,
-    students: ["A", "B", "C", "D", "E", "F"],
-    rooms: [101, 102, 103, 104],
-    constraints: [
-      {
-        _id: 0,
-        pair: ["A", "B"],
-        type: 0,
-        text: "must live in the same room"
-      },
-      {
-        _id: 1,
-        pair: ["A", "C"],
-        type: 1,
-        text: "can't live in the same room"
-      }
-    ],
-    payoff: {
-      A: {
-        "101": 26,
-        "102": 55,
-        "103": 39,
-        "104": 27
-      },
-      B: {
-        "101": 52,
-        "102": 21,
-        "103": 69,
-        "104": 36
-      },
-      C: {
-        "101": 33,
-        "102": 47,
-        "103": 76,
-        "104": 69
-      },
-      D: {
-        "101": 87,
-        "102": 38,
-        "103": 28,
-        "104": 61
-      },
-      E: {
-        "101": 43,
-        "102": 90,
-        "103": 52,
-        "104": 96
-      },
-      F: {
-        "101": 43,
-        "102": 84,
-        "103": 83,
-        "104": 42
-      }
-    }
-  },
-  {
-    _id: 4,
-    usedIn: "step2",
-    optimal: 567,
-    difficulty: "medium",
-    computeTime: 2.99,
-    students: ["A", "B", "C", "D", "E", "F", "G", "H"],
-    rooms: [101, 102, 103, 104, 105],
-    constraints: [
-      {
-        _id: 0,
-        pair: ["C", "D"],
-        type: 1,
-        text: "can't live in the same room"
-      },
-      {
-        _id: 1,
-        pair: ["D", "E"],
-        type: 2,
-        text: "must be neighbors"
-      },
-      {
-        _id: 2,
-        pair: ["E", "H"],
-        type: 3,
-        text: "can't live in the same room or be neighbors"
-      },
-      {
-        _id: 3,
-        pair: ["F", "H"],
-        type: 1,
-        text: "can't live in the same room"
-      }
-    ],
-    payoff: {
-      A: {
-        "101": 53,
-        "102": 77,
-        "103": 75,
-        "104": 36,
-        "105": 24
-      },
-      B: {
-        "101": 44,
-        "102": 39,
-        "103": 66,
-        "104": 44,
-        "105": 39
-      },
-      C: {
-        "101": 31,
-        "102": 35,
-        "103": 65,
-        "104": 21,
-        "105": 76
-      },
-      D: {
-        "101": 48,
-        "102": 66,
-        "103": 30,
-        "104": 37,
-        "105": 80
-      },
-      E: {
-        "101": 66,
-        "102": 78,
-        "103": 27,
-        "104": 74,
-        "105": 48
-      },
-      F: {
-        "101": 82,
-        "102": 31,
-        "103": 67,
-        "104": 76,
-        "105": 37
-      },
-      G: {
-        "101": 56,
-        "102": 25,
-        "103": 37,
-        "104": 47,
-        "105": 24
-      },
-      H: {
-        "101": 73,
-        "102": 55,
-        "103": 42,
-        "104": 69,
-        "105": 34
-      }
-    }
-  },
-  {
-    _id: 5,
-    usedIn: "step2",
-    optimal: 570,
-    difficulty: "medium",
-    computeTime: 7.25,
-    students: ["A", "B", "C", "D", "E", "F", "G", "H"],
-    rooms: [101, 102, 103, 104, 105],
-    constraints: [
-      {
-        _id: 0,
-        pair: ["B", "D"],
-        type: 3,
-        text: "can't live in the same room or be neighbors"
-      },
-      {
-        _id: 1,
-        pair: ["B", "E"],
-        type: 0,
-        text: "must live in the same room"
-      },
-      {
-        _id: 2,
-        pair: ["D", "E"],
-        type: 1,
-        text: "can't live in the same room"
-      },
-      {
-        _id: 3,
-        pair: ["E", "G"],
-        type: 2,
-        text: "must be neighbors"
-      }
-    ],
-    payoff: {
-      A: {
-        "101": 54,
-        "102": 73,
-        "103": 80,
-        "104": 63,
-        "105": 35
-      },
-      B: {
-        "101": 63,
-        "102": 26,
-        "103": 69,
-        "104": 81,
-        "105": 54
-      },
-      C: {
-        "101": 32,
-        "102": 45,
-        "103": 77,
-        "104": 61,
-        "105": 66
-      },
-      D: {
-        "101": 21,
-        "102": 46,
-        "103": 55,
-        "104": 70,
-        "105": 64
-      },
-      E: {
-        "101": 25,
-        "102": 49,
-        "103": 38,
-        "104": 63,
-        "105": 69
-      },
-      F: {
-        "101": 83,
-        "102": 56,
-        "103": 63,
-        "104": 67,
-        "105": 25
-      },
-      G: {
-        "101": 21,
-        "102": 78,
-        "103": 44,
-        "104": 66,
-        "105": 50
-      },
-      H: {
-        "101": 80,
-        "102": 81,
-        "103": 65,
-        "104": 22,
-        "105": 77
-      }
-    }
-  },
-  {
-    _id: 6,
-    usedIn: "step2",
-    optimal: 672,
-    difficulty: "hard",
-    computeTime: 20,
+      A: { 101: 27, 102: 61, 103: 67, 104: 40, 105: 74, 106: 52 },
+      B: { 101: 97, 102: 46, 103: 41, 104: 56, 105: 43, 106: 71 },
+      C: { 101: 23, 102: 35, 103: 80, 104: 39, 105: 92, 106: 58 },
+      D: { 101: 87, 102: 32, 103: 79, 104: 93, 105: 68, 106: 49 },
+      E: { 101: 34, 102: 69, 103: 77, 104: 96, 105: 38, 106: 53 },
+      F: { 101: 98, 102: 72, 103: 76, 104: 92, 105: 31, 106: 66 },
+      G: { 101: 57, 102: 26, 103: 39, 104: 75, 105: 21, 106: 43 },
+      H: { 101: 61, 102: 59, 103: 36, 104: 65, 105: 20, 106: 41 },
+      I: { 101: 58, 102: 23, 103: 60, 104: 38, 105: 45, 106: 33 }
+    },
+    _id: "0",
+    difficulty: "Training - Hard",
     students: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
     rooms: [101, 102, 103, 104, 105, 106],
     constraints: [
       {
         _id: 0,
-        pair: ["A", "B"],
         type: 2,
+        pair: ["A", "B"],
         text: "must be neighbors"
       },
       {
         _id: 1,
-        pair: ["A", "D"],
         type: 3,
+        pair: ["A", "D"],
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 2,
+        type: 3,
         pair: ["A", "G"],
-        type: 3,
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 3,
-        pair: ["C", "D"],
         type: 0,
+        pair: ["C", "D"],
         text: "must live in the same room"
       },
-      {
-        _id: 4,
-        pair: ["C", "F"],
-        type: 2,
-        text: "must be neighbors"
-      },
+      { _id: 4, type: 2, pair: ["C", "F"], text: "must be neighbors" },
       {
         _id: 5,
-        pair: ["C", "G"],
         type: 3,
+        pair: ["C", "G"],
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 6,
-        pair: ["D", "G"],
         type: 1,
+        pair: ["D", "G"],
         text: "can't live in the same room"
       },
       {
         _id: 7,
-        pair: ["H", "I"],
         type: 3,
+        pair: ["H", "I"],
         text: "can't live in the same room or be neighbors"
       }
     ],
-    payoff: {
-      A: {
-        "101": 27,
-        "102": 61,
-        "103": 67,
-        "104": 40,
-        "105": 74,
-        "106": 52
-      },
-      B: {
-        "101": 97,
-        "102": 46,
-        "103": 41,
-        "104": 56,
-        "105": 43,
-        "106": 71
-      },
-      C: {
-        "101": 23,
-        "102": 35,
-        "103": 80,
-        "104": 39,
-        "105": 92,
-        "106": 58
-      },
-      D: {
-        "101": 87,
-        "102": 32,
-        "103": 79,
-        "104": 93,
-        "105": 68,
-        "106": 49
-      },
-      E: {
-        "101": 34,
-        "102": 69,
-        "103": 77,
-        "104": 96,
-        "105": 38,
-        "106": 53
-      },
-      F: {
-        "101": 98,
-        "102": 72,
-        "103": 76,
-        "104": 92,
-        "105": 31,
-        "106": 66
-      },
-      G: {
-        "101": 57,
-        "102": 26,
-        "103": 39,
-        "104": 75,
-        "105": 21,
-        "106": 43
-      },
-      H: {
-        "101": 61,
-        "102": 59,
-        "103": 36,
-        "104": 65,
-        "105": 20,
-        "106": 41
-      },
-      I: {
-        "101": 58,
-        "102": 23,
-        "103": 60,
-        "104": 38,
-        "105": 45,
-        "106": 33
-      }
-    }
+    optimal: 672,
+    computeTime: 20.0,
+    usedIn: "step2",
+    study: "pilot2"
   },
   {
-    _id: 7,
+    payoff: {
+      A: { 101: 10, 102: 47, 103: 32, 104: 20 },
+      B: { 101: 78, 102: 65, 103: 46, 104: 37 },
+      C: { 101: 35, 102: 59, 103: 41, 104: 53 },
+      D: { 101: 40, 102: 65, 103: 12, 104: 43 },
+      E: { 101: 18, 102: 39, 103: 40, 104: 78 },
+      F: { 101: 22, 102: 51, 103: 57, 104: 40 }
+    },
+    _id: "1",
+    difficulty: "Easy",
+    students: ["A", "B", "C", "D", "E", "F"],
+    rooms: [101, 102, 103, 104],
+    constraints: [
+      {
+        _id: 0,
+        type: 2,
+        pair: ["B", "E"],
+        text: "must be neighbors"
+      },
+      {
+        _id: 1,
+        type: 3,
+        pair: ["C", "F"],
+        text: "can't live in the same room or be neighbors"
+      }
+    ],
+    optimal: 340,
+    computeTime: 1.31,
     usedIn: "step2",
-    optimal: 623,
-    difficulty: "hard",
-    computeTime: 36.5,
+    study: "pilot2"
+  },
+  {
+    payoff: {
+      A: { 101: 55, 102: 18, 103: 51, 104: 63, 105: 24 },
+      B: { 101: 75, 102: 59, 103: 10, 104: 70, 105: 64 },
+      C: { 101: 27, 102: 53, 103: 38, 104: 51, 105: 14 },
+      D: { 101: 13, 102: 37, 103: 17, 104: 11, 105: 33 },
+      E: { 101: 25, 102: 45, 103: 10, 104: 41, 105: 32 },
+      F: { 101: 59, 102: 55, 103: 26, 104: 77, 105: 61 },
+      G: { 101: 32, 102: 36, 103: 19, 104: 45, 105: 51 },
+      H: { 101: 58, 102: 59, 103: 65, 104: 72, 105: 28 }
+    },
+    _id: "2",
+    difficulty: "Medium",
+    students: ["A", "B", "C", "D", "E", "F", "G", "H"],
+    rooms: [101, 102, 103, 104, 105],
+    constraints: [
+      {
+        _id: 0,
+        type: 3,
+        pair: ["A", "H"],
+        text: "can't live in the same room or be neighbors"
+      },
+      { _id: 1, type: 2, pair: ["B", "H"], text: "must be neighbors" },
+      {
+        _id: 2,
+        type: 1,
+        pair: ["C", "E"],
+        text: "can't live in the same room"
+      },
+      { _id: 3, type: 2, pair: ["C", "F"], text: "must be neighbors" },
+      { _id: 4, type: 2, pair: ["D", "F"], text: "must be neighbors" }
+    ],
+    optimal: 441,
+    computeTime: 7.45,
+    usedIn: "step2",
+    study: "pilot2"
+  },
+  {
+    payoff: {
+      A: { 101: 61, 102: 24, 103: 57, 104: 69, 105: 30, 106: 55 },
+      B: { 101: 76, 102: 60, 103: 11, 104: 71, 105: 65, 106: 26 },
+      C: { 101: 29, 102: 55, 103: 40, 104: 53, 105: 16, 106: 20 },
+      D: { 101: 13, 102: 37, 103: 17, 104: 11, 105: 33, 106: 31 },
+      E: { 101: 32, 102: 36, 103: 19, 104: 46, 105: 51, 106: 27 },
+      F: { 101: 25, 102: 45, 103: 10, 104: 41, 105: 32, 106: 52 },
+      G: { 101: 56, 102: 52, 103: 23, 104: 74, 105: 58, 106: 34 },
+      H: { 101: 77, 102: 53, 103: 44, 104: 67, 105: 70, 106: 20 },
+      I: { 101: 58, 102: 59, 103: 65, 104: 72, 105: 28, 106: 50 }
+    },
+    _id: "3",
+    difficulty: "Hard",
     students: ["A", "B", "C", "D", "E", "F", "G", "H", "I"],
     rooms: [101, 102, 103, 104, 105, 106],
     constraints: [
       {
         _id: 0,
-        pair: ["A", "B"],
         type: 3,
+        pair: ["A", "I"],
         text: "can't live in the same room or be neighbors"
       },
-      {
-        _id: 1,
-        pair: ["A", "C"],
-        type: 2,
-        text: "must be neighbors"
-      },
+      { _id: 1, type: 2, pair: ["B", "I"], text: "must be neighbors" },
       {
         _id: 2,
-        pair: ["A", "D"],
-        type: 2,
-        text: "must be neighbors"
+        type: 1,
+        pair: ["C", "F"],
+        text: "can't live in the same room"
       },
-      {
-        _id: 3,
-        pair: ["B", "C"],
-        type: 3,
-        text: "can't live in the same room or be neighbors"
-      },
-      {
-        _id: 4,
-        pair: ["B", "E"],
-        type: 0,
-        text: "must live in the same room"
-      },
+      { _id: 3, type: 2, pair: ["C", "G"], text: "must be neighbors" },
+      { _id: 4, type: 2, pair: ["D", "G"], text: "must be neighbors" },
       {
         _id: 5,
-        pair: ["B", "G"],
-        type: 2,
-        text: "must be neighbors"
+        type: 3,
+        pair: ["D", "I"],
+        text: "can't live in the same room or be neighbors"
       },
       {
         _id: 6,
-        pair: ["C", "D"],
         type: 3,
+        pair: ["E", "G"],
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 7,
-        pair: ["D", "F"],
-        type: 1,
-        text: "can't live in the same room"
+        type: 0,
+        pair: ["G", "H"],
+        text: "must live in the same room"
       }
     ],
+    optimal: 526,
+    computeTime: 22.75,
+    usedIn: "step2",
+    study: "pilot2"
+  },
+  {
     payoff: {
       A: {
-        "101": 62,
-        "102": 61,
-        "103": 64,
-        "104": 58,
-        "105": 30,
-        "106": 48
+        101: 25,
+        102: 45,
+        103: 10,
+        104: 41,
+        105: 32,
+        106: 52,
+        107: 29
+      },
+      B: { 101: 76, 102: 60, 103: 11, 104: 71, 105: 65, 106: 26, 107: 52 },
+      C: { 101: 30, 102: 47, 103: 65, 104: 41, 105: 26, 106: 40, 107: 51 },
+      D: { 101: 55, 102: 56, 103: 62, 104: 69, 105: 25, 106: 47, 107: 71 },
+      E: { 101: 18, 102: 24, 103: 27, 104: 49, 105: 53, 106: 36, 107: 41 },
+      F: { 101: 68, 102: 31, 103: 65, 104: 76, 105: 37, 106: 62, 107: 45 },
+      G: { 101: 54, 102: 50, 103: 21, 104: 72, 105: 56, 106: 32, 107: 37 },
+      H: { 101: 73, 102: 49, 103: 40, 104: 63, 105: 66, 106: 16, 107: 29 },
+      I: { 101: 23, 102: 47, 103: 27, 104: 21, 105: 43, 106: 41, 107: 37 },
+      J: { 101: 53, 102: 29, 103: 60, 104: 31, 105: 57, 106: 14, 107: 20 },
+      K: { 101: 35, 102: 61, 103: 46, 104: 59, 105: 22, 106: 26, 107: 55 },
+      L: { 101: 30, 102: 34, 103: 17, 104: 44, 105: 49, 106: 25, 107: 16 }
+    },
+    _id: "4",
+    difficulty: "Very Hard",
+    students: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"],
+    rooms: [101, 102, 103, 104, 105, 106, 107],
+    constraints: [
+      {
+        _id: 0,
+        type: 3,
+        pair: ["A", "C"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 1,
+        type: 1,
+        pair: ["A", "K"],
+        text: "can't live in the same room"
+      },
+      { _id: 2, type: 2, pair: ["B", "D"], text: "must be neighbors" },
+      {
+        _id: 3,
+        type: 0,
+        pair: ["C", "E"],
+        text: "must live in the same room"
+      },
+      {
+        _id: 4,
+        type: 3,
+        pair: ["D", "F"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 5,
+        type: 3,
+        pair: ["D", "I"],
+        text: "can't live in the same room or be neighbors"
+      },
+      { _id: 6, type: 2, pair: ["E", "F"], text: "must be neighbors" },
+      {
+        _id: 7,
+        type: 0,
+        pair: ["G", "H"],
+        text: "must live in the same room"
+      },
+      { _id: 8, type: 2, pair: ["G", "I"], text: "must be neighbors" },
+      { _id: 9, type: 2, pair: ["G", "K"], text: "must be neighbors" },
+      {
+        _id: 10,
+        type: 3,
+        pair: ["G", "L"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 11,
+        type: 3,
+        pair: ["J", "K"],
+        text: "can't live in the same room or be neighbors"
+      }
+    ],
+    optimal: 673,
+    computeTime: 91.62,
+    usedIn: "step2",
+    study: "pilot2"
+  },
+  {
+    payoff: {
+      A: {
+        101: 27,
+        102: 51,
+        103: 31,
+        104: 25,
+        105: 47,
+        106: 45,
+        107: 41,
+        108: 54
       },
       B: {
-        "101": 59,
-        "102": 77,
-        "103": 51,
-        "104": 97,
-        "105": 57,
-        "106": 69
+        101: 44,
+        102: 40,
+        103: 11,
+        104: 62,
+        105: 46,
+        106: 22,
+        107: 27,
+        108: 53
       },
       C: {
-        "101": 34,
-        "102": 64,
-        "103": 80,
-        "104": 35,
-        "105": 38,
-        "106": 51
+        101: 24,
+        102: 17,
+        103: 38,
+        104: 42,
+        105: 32,
+        106: 64,
+        107: 58,
+        108: 41
       },
       D: {
-        "101": 54,
-        "102": 68,
-        "103": 65,
-        "104": 26,
-        "105": 61,
-        "106": 75
+        101: 50,
+        102: 26,
+        103: 57,
+        104: 28,
+        105: 54,
+        106: 11,
+        107: 17,
+        108: 32
       },
       E: {
-        "101": 58,
-        "102": 44,
-        "103": 75,
-        "104": 52,
-        "105": 80,
-        "106": 38
+        101: 47,
+        102: 38,
+        103: 51,
+        104: 12,
+        105: 16,
+        106: 34,
+        107: 59,
+        108: 48
       },
       F: {
-        "101": 34,
-        "102": 39,
-        "103": 48,
-        "104": 21,
-        "105": 33,
-        "106": 45
+        101: 37,
+        102: 63,
+        103: 48,
+        104: 61,
+        105: 24,
+        106: 28,
+        107: 57,
+        108: 39
       },
       G: {
-        "101": 79,
-        "102": 84,
-        "103": 36,
-        "104": 86,
-        "105": 34,
-        "106": 52
+        101: 77,
+        102: 61,
+        103: 12,
+        104: 72,
+        105: 66,
+        106: 27,
+        107: 53,
+        108: 35
       },
       H: {
-        "101": 76,
-        "102": 42,
-        "103": 33,
-        "104": 88,
-        "105": 39,
-        "106": 47
+        101: 68,
+        102: 44,
+        103: 35,
+        104: 58,
+        105: 61,
+        106: 11,
+        107: 24,
+        108: 45
       },
       I: {
-        "101": 69,
-        "102": 54,
-        "103": 49,
-        "104": 46,
-        "105": 38,
-        "106": 32
+        101: 31,
+        102: 51,
+        103: 16,
+        104: 47,
+        105: 38,
+        106: 58,
+        107: 35,
+        108: 66
+      },
+      J: {
+        101: 54,
+        102: 55,
+        103: 61,
+        104: 68,
+        105: 24,
+        106: 46,
+        107: 70,
+        108: 42
+      },
+      K: {
+        101: 66,
+        102: 29,
+        103: 63,
+        104: 74,
+        105: 35,
+        106: 60,
+        107: 43,
+        108: 50
+      },
+      L: {
+        101: 15,
+        102: 63,
+        103: 19,
+        104: 43,
+        105: 51,
+        106: 28,
+        107: 34,
+        108: 40
+      },
+      M: {
+        101: 43,
+        102: 50,
+        103: 36,
+        104: 21,
+        105: 17,
+        106: 56,
+        107: 39,
+        108: 47
+      },
+      N: {
+        101: 33,
+        102: 50,
+        103: 68,
+        104: 44,
+        105: 29,
+        106: 43,
+        107: 54,
+        108: 36
+      },
+      O: {
+        101: 17,
+        102: 32,
+        103: 45,
+        104: 68,
+        105: 54,
+        106: 16,
+        107: 33,
+        108: 53
+      },
+      P: {
+        101: 30,
+        102: 34,
+        103: 17,
+        104: 44,
+        105: 49,
+        106: 25,
+        107: 16,
+        108: 18
+      },
+      Q: {
+        101: 49,
+        102: 29,
+        103: 61,
+        104: 37,
+        105: 39,
+        106: 20,
+        107: 62,
+        108: 48
+      },
+      R: {
+        101: 19,
+        102: 25,
+        103: 28,
+        104: 50,
+        105: 54,
+        106: 37,
+        107: 42,
+        108: 20
       }
-    }
+    },
+    _id: "5",
+    difficulty: "Impossible",
+    students: [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R"
+    ],
+    rooms: [101, 102, 103, 104, 105, 106, 107, 108],
+    constraints: [
+      {
+        _id: 0,
+        type: 2,
+        pair: ["A", "B"],
+        text: "must be neighbors"
+      },
+      {
+        _id: 1,
+        type: 3,
+        pair: ["A", "J"],
+        text: "can't live in the same room or be neighbors"
+      },
+      { _id: 2, type: 2, pair: ["B", "F"], text: "must be neighbors" },
+      {
+        _id: 3,
+        type: 0,
+        pair: ["B", "H"],
+        text: "must live in the same room"
+      },
+      {
+        _id: 4,
+        type: 3,
+        pair: ["B", "P"],
+        text: "can't live in the same room or be neighbors"
+      },
+      { _id: 5, type: 2, pair: ["C", "E"], text: "must be neighbors" },
+      {
+        _id: 6,
+        type: 1,
+        pair: ["C", "J"],
+        text: "can't live in the same room"
+      },
+      {
+        _id: 7,
+        type: 3,
+        pair: ["D", "F"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 8,
+        type: 3,
+        pair: ["E", "Q"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 9,
+        type: 1,
+        pair: ["F", "I"],
+        text: "can't live in the same room"
+      },
+      { _id: 10, type: 2, pair: ["G", "J"], text: "must be neighbors" },
+      {
+        _id: 11,
+        type: 3,
+        pair: ["I", "N"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 12,
+        type: 3,
+        pair: ["J", "K"],
+        text: "can't live in the same room or be neighbors"
+      },
+      { _id: 13, type: 2, pair: ["K", "R"], text: "must be neighbors" },
+      {
+        _id: 14,
+        type: 3,
+        pair: ["L", "Q"],
+        text: "can't live in the same room or be neighbors"
+      },
+      {
+        _id: 15,
+        type: 0,
+        pair: ["M", "O"],
+        text: "must live in the same room"
+      },
+      {
+        _id: 16,
+        type: 0,
+        pair: ["N", "R"],
+        text: "must live in the same room"
+      },
+      { _id: 17, type: 2, pair: ["O", "P"], text: "must be neighbors" }
+    ],
+    optimal: 996,
+    computeTime: 280.84,
+    usedIn: "step2",
+    study: "pilot2"
   }
 ];

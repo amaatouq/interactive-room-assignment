@@ -16,6 +16,9 @@ export default {
 
     //initiate the score for this round (because everyone will have the same score, we can save it at the round object
     stage.set("score", 0);
+    if (team) {
+      stage.set("chat", []);
+    }
     stage.set("log", [
       {
         verb: "roundStarted",

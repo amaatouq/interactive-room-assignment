@@ -33,6 +33,7 @@ export const init = (treatment, players) => {
   const rounds = [];
   const stages = [];
 
+  console.log(taskSequence);
   // in this game we have stages per round and the very first stage is practice
   _.times(taskSequence.length, i => {
     stages.push({

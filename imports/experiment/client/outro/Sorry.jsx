@@ -50,7 +50,10 @@ export default class Sorry extends React.Component {
             </p>
           )}
 
-          <p>Feel free to come back for the next scheduled game.</p>
+          <p>
+            Feel free to come back for the next scheduled game. We will send an
+            email notification once the next Part 2 of the HIT is scheduled.
+          </p>
 
           {/*This is not really needed .. all of these people failed to start the game .. if we allow them to submit, then their data will be deleted, we don't want that*/}
           <p>
