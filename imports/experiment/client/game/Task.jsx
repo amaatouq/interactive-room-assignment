@@ -4,7 +4,17 @@ import Room from "./Room.jsx";
 import Timer from "./Timer.jsx";
 
 export default class Task extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { activeButton: false };
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ activeButton: true }), 5000); //we make the satisfied button active after 5 seconds
+  }
+
   handleSatisfaction = (satisfied, event) => {
+    this.setState({ activeButton: false });
     const { player, stage } = this.props;
     event.preventDefault();
     player.set("satisfied", satisfied);
@@ -36,7 +46,11 @@ export default class Task extends React.Component {
 
           <div className="constraints">
             {stage.name === "practice" ? (
-              <p><strong style={{ color: "blue" }}>This is practice round and the Score will not count</strong></p>
+              <p>
+                <strong style={{ color: "blue" }}>
+                  This is practice round and the Score will not count
+                </strong>
+              </p>
             ) : (
               ""
             )}
@@ -120,6 +134,7 @@ export default class Task extends React.Component {
                 player.get("satisfied") ? "pt-minimal" : ""
               }`}
               onClick={this.handleSatisfaction.bind(this, false)}
+              disabled={!this.state.activeButton}
             >
               Unsatisfied
             </button>
@@ -129,6 +144,7 @@ export default class Task extends React.Component {
                 player.get("satisfied") ? "" : "pt-minimal"
               }`}
               onClick={this.handleSatisfaction.bind(this, true)}
+              disabled={!this.state.activeButton}
             >
               Satisfied
             </button>

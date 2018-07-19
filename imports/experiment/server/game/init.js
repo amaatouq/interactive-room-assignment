@@ -6,7 +6,12 @@ const avatarNames = ["Colton", "Aaron", "Alex", "Tristan"]; // to do more go to 
 const nameColor = ["#3D50B7", "#70A945", "#DE8AAB", "A59144"]; // similar to the color of the avatar
 
 export const init = (treatment, players) => {
-  console.log("Game with a treatment: ", treatment, " will start");
+  console.log(
+    "Game with a treatment: ",
+    treatment,
+    " will start, with workers",
+    _.pluck(players, "id")
+  );
 
   //we don't know the sequence yet
   let taskSequence = treatment.StepOne ? stepOneData : stepTwoData;
@@ -33,7 +38,6 @@ export const init = (treatment, players) => {
   const rounds = [];
   const stages = [];
 
-  console.log(taskSequence);
   // in this game we have stages per round and the very first stage is practice
   _.times(taskSequence.length, i => {
     stages.push({

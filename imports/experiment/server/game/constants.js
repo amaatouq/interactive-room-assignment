@@ -714,7 +714,7 @@ export const stepTwoData = [
       }
     },
     _id: "5",
-    difficulty: "Impossible",
+    difficulty: "Super Hard",
     students: [
       "A",
       "B",

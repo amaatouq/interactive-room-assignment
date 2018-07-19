@@ -5,12 +5,18 @@ import Centered from "../../../core/ui/components/Centered.jsx";
 export default class Sorry extends React.Component {
   static stepName = "Sorry";
 
+  constructor(props) {
+    super(props);
+    const { player } = this.props;
+    player.set("exitStatus", player.exitStatus);
+  }
+
   render() {
     const { player, hasNext, onSubmit } = this.props;
     let msg;
     switch (player.exitStatus) {
       case "gameFull":
-        msg = "Games filled up too fast...";
+        msg = "Your game has filled up too fast...";
         break;
       // case "gameLobbyTimedOut":
       //   msg = "???";
@@ -27,8 +33,6 @@ export default class Sorry extends React.Component {
         break;
     }
 
-    const pay = player.exitStatus !== "gameFull";
-
     return (
       <Centered>
         <div className="score">
@@ -36,7 +40,7 @@ export default class Sorry extends React.Component {
 
           <p>Sorry, you were not able to play today! {msg}</p>
 
-          {pay ? (
+          {player.exitStatus !== "gameFull" ? (
             <p>
               Please submit{" "}
               <strong>
@@ -45,8 +49,13 @@ export default class Sorry extends React.Component {
             </p>
           ) : (
             <p>
-              Please return the HIT now so our platform does not register your
-              MTurk ID as someone who already participated.
+              Please click on: <strong>Reset current session</strong> from the
+              top right side of the page (if it appears for you) to see if there
+              are other games that you could join now. Note you will need to go
+              over the instructions and quiz again (they might be different for
+              different games). Otherwise, Please return the HIT now so our
+              platform does not register your MTurk ID as someone who already
+              participated.
             </p>
           )}
 
