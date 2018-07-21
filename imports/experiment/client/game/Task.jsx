@@ -10,13 +10,31 @@ export default class Task extends React.Component {
   }
 
   componentDidMount() {
+    const { player } = this.props;
     setTimeout(() => this.setState({ activeButton: true }), 5000); //we make the satisfied button active after 5 seconds
+    if (player.stage.submitted) {
+      this.setState({ activeButton: false });
+    }
   }
 
   handleSatisfaction = (satisfied, event) => {
-    this.setState({ activeButton: false });
-    const { player, stage } = this.props;
+    const { game, player, stage } = this.props;
     event.preventDefault();
+
+    //if everyone submitted then, there is nothing to handle
+    if (player.stage.submitted) {
+      return;
+    }
+
+    //if it is only one player, and satisfied, we want to lock everything
+    if (game.players.length === 1 && satisfied) {
+      this.setState({ activeButton: false });
+    } else {
+      //if they are group (or individual that clicked unsatisfied), we want to momentarily disable the button so they don't spam, but they can change their mind so we unlock it after 1.5 seconds
+      this.setState({ activeButton: false });
+      setTimeout(() => this.setState({ activeButton: true }), 800); //preventing spam by a group
+    }
+
     player.set("satisfied", satisfied);
     stage.append("log", {
       verb: "playerSatisfaction",
@@ -128,16 +146,16 @@ export default class Task extends React.Component {
           </div>
 
           <div className="response">
-            <button
-              type="button"
-              className={`pt-button pt-icon-cross pt-intent-danger pt-large ${
-                player.get("satisfied") ? "pt-minimal" : ""
-              }`}
-              onClick={this.handleSatisfaction.bind(this, false)}
-              disabled={!this.state.activeButton}
-            >
-              Unsatisfied
-            </button>
+              <button
+                type="button"
+                className={`pt-button pt-icon-cross pt-intent-danger pt-large ${
+                  player.get("satisfied") ? "pt-minimal" : ""
+                }`}
+                onClick={this.handleSatisfaction.bind(this, false)}
+                disabled={!this.state.activeButton}
+              >
+                Unsatisfied
+              </button>
             <button
               type="button"
               className={`pt-button pt-icon-tick pt-intent-success pt-large ${

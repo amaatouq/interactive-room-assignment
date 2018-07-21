@@ -60,7 +60,7 @@ export default class MoreAboutBonus extends React.Component {
             positive, no matter whether your answer is the BEST possible
             assignment or not. The exchange rate is{" "}
             <strong style={{ color: "red" }}>
-              {1 / treatment.conversionRate} game points = $1 bonus
+              {Math.round(1 / treatment.conversionRate)} game points = $1 bonus
             </strong>.
           </p>
 
