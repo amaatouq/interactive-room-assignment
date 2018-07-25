@@ -81,15 +81,15 @@ export default class IndividualExitSurvey extends React.Component {
               >
                 <Radio
                   label="I allocated all students to rooms for which they had the highest values, and then tried to resolve conflicts"
-                  value="optimization-CSP"
+                  value="optimization-then-constraints"
                 />
                 <Radio
                   label="I allocated all students with conflicts, and only when all conflicts were resolved did I try moving students to higher-value rooms"
-                  value="CSPO-optimization"
+                  value="constraints-then-optimization"
                 />
                 <Radio
                   label="I allocated students to rooms until I ran into a conflict and then tried to resolve it."
-                  value="together"
+                  value="constraints-and-optimization-together"
                 />
               </RadioGroup>
             </div>
@@ -109,7 +109,7 @@ export default class IndividualExitSurvey extends React.Component {
                 />
                 <Radio
                   label="Try to increase your score by moving students around as long as you didn’t generate any new conflicts"
-                  value="no-new-conflicts"
+                  value="optimize-while-no-new-conflicts"
                 />
                 <Radio
                   label="Try to increase your score by moving students around even if it meant generating new conflicts."
