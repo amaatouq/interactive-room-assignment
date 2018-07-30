@@ -62,8 +62,9 @@ export default {
 
     //add the round score to the game total cumulative score (only if it is not practice)
     if (stage.name !== "practice") {
+      const cumScore = game.get("cumulativeScore") || 0;
       const scoreIncrement = currentScore > 0 ? Math.round(currentScore) : 0;
-      game.set("cumulativeScore", scoreIncrement + game.get("cumulativeScore"));
+      game.set("cumulativeScore", Math.round(scoreIncrement + cumScore));
     }
   },
 
@@ -90,7 +91,9 @@ export default {
 
     players.forEach(player => {
       if (player.get("bonus") === 0) {
+        //if we never computed their bonus
         player.set("bonus", bonus);
+        player.set("cumulativeScore", game.get("cumulativeScore"));
       }
     });
   },
