@@ -32,7 +32,7 @@ export default class Sorry extends React.Component {
         <div className="score">
           <h1>Sorry!</h1>
 
-          <p>Sorry, you were not able to play today! {msg}</p>
+          <p>Sorry, you were not able to now! {msg}</p>
 
           {/*{player.exitStatus !== "gameFull" ? (*/}
           <p>
@@ -51,9 +51,8 @@ export default class Sorry extends React.Component {
           {/*</p>*/}
 
           <p>
-            <strong>Also, please come back for the next scheduled game.</strong>{" "}
-            We will send an email notification once the next Part 2 of the HIT
-            is scheduled.
+            <strong>Please come back for the next scheduled game.</strong>{" "}
+            {/*We will send an email notification once the next  HIT is scheduled.*/}
           </p>
 
           {/*This is not really needed .. all of these people failed to start the game .. if we allow them to submit, then their data will be deleted, we don't want that*/}

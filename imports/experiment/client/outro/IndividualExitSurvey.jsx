@@ -56,7 +56,6 @@ export default class IndividualExitSurvey extends React.Component {
       instructionsClear,
       fair,
       feedback,
-      strategyQ1,
       strategyQ2,
       strategyQ3,
       strategyQ4
@@ -71,29 +70,29 @@ export default class IndividualExitSurvey extends React.Component {
         </p>
         <br />
         <form onSubmit={this.handleSubmit}>
-          <div className="pt-form-group">
-            <div className="pt-form-content">
-              <RadioGroup
-                name="strategyQ1"
-                label="Of the following statements select the one that most accurately describes your general approach to solving these problems?"
-                onChange={this.handleChange}
-                selectedValue={strategyQ1}
-              >
-                <Radio
-                  label="I allocated all students to rooms for which they had the highest values, and then tried to resolve conflicts"
-                  value="optimization-then-constraints"
-                />
-                <Radio
-                  label="I allocated all students with conflicts, and only when all conflicts were resolved did I try moving students to higher-value rooms"
-                  value="constraints-then-optimization"
-                />
-                <Radio
-                  label="I allocated students to rooms until I ran into a conflict and then tried to resolve it."
-                  value="constraints-and-optimization-together"
-                />
-              </RadioGroup>
-            </div>
-          </div>
+          {/*<div className="pt-form-group">*/}
+          {/*<div className="pt-form-content">*/}
+          {/*<RadioGroup*/}
+          {/*name="strategyQ1"*/}
+          {/*label="Of the following statements select the one that most accurately describes your general approach to solving these problems?"*/}
+          {/*onChange={this.handleChange}*/}
+          {/*selectedValue={strategyQ1}*/}
+          {/*>*/}
+          {/*<Radio*/}
+          {/*label="I allocated all students to rooms for which they had the highest values, and then tried to resolve conflicts"*/}
+          {/*value="optimization-then-constraints"*/}
+          {/*/>*/}
+          {/*<Radio*/}
+          {/*label="I allocated all students with conflicts, and only when all conflicts were resolved did I try moving students to higher-value rooms"*/}
+          {/*value="constraints-then-optimization"*/}
+          {/*/>*/}
+          {/*<Radio*/}
+          {/*label="I allocated students to rooms until I ran into a conflict and then tried to resolve it."*/}
+          {/*value="constraints-and-optimization-together"*/}
+          {/*/>*/}
+          {/*</RadioGroup>*/}
+          {/*</div>*/}
+          {/*</div>*/}
 
           <div className="pt-form-group">
             <div className="pt-form-content">

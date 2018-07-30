@@ -255,15 +255,15 @@ export const stepOneData = [
 export const stepTwoData = [
   {
     payoff: {
-      A: { 101: 27, 102: 61, 103: 67, 104: 40, 105: 74, 106: 52 },
-      B: { 101: 97, 102: 46, 103: 41, 104: 56, 105: 43, 106: 71 },
-      C: { 101: 23, 102: 35, 103: 80, 104: 39, 105: 92, 106: 58 },
-      D: { 101: 87, 102: 32, 103: 79, 104: 93, 105: 68, 106: 49 },
-      E: { 101: 34, 102: 69, 103: 77, 104: 96, 105: 38, 106: 53 },
-      F: { 101: 98, 102: 72, 103: 76, 104: 92, 105: 31, 106: 66 },
-      G: { 101: 57, 102: 26, 103: 39, 104: 75, 105: 21, 106: 43 },
-      H: { 101: 61, 102: 59, 103: 36, 104: 65, 105: 20, 106: 41 },
-      I: { 101: 58, 102: 23, 103: 60, 104: 38, 105: 45, 106: 33 }
+      A: { 101: 61, 102: 24, 103: 57, 104: 69, 105: 30, 106: 55 },
+      B: { 101: 76, 102: 60, 103: 11, 104: 71, 105: 65, 106: 26 },
+      C: { 101: 29, 102: 55, 103: 40, 104: 53, 105: 16, 106: 20 },
+      D: { 101: 13, 102: 37, 103: 17, 104: 11, 105: 33, 106: 31 },
+      E: { 101: 32, 102: 36, 103: 19, 104: 46, 105: 51, 106: 27 },
+      F: { 101: 25, 102: 45, 103: 10, 104: 41, 105: 32, 106: 52 },
+      G: { 101: 56, 102: 52, 103: 23, 104: 74, 105: 58, 106: 34 },
+      H: { 101: 77, 102: 53, 103: 44, 104: 67, 105: 70, 106: 20 },
+      I: { 101: 58, 102: 59, 103: 65, 104: 72, 105: 28, 106: 50 }
     },
     _id: "0",
     difficulty: "Training - Hard",
@@ -272,50 +272,40 @@ export const stepTwoData = [
     constraints: [
       {
         _id: 0,
-        type: 2,
-        pair: ["A", "B"],
-        text: "must be neighbors"
-      },
-      {
-        _id: 1,
         type: 3,
-        pair: ["A", "D"],
+        pair: ["A", "I"],
         text: "can't live in the same room or be neighbors"
       },
+      { _id: 1, type: 2, pair: ["B", "I"], text: "must be neighbors" },
       {
         _id: 2,
-        type: 3,
-        pair: ["A", "G"],
-        text: "can't live in the same room or be neighbors"
+        type: 1,
+        pair: ["C", "F"],
+        text: "can't live in the same room"
       },
-      {
-        _id: 3,
-        type: 0,
-        pair: ["C", "D"],
-        text: "must live in the same room"
-      },
-      { _id: 4, type: 2, pair: ["C", "F"], text: "must be neighbors" },
+      { _id: 3, type: 2, pair: ["C", "G"], text: "must be neighbors" },
+      { _id: 4, type: 2, pair: ["D", "G"], text: "must be neighbors" },
       {
         _id: 5,
         type: 3,
-        pair: ["C", "G"],
+        pair: ["D", "I"],
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 6,
-        type: 1,
-        pair: ["D", "G"],
-        text: "can't live in the same room"
+        type: 3,
+        pair: ["E", "G"],
+        text: "can't live in the same room or be neighbors"
       },
       {
         _id: 7,
-        type: 3,
-        pair: ["H", "I"],
-        text: "can't live in the same room or be neighbors"
+        type: 0,
+        pair: ["G", "H"],
+        text: "must live in the same room"
       }
     ],
-    optimal: 672,
-    computeTime: 20.0,
+    optimal: 526,
+    computeTime: 22.75,
     usedIn: "step2",
     study: "pilot2"
   },
@@ -390,15 +380,15 @@ export const stepTwoData = [
   },
   {
     payoff: {
-      A: { 101: 61, 102: 24, 103: 57, 104: 69, 105: 30, 106: 55 },
-      B: { 101: 76, 102: 60, 103: 11, 104: 71, 105: 65, 106: 26 },
-      C: { 101: 29, 102: 55, 103: 40, 104: 53, 105: 16, 106: 20 },
-      D: { 101: 13, 102: 37, 103: 17, 104: 11, 105: 33, 106: 31 },
-      E: { 101: 32, 102: 36, 103: 19, 104: 46, 105: 51, 106: 27 },
-      F: { 101: 25, 102: 45, 103: 10, 104: 41, 105: 32, 106: 52 },
-      G: { 101: 56, 102: 52, 103: 23, 104: 74, 105: 58, 106: 34 },
-      H: { 101: 77, 102: 53, 103: 44, 104: 67, 105: 70, 106: 20 },
-      I: { 101: 58, 102: 59, 103: 65, 104: 72, 105: 28, 106: 50 }
+      A: { 101: 27, 102: 61, 103: 67, 104: 40, 105: 74, 106: 52 },
+      B: { 101: 97, 102: 46, 103: 41, 104: 56, 105: 43, 106: 71 },
+      C: { 101: 23, 102: 35, 103: 80, 104: 39, 105: 92, 106: 58 },
+      D: { 101: 87, 102: 32, 103: 79, 104: 93, 105: 68, 106: 49 },
+      E: { 101: 34, 102: 69, 103: 77, 104: 96, 105: 38, 106: 53 },
+      F: { 101: 98, 102: 72, 103: 76, 104: 92, 105: 31, 106: 66 },
+      G: { 101: 57, 102: 26, 103: 39, 104: 75, 105: 21, 106: 43 },
+      H: { 101: 61, 102: 59, 103: 36, 104: 65, 105: 20, 106: 41 },
+      I: { 101: 58, 102: 23, 103: 60, 104: 38, 105: 45, 106: 33 }
     },
     _id: "3",
     difficulty: "Hard",
@@ -407,40 +397,50 @@ export const stepTwoData = [
     constraints: [
       {
         _id: 0,
+        type: 2,
+        pair: ["A", "B"],
+        text: "must be neighbors"
+      },
+      {
+        _id: 1,
         type: 3,
-        pair: ["A", "I"],
+        pair: ["A", "D"],
         text: "can't live in the same room or be neighbors"
       },
-      { _id: 1, type: 2, pair: ["B", "I"], text: "must be neighbors" },
       {
         _id: 2,
-        type: 1,
-        pair: ["C", "F"],
-        text: "can't live in the same room"
+        type: 3,
+        pair: ["A", "G"],
+        text: "can't live in the same room or be neighbors"
       },
-      { _id: 3, type: 2, pair: ["C", "G"], text: "must be neighbors" },
-      { _id: 4, type: 2, pair: ["D", "G"], text: "must be neighbors" },
+      {
+        _id: 3,
+        type: 0,
+        pair: ["C", "D"],
+        text: "must live in the same room"
+      },
+      { _id: 4, type: 2, pair: ["C", "F"], text: "must be neighbors" },
       {
         _id: 5,
         type: 3,
-        pair: ["D", "I"],
+        pair: ["C", "G"],
         text: "can't live in the same room or be neighbors"
       },
       {
         _id: 6,
-        type: 3,
-        pair: ["E", "G"],
-        text: "can't live in the same room or be neighbors"
+        type: 1,
+        pair: ["D", "G"],
+        text: "can't live in the same room"
       },
       {
         _id: 7,
-        type: 0,
-        pair: ["G", "H"],
-        text: "must live in the same room"
+        type: 3,
+        pair: ["H", "I"],
+        text: "can't live in the same room or be neighbors"
       }
     ],
-    optimal: 526,
-    computeTime: 22.75,
+    optimal: 672,
+    computeTime: 20.0,
     usedIn: "step2",
     study: "pilot2"
   },

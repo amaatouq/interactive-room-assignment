@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AlertToaster } from "../../../core/ui/components/AlertToaster.jsx";
+import { AlertToaster } from "../../../core/ui/components/Toasters.jsx";
 import Centered from "../../../core/ui/components/Centered.jsx";
 
 import { Checkbox } from "@blueprintjs/core";
