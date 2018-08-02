@@ -10,7 +10,7 @@ export default class Sorry extends React.Component {
     let msg;
     switch (player.exitStatus) {
       case "gameFull":
-        msg = "Your game has filled up too fast...";
+        msg = "All games you are eligible for have filled up too fast...";
         break;
       // case "gameLobbyTimedOut":
       //   msg = "???";
@@ -35,10 +35,20 @@ export default class Sorry extends React.Component {
           <p>Sorry, you were not able to now! {msg}</p>
 
           {/*{player.exitStatus !== "gameFull" ? (*/}
+
           <p>
-            Please submit <em>didNotStartCSOP213093</em> as the survey code in
-            order to receive the base payment for your attempt today.{" "}
+            Please return the HIT now so our platform does register your MTurk.
+            Please come back for one of the next batches. We will submit new
+            batches on Monday the 6th of August and Tuesday the 7th of August
+            (batches of 100 games every hour starting at 1PM ET until 4PM).
           </p>
+
+          {/*TODO: uncomment this for step 2*/}
+          {/*<p>*/}
+          {/*Please submit <em>didNotStartCSOP213093</em> as the survey code in*/}
+          {/*order to receive the base payment for your attempt today.{" "}*/}
+          {/*</p>*/}
+
           {/*) : (*/}
           {/*<p>*/}
           {/*Please click on: <strong>Reset current session</strong> from the*/}
