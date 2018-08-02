@@ -36,8 +36,8 @@ export default class Sorry extends React.Component {
 
           {/*{player.exitStatus !== "gameFull" ? (*/}
           <p>
-            Please submit your Worker id as the survey code in order to receive
-            the base payment for your attempt today.{" "}
+            Please submit <em>didNotStartCSOP213093</em> as the survey code in
+            order to receive the base payment for your attempt today.{" "}
           </p>
           {/*) : (*/}
           {/*<p>*/}
