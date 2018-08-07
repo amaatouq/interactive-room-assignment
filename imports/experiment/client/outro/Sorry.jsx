@@ -38,9 +38,9 @@ export default class Sorry extends React.Component {
 
           <p>
             Please return the HIT now so our platform does register your MTurk.
-            Please come back for one of the next batches. We will submit new
+            Please come back for one of the next batches of Part 1. We will submit new
             batches on Monday the 6th of August and Tuesday the 7th of August
-            (batches of 100 games every hour starting at 1PM ET until 4PM).
+            (batches of 100 games every hour starting at 2PM ET until 5PM).
           </p>
 
           {/*TODO: uncomment this for step 2*/}

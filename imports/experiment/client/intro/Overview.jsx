@@ -27,11 +27,11 @@ export default class Overview extends React.Component {
             <strong>{Math.ceil(treatment.stageDuration / 60.0)} minutes</strong>{" "}
             to work on each task. Completing the entire game may take you as
             long as{" "}
-            {Math.ceil(treatment.stageDuration / 60.0 * treatment.nRounds)}{" "}
+            {Math.ceil(treatment.stageDuration / 60.0 * 6.0)}{" "}
             minutes.{" "}
             <strong>
               If you do not have at least{" "}
-              {Math.ceil(treatment.stageDuration / 60.0 * treatment.nRounds)}{" "}
+              {Math.ceil(treatment.stageDuration / 60.0 * 6.0)}{" "}
               minutes available to work on this HIT please return it now.
             </strong>
           </p>
