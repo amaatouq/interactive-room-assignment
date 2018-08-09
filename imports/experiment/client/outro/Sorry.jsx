@@ -12,9 +12,9 @@ export default class Sorry extends React.Component {
       case "gameFull":
         msg = "All games you are eligible for have filled up too fast...";
         break;
-      // case "gameLobbyTimedOut":
-      //   msg = "???";
-      //   break;
+      case "gameLobbyTimedOut":
+        msg = "There were NOT enough players for the game to start..";
+        break;
       // case "playerLobbyTimedOut":
       //   msg = "???";
       //   break;
@@ -32,22 +32,31 @@ export default class Sorry extends React.Component {
         <div className="score">
           <h1>Sorry!</h1>
 
-          <p>Sorry, you were not able to now! {msg}</p>
+          <p>Sorry, you were not able to play today! {msg}</p>
 
           {/*{player.exitStatus !== "gameFull" ? (*/}
 
-          <p>
-            Please return the HIT now so our platform does register your MTurk.
-            Please come back for one of the next batches of Part 1. We will submit new
-            batches on Monday the 6th of August and Tuesday the 7th of August
-            (batches of 100 games every hour starting at 2PM ET until 5PM).
-          </p>
-
-          {/*TODO: uncomment this for step 2*/}
           {/*<p>*/}
-          {/*Please submit <em>didNotStartCSOP213093</em> as the survey code in*/}
-          {/*order to receive the base payment for your attempt today.{" "}*/}
+          {/*Please return the HIT now so our platform does register your MTurk.*/}
+          {/*Please come back for one of the next batches of Part 1. We will submit new*/}
+          {/*batches on Monday the 6th of August and Tuesday the 7th of August*/}
+          {/*(batches of 100 games every hour starting at 2PM ET until 5PM).*/}
           {/*</p>*/}
+
+          {player.exitStatus === "gameLobbyTimedOut" ? (
+            <p>
+              Please submit <em>{player._id}</em> as the survey code in order to
+              receive the $1 base payment for your time today. We will also add
+              $0.1 showing-up bonus with the approval of this HIT.
+            </p>
+          ) : null}
+
+          {player.exitStatus === "gameFull" ? (
+            <p>
+              Please submit <em>FZgameFullCSOP213093</em> as the survey code in
+              order to receive the $0.1 showing up bonus.
+            </p>
+          ) : null}
 
           {/*) : (*/}
           {/*<p>*/}

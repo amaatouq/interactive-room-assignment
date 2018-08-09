@@ -84,11 +84,20 @@ export const createPlayer = new ValidatedMethod({
       lobbyPool = lobbies;
     }
 
+    const allLobbiesFull = lobbyPool.length === 0;
+    if (allLobbiesFull) {
+      lobbyPool = lobbies;
+    }
+
     // Book proportially to total expected playerCount
     const weigthedLobbyPool = lobbyPool.map(lobby => {
+      let weight = lobby.availableCount;
+      if (allLobbiesFull && weight !== 1) {
+        weight *= 2;
+      }
       return {
         value: lobby,
-        weight: lobby.availableCount
+        weight: weight
       };
     });
 
