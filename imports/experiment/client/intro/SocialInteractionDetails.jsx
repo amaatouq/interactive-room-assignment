@@ -145,7 +145,9 @@ export default class SocialInteractionDetails extends React.Component {
             <strong>
               If all team members are satisfied with the answer before the timer
               is up, the answer will be submitted and your team will proceed to
-              the next task.
+              the next task. If the "Satisfied" button is unclickable (i.e.,
+              inactive) for you for more than 10 seconds, try to refresh the
+              page.
             </strong>.
           </p>
 
