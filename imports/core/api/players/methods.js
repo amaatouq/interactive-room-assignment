@@ -372,7 +372,7 @@ export const archiveGameFullPlayers = new ValidatedMethod({
 
     const players = Players.find({
       exitStatus: "gameFull",
-      "data.archivedGameFullAt": { $exists: false }
+      "data.archivedAt": { $exists: false }
     }).fetch();
 
     const timestamp = new Date().toISOString();
@@ -383,7 +383,39 @@ export const archiveGameFullPlayers = new ValidatedMethod({
       Players.update(player._id, {
         $set: {
           id: `${player.id} (Archived game full at ${timestamp})`,
-          "data.archivedGameFullAt": new Date()
+          "data.archivedAt": new Date()
+        }
+      });
+    }
+
+    return players.length;
+  }
+});
+
+export const archiveLobbyTimeOutPlayers = new ValidatedMethod({
+  name: "Players.methods.admin.archiveLobbyTimeOut",
+
+  validate: new SimpleSchema({}).validator(),
+
+  run() {
+    if (!this.userId) {
+      throw new Error("unauthorized");
+    }
+
+    const players = Players.find({
+      exitStatus: "gameLobbyTimedOut",
+      "data.archivedAt": { $exists: false }
+    }).fetch();
+
+    const timestamp = new Date().toISOString();
+
+    for (let i = 0; i < players.length; i++) {
+      const player = players[i];
+
+      Players.update(player._id, {
+        $set: {
+          id: `${player.id} (Archived lobbyTimeOut at ${timestamp})`,
+          "data.archivedAt": new Date()
         }
       });
     }
@@ -401,8 +433,8 @@ export const playerWasArchived = new ValidatedMethod({
     return Boolean(
       Players.findOne({
         _id,
-        exitStatus: "gameFull",
-        "data.archivedGameFullAt": { $exists: true }
+        exitStatus: { $in: ["gameFull", "gameLobbyTimedOut"] },
+        "data.archivedAt": { $exists: true }
       })
     );
   }
