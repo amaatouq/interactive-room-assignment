@@ -10,7 +10,7 @@ import Breadcrumb from "./Breadcrumb.jsx";
 import DelayedDisplay from "./DelayedDisplay.jsx";
 import ExitSteps from "./ExitSteps.jsx";
 import GameLobbyContainer from "../containers/GameLobbyContainer.jsx";
-import Instructions from "./Instructions.jsx";
+import InstructionSteps from "./InstructionSteps.jsx";
 import Loading from "./Loading";
 import WaitingForServer from "./WaitingForServer.jsx";
 
@@ -63,8 +63,9 @@ export default class Game extends React.Component {
       }
 
       return (
-        <Instructions
+        <InstructionSteps
           treatment={treatment}
+          player={player}
           onDone={() => {
             playerReady.call({ _id: player._id });
           }}

@@ -1,27 +1,25 @@
 import React from "react";
+
 import { AlertToaster, SuccessToaster } from "../Toasters";
-import {
-  archiveGameFullPlayers,
-  archiveLobbyTimeOutPlayers
-} from "../../../api/players/methods";
+import { retireGameFullPlayers } from "../../../api/players/methods";
+import { exitStatuses } from "../../../api/players/players.js";
 
 export default class AdminPlayers extends React.Component {
-  handleCleaPlayersGameFull = event => {
-    event.preventDefault();
-    archiveGameFullPlayers.call((err, playersAffected) => {
-      if (err) {
-        AlertToaster.show({ message: `Failed to archive players: ${err}` });
-      } else {
-        SuccessToaster.show({ message: `${playersAffected} players affected` });
-      }
+  state = { retiredReason: exitStatuses[0] };
+
+  handleChange = event => {
+    const retiredReason = event.currentTarget.value;
+    this.setState({
+      retiredReason
     });
   };
 
-  handleCleaPlayersLobbyTimeOut = event => {
+  handleRetirePlayers = event => {
     event.preventDefault();
-    archiveLobbyTimeOutPlayers.call((err, playersAffected) => {
+    const { retiredReason } = this.state;
+    retireGameFullPlayers.call({ retiredReason }, (err, playersAffected) => {
       if (err) {
-        AlertToaster.show({ message: `Failed to archive players: ${err}` });
+        AlertToaster.show({ message: `Failed to retire players: ${err}` });
       } else {
         SuccessToaster.show({ message: `${playersAffected} players affected` });
       }
@@ -29,31 +27,42 @@ export default class AdminPlayers extends React.Component {
   };
 
   render() {
+    const { retiredReason } = this.state;
     return (
       <div className="players">
         <h2>
           <span className="pt-icon-large pt-icon-person" /> Players
         </h2>
 
-        <div>
-          <button
-            type="button"
-            className="pt-button"
-            onClick={this.handleCleaPlayersGameFull}
-          >
-            Archive Player Records with "Game Full"
-          </button>
+        <div className="pt-form-group">
+          <div className="pt-form-content">
+            <div className="pt-select">
+              <select
+                className="pt-input"
+                name="retire"
+                id="retire"
+                onChange={this.handleChange}
+                value={retiredReason}
+              >
+                {_.map(exitStatuses, name => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <br />
+            <br />
+            <button
+              type="button"
+              className="pt-button pt-intent-primary"
+              onClick={this.handleRetirePlayers}
+            >
+              Retire Players with exitStatus <strong>{retiredReason}</strong>
+            </button>
+          </div>
         </div>
-        <br />
-        <div>
-          <button
-            type="button"
-            className="pt-button"
-            onClick={this.handleCleaPlayersLobbyTimeOut}
-          >
-            Archive Player Records with "Lobby Time Out"
-          </button>
-        </div>
+
         <div className="pt-non-ideal-state">
           <div className="pt-non-ideal-state-visual pt-non-ideal-state-icon">
             <span className="pt-icon pt-icon-build" />

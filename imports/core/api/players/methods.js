@@ -6,6 +6,7 @@ import { GameLobbies } from "../game-lobbies/game-lobbies";
 import { IdSchema } from "../default-schemas.js";
 import { LobbyConfigs } from "../lobby-configs/lobby-configs.js";
 import { Players } from "./players";
+import { exitStatuses } from "./players.js";
 import { weightedRandom } from "../../lib/utils.js";
 
 let callOnChange;
@@ -360,19 +361,26 @@ export const endPlayerTimeoutWait = new ValidatedMethod({
   }
 });
 
-export const archiveGameFullPlayers = new ValidatedMethod({
-  name: "Players.methods.admin.archiveGameFull",
+export const retireGameFullPlayers = new ValidatedMethod({
+  name: "Players.methods.admin.retireGameFull",
 
-  validate: new SimpleSchema({}).validator(),
+  validate: new SimpleSchema({
+    retiredReason: {
+      label: "Retired Reason",
+      type: String,
+      optional: true,
+      allowedValues: exitStatuses
+    }
+  }).validator(),
 
-  run() {
+  run({ retiredReason }) {
     if (!this.userId) {
       throw new Error("unauthorized");
     }
 
     const players = Players.find({
-      exitStatus: "gameFull",
-      "data.archivedAt": { $exists: false }
+      exitStatus: retiredReason,
+      retiredAt: { $exists: false }
     }).fetch();
 
     const timestamp = new Date().toISOString();
@@ -382,8 +390,9 @@ export const archiveGameFullPlayers = new ValidatedMethod({
 
       Players.update(player._id, {
         $set: {
-          id: `${player.id} (Archived game full at ${timestamp})`,
-          "data.archivedAt": new Date()
+          id: `${player.id} (Retired ${retiredReason} at ${timestamp})`,
+          retiredAt: new Date(),
+          retiredReason
         }
       });
     }
@@ -392,40 +401,8 @@ export const archiveGameFullPlayers = new ValidatedMethod({
   }
 });
 
-export const archiveLobbyTimeOutPlayers = new ValidatedMethod({
-  name: "Players.methods.admin.archiveLobbyTimeOut",
-
-  validate: new SimpleSchema({}).validator(),
-
-  run() {
-    if (!this.userId) {
-      throw new Error("unauthorized");
-    }
-
-    const players = Players.find({
-      exitStatus: "gameLobbyTimedOut",
-      "data.archivedAt": { $exists: false }
-    }).fetch();
-
-    const timestamp = new Date().toISOString();
-
-    for (let i = 0; i < players.length; i++) {
-      const player = players[i];
-
-      Players.update(player._id, {
-        $set: {
-          id: `${player.id} (Archived lobbyTimeOut at ${timestamp})`,
-          "data.archivedAt": new Date()
-        }
-      });
-    }
-
-    return players.length;
-  }
-});
-
-export const playerWasArchived = new ValidatedMethod({
-  name: "Players.methods.playerWasArchived",
+export const playerWasRetired = new ValidatedMethod({
+  name: "Players.methods.playerWasRetired",
 
   validate: IdSchema.validator(),
 
@@ -433,8 +410,8 @@ export const playerWasArchived = new ValidatedMethod({
     return Boolean(
       Players.findOne({
         _id,
-        exitStatus: { $in: ["gameFull", "gameLobbyTimedOut"] },
-        "data.archivedAt": { $exists: true }
+        exitStatus: "gameFull",
+        "data.archivedGameFullAt": { $exists: true }
       })
     );
   }
